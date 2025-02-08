@@ -1,16 +1,28 @@
+using Unity.VisualScripting;
 using UnityEngine;
-
-public class PlayerInputs : MonoBehaviour
+using UnityEngine.InputSystem;
+namespace Charactercontroller
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class PlayerInputs : MonoBehaviour, InputActions.IPlayerLocomotionMapActions
     {
-        
-    }
+        public InputActions InputActions {get; private set;}
+        public Vector2 MovementInput {get; private set;}
+        private void OnEnable(){
+            InputActions = new InputActions();
+            InputActions.Enable();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            InputActions.PlayerLocomotionMap.Enable();
+            InputActions.PlayerLocomotionMap.SetCallbacks(this);
+        }
+        private void OnDisable(){
+            InputActions.PlayerLocomotionMap.Disable();
+            InputActions.PlayerLocomotionMap.RemoveCallbacks(this);
+        }
+        public void OnMovement(InputAction.CallbackContext context)
+        {
+            MovementInput = context.ReadValue<Vector2>();
+            print(MovementInput);
+        }
     }
 }
+
