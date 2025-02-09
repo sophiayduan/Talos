@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "12933922-f021-4dc0-9e81-20518fcb0b3e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -125,6 +134,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "bcd277b9-96af-4873-aa61-746890bbe1d1",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

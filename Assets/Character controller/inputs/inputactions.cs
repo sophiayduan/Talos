@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Charactercontroller
+namespace Charactercontroller.Inputs
 {
     /// <summary>
     /// Provides programmatic access to <see cref="InputActionAsset" />, <see cref="InputActionMap" />, <see cref="InputAction" /> and <see cref="InputControlScheme" /> instances defined in asset "Assets/Character controller/inputs/InputActions.inputactions".
@@ -97,6 +97,15 @@ namespace Charactercontroller
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""2d3a5ee6-0763-4b4c-898c-894c511b8e2c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""12933922-f021-4dc0-9e81-20518fcb0b3e"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -213,6 +222,17 @@ namespace Charactercontroller
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bcd277b9-96af-4873-aa61-746890bbe1d1"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -222,6 +242,7 @@ namespace Charactercontroller
             // PlayerLocomotionMap
             m_PlayerLocomotionMap = asset.FindActionMap("PlayerLocomotionMap", throwIfNotFound: true);
             m_PlayerLocomotionMap_Movement = m_PlayerLocomotionMap.FindAction("Movement", throwIfNotFound: true);
+            m_PlayerLocomotionMap_Look = m_PlayerLocomotionMap.FindAction("Look", throwIfNotFound: true);
         }
 
         ~@InputActions()
@@ -303,6 +324,7 @@ namespace Charactercontroller
         private readonly InputActionMap m_PlayerLocomotionMap;
         private List<IPlayerLocomotionMapActions> m_PlayerLocomotionMapActionsCallbackInterfaces = new List<IPlayerLocomotionMapActions>();
         private readonly InputAction m_PlayerLocomotionMap_Movement;
+        private readonly InputAction m_PlayerLocomotionMap_Look;
         /// <summary>
         /// Provides access to input actions defined in input action map "PlayerLocomotionMap".
         /// </summary>
@@ -318,6 +340,10 @@ namespace Charactercontroller
             /// Provides access to the underlying input action "PlayerLocomotionMap/Movement".
             /// </summary>
             public InputAction @Movement => m_Wrapper.m_PlayerLocomotionMap_Movement;
+            /// <summary>
+            /// Provides access to the underlying input action "PlayerLocomotionMap/Look".
+            /// </summary>
+            public InputAction @Look => m_Wrapper.m_PlayerLocomotionMap_Look;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -347,6 +373,9 @@ namespace Charactercontroller
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
             }
 
             /// <summary>
@@ -361,6 +390,9 @@ namespace Charactercontroller
                 @Movement.started -= instance.OnMovement;
                 @Movement.performed -= instance.OnMovement;
                 @Movement.canceled -= instance.OnMovement;
+                @Look.started -= instance.OnLook;
+                @Look.performed -= instance.OnLook;
+                @Look.canceled -= instance.OnLook;
             }
 
             /// <summary>
@@ -408,6 +440,13 @@ namespace Charactercontroller
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnMovement(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnLook(InputAction.CallbackContext context);
         }
     }
 }
