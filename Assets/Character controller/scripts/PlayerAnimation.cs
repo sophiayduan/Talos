@@ -8,12 +8,14 @@ namespace Charactercontroller{
         [SerializeField] private float locomotionBlendSpeed = 0.02f;
 
         private PlayerInputs _playerinputs;
+        private PlayerState _playerState;
         private static int inputXHash = Animator.StringToHash("inputX");
         private static int inputYHash = Animator.StringToHash("inputY");
         private Vector3 _currentBlendInput = Vector3.zero;
 
         private void Awake(){
             _playerinputs = GetComponent<PlayerInputs>();
+            _playerState = GetComponent<PlayerState>();
         }
 
         private void Update(){
