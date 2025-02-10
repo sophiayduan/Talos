@@ -1,3 +1,4 @@
-# JuiceGame
+# Juice
 
-to me reading this, THIS IS THE CORRECT REPO
+Creating a game for Hack Club's Juice!
+More info to come...
