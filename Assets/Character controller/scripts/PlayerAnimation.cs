@@ -23,7 +23,7 @@ namespace Charactercontroller{
         private void UpdateAnimationState(){
             Vector2 inputTarget = _playerinputs.MovementInput;
             _currentBlendInput = Vector3.Lerp(_currentBlendInput, inputTarget, locomotionBlendSpeed * Time.deltaTime);
-
+            
             _animator.SetFloat(inputXHash, inputTarget.x);
             _animator.SetFloat(inputYHash, inputTarget.y);
 
