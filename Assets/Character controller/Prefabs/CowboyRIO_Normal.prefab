@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2540263887507582884}
   - component: {fileID: 2114505078232742010}
   - component: {fileID: 8832433561435083326}
+  - component: {fileID: 5547316428752660654}
   m_Layer: 0
   m_Name: CowboyRIO_Normal
   m_TagString: Untagged
@@ -93,6 +94,28 @@ MonoBehaviour:
   lookSenseH: 0.1
   lookSenseV: 0.1
   lookLimitV: 89
+--- !u!95 &5547316428752660654
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6038827527495832040}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: de13a7420582ded45a8d7d3f96889aca, type: 3}
+  m_Controller: {fileID: 9100000, guid: cdd11b6711ce6be4a94ff48f5a4066b2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8568513184755937282
 GameObject:
   m_ObjectHideFlags: 0
