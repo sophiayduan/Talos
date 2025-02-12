@@ -15,6 +15,11 @@ public class EnemyScript : MonoBehaviour
     public Rigidbody rb;
     public GameObject Target;
     private bool seePlayer;
+
+    // public float damage;
+
+    // public float health;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -53,6 +58,15 @@ public class EnemyScript : MonoBehaviour
                     Vector3 Move = new Vector3(Direction.x *Speed, 0, Direction.z * Speed);
                     rb.linearVelocity = Move;
                     transform.forward = Move;
+
+                    // if(Distance == 0){
+                    //     var Health = health - damage;
+
+                    // }
+
+                    // else {
+                    //     return;
+                    
                 }
             }
 
