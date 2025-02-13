@@ -16,9 +16,11 @@ public class EnemyScript : MonoBehaviour
     public GameObject Target;
     private bool seePlayer;
 
-    // public float damage;
+    public float AttackDamage;
 
-    // public float health;
+    public float Cooldown;
+    public float AttackRange;
+    public float LastAttack;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,13 +61,15 @@ public class EnemyScript : MonoBehaviour
                     rb.linearVelocity = Move;
                     transform.forward = Move;
 
-                    // if(Distance == 0){
-                    //     var Health = health - damage;
+                    if(Distance <= AttackRange && Time.time >= LastAttack + Cooldown){ 
+//hi sia, and me, basically it only attacks if its in range AND the total time the game has been running is more than the timestamp of its last attack + the cooldown for the attack
+                        // Attack(); // using attack
+                        LastAttack = Time.time; //reset cooldown basically
 
-                    // }
-
-                    // else {
-                    //     return;
+        
+                    }
+                    else {
+                        return;
                     
                 }
             }
@@ -73,4 +77,10 @@ public class EnemyScript : MonoBehaviour
         }
         
     }
+    }
+        void Attack()
+    {
+
+    }
 }
+
