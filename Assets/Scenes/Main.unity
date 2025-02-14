@@ -183,13 +183,15 @@ MonoBehaviour:
   SightRange: 20
   DetectionRange: 20
   rb: {fileID: 326427504}
-  Target: {fileID: 0}
+  Target: {fileID: 1170591945}
   grounded: 0
   AttackDamage: 0
   Cooldown: 1
-  AttackRange: 10
+  MinAttackRange: 0
+  MaxAttackRange: 0
   LastAttack: 0
   EnemyBullet: {fileID: 3197746329366166003, guid: 924ffae674b43064a9a40f7f06e34e8a, type: 3}
+  RetreatDistance: 0
 --- !u!65 &326427506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -598,6 +600,7 @@ GameObject:
   - component: {fileID: 1170591949}
   - component: {fileID: 1170591948}
   - component: {fileID: 1170591947}
+  - component: {fileID: 1170591950}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Player
@@ -696,6 +699,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170591945}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!136 &1170591950
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170591945}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1442357661
 GameObject:
   m_ObjectHideFlags: 0
