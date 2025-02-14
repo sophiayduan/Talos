@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using System.Runtime.CompilerServices;
 using UnityEngine.UIElements;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -81,13 +82,12 @@ public class EnemyScript : MonoBehaviour
                         Instantiate(EnemyBullet, transform.position, Quaternion.identity);
 
                         LastAttack = Time.time; //reset cooldown basically
-                        // if (Distance < MinAttackRange){
-                        //     Vector3 AwayDirection = (transform.position - Target.transform.position).normalized;
-                        //     Vector3 MoveAway = new Vector3(AwayDirection.x * Speed, 0, AwayDirection.z * Speed);
-                        //     rb.linearVelocity = MoveAway;
-                                
-                        
-                        // }
+
+                    }
+                    else if (Distance < MinAttackRange){
+                        Vector3 AwayDirection = (transform.position - Target.transform.position).normalized;
+                        Vector3 MoveAway = new Vector3(AwayDirection.x * Speed, 0, AwayDirection.z * Speed);
+                        rb.linearVelocity = MoveAway;
             
                     }
 
@@ -112,7 +112,5 @@ public class EnemyScript : MonoBehaviour
         //     }
         // }
 
-
     }
-
 }

@@ -1188,6 +1188,7 @@ MonoBehaviour:
   lookSenseH: 0.1
   lookSenseV: 0.1
   lookLimitV: 89
+  MouseSenstivity: 3
 --- !u!95 &8158152352229030201
 Animator:
   serializedVersion: 7
