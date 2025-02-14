@@ -184,6 +184,12 @@ MonoBehaviour:
   DetectionRange: 20
   rb: {fileID: 326427504}
   Target: {fileID: 0}
+  grounded: 0
+  AttackDamage: 0
+  Cooldown: 1
+  AttackRange: 10
+  LastAttack: 0
+  EnemyBullet: {fileID: 3197746329366166003, guid: 924ffae674b43064a9a40f7f06e34e8a, type: 3}
 --- !u!65 &326427506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -267,7 +273,7 @@ Transform:
   m_GameObject: {fileID: 326427503}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 529.206, y: 123.843, z: 1466.8264}
+  m_LocalPosition: {x: 529.56, y: 123.843, z: 1465.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -608,11 +614,11 @@ Transform:
   m_GameObject: {fileID: 1170591945}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 535.5146, y: 124.248146, z: 1466.8264}
+  m_LocalPosition: {x: -0.52, y: 1.5, z: 0.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1442357662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1170591947
 CapsuleCollider:
@@ -719,6 +725,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1170591946}
   - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -839,5 +846,4 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 2094587980}
   - {fileID: 326427509}
-  - {fileID: 1170591946}
   - {fileID: 1442357662}
