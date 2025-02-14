@@ -186,11 +186,11 @@ MonoBehaviour:
   Target: {fileID: 1170591945}
   grounded: 0
   AttackDamage: 0
-  Cooldown: 1
-  MinAttackRange: 0
-  MaxAttackRange: 0
+  Cooldown: 1.2
+  MinAttackRange: 3
+  MaxAttackRange: 10
   LastAttack: 0
-  EnemyBullet: {fileID: 3197746329366166003, guid: 924ffae674b43064a9a40f7f06e34e8a, type: 3}
+  EnemyBullet: {fileID: 6097062040410361932, guid: d18b11c176785c243bf09acd53f111db, type: 3}
   RetreatDistance: 0
 --- !u!65 &326427506
 BoxCollider:
@@ -236,7 +236,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -617,7 +617,7 @@ Transform:
   m_GameObject: {fileID: 1170591945}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.52, y: 1.5, z: 0.43}
+  m_LocalPosition: {x: 4.13, y: 1.5, z: 8.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -768,7 +768,7 @@ GameObject:
   - component: {fileID: 2094587978}
   - component: {fileID: 2094587977}
   m_Layer: 0
-  m_Name: fff
+  m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -859,7 +859,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 532.3623, y: 123.30027, z: 1466.8264}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
