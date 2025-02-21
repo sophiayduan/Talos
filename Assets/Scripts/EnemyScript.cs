@@ -74,15 +74,17 @@ public class EnemyScript : MonoBehaviour
                     transform.forward = Move;
 
 
-                    if(Distance <= MaxAttackRange && Distance >= MinAttackRange && Time.time >= LastAttack + Cooldown ){ 
+                    if(Distance <= MaxAttackRange && Distance >= MinAttackRange){ 
 //hi sia, and me, basically it only attacks if its in range AND the total time the game has been running is more than the timestamp of its last attack + the cooldown for the attack
                         // Attack(); // using attack
                         
-                        transform.LookAt(Target.transform.position);
-                        Instantiate(EnemyBullet, transform.position, Quaternion.identity);
+                        if (Time.time >= LastAttack + Cooldown){
+                            transform.LookAt(Target.transform.position);
+                            Instantiate(EnemyBullet, transform.position, Quaternion.identity);
+                            // transform.position = transform.position;
 
-                        LastAttack = Time.time; //reset cooldown basically
-
+                            LastAttack = Time.time; //reset cooldown basically
+                        }
                     }
                     else if (Distance < MinAttackRange){
                         Vector3 AwayDirection = (transform.position - Target.transform.position).normalized;
@@ -93,7 +95,7 @@ public class EnemyScript : MonoBehaviour
 
                     else 
                     {
-                        return;
+                        rb.linearVelocity = Vector3.zero;
                     }
             }
 
