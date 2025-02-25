@@ -8,7 +8,7 @@ public class EnemyBullet : MonoBehaviour
     public float speed;
     private Transform player;
     private Vector3 target;
-    public float damage = 2;
+    public float amount = 10;
     public float KOtime;
     // public int damage = 2;
     private PlayerHealth playerHealth;
@@ -23,9 +23,10 @@ public class EnemyBullet : MonoBehaviour
         {
             
             playerHealth = player.GetComponent<PlayerHealth>();
+
             if(playerHealth != null){
-                playerHealth.takeDamage(damage);
-                Debug.Log($"Damage Amount: {damage}");
+                playerHealth.takeDamage(amount);
+                Debug.Log($"Damage Amount: {amount}");
                 DestroyEnemyBullet();
                 
                 target = player.transform.position;
@@ -71,7 +72,7 @@ public class EnemyBullet : MonoBehaviour
         PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
         if(playerHealth!=null)
         {
-            playerHealth.takeDamage(damage);
+            playerHealth.takeDamage(amount);
         }
     }
 }
