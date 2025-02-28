@@ -13,6 +13,7 @@ namespace Charactercontroller
         public InputActions InputActions {get; private set;}
         public Vector2 MovementInput {get; private set;}
         public Vector2 LookInput {get; private set;}
+        public bool JumpPressed {get; private set;}
         private void OnEnable(){
             InputActions = new InputActions();
             InputActions.Enable();
@@ -23,6 +24,11 @@ namespace Charactercontroller
         private void OnDisable(){
             InputActions.PlayerLocomotionMap.Disable();
             InputActions.PlayerLocomotionMap.RemoveCallbacks(this);
+        }
+
+        private void LateUpdate()
+        {
+            JumpPressed = false;
         }
         public void OnMovement(InputAction.CallbackContext context)
         {
@@ -43,6 +49,14 @@ namespace Charactercontroller
             else if (context.canceled){
                 SprintToggledOn = !holdToSprint && SprintToggledOn;
             }
+        }
+
+        public void OnJump(InputAction.CallbackContext context)
+        {
+            if(!context.performed)
+                return;
+            
+            JumpPressed = true;
         }
     }
 }
