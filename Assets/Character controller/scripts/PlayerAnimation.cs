@@ -9,8 +9,11 @@ namespace Charactercontroller{
 
         private PlayerInputs _playerinputs;
         private PlayerState _playerState;
+
         private static int inputXHash = Animator.StringToHash("inputX");
         private static int inputYHash = Animator.StringToHash("inputY");
+        private static int inputMagHash = Animator.StringToHash("inputMag");
+
         private Vector3 _currentBlendInput = Vector3.zero;
 
         private void Awake(){
@@ -23,11 +26,14 @@ namespace Charactercontroller{
         }
 
         private void UpdateAnimationState(){
-            Vector2 inputTarget = _playerinputs.MovementInput;
+            bool isSprintng = _playerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting;
+
+            Vector2 inputTarget = isSprintng ? _playerinputs.MovementInput * 1.5f : _playerinputs.MovementInput;
             _currentBlendInput = Vector3.Lerp(_currentBlendInput, inputTarget, locomotionBlendSpeed * Time.deltaTime);
             
             _animator.SetFloat(inputXHash, _currentBlendInput.x);
             _animator.SetFloat(inputYHash, _currentBlendInput.y);
+            _animator.SetFloat(inputMagHash, _currentBlendInput.magnitude);
 
         }
     }

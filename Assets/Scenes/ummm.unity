@@ -1724,6 +1724,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
+      propertyPath: drag
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: lookSenseH
       value: 0.5
       objectReference: {fileID: 0}
@@ -1732,8 +1736,20 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
+      propertyPath: sprintSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: MouseSenstivity
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
+      propertyPath: runAcceleration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
+      propertyPath: sprintAcceleration
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 599308147405661221, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: maxHealth
