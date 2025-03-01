@@ -35,6 +35,7 @@ public class EnemyBullet : MonoBehaviour
             }
             else {
                 Debug.LogError("playerhealth issue");
+
             }
 
         }

@@ -1,18 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
-{        public Slider healthSlider;
+{        
+    public Slider healthSlider;
 
-        public float maxHealth = 100f;
-        // [SerializeField] private float currentHealth;
-        public float currentHealth;
-        // public Slider easeHealthSlider;
-        // private float lerpSpeed = 0.05f;
+    public float maxHealth = 100f;
+    // [SerializeField] private float currentHealth;
+    public float currentHealth;
+    // public Slider easeHealthSlider;
+    // private float lerpSpeed = 0.05f;
 
 
     void Start()
     {
         currentHealth = maxHealth;
+        healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
     }
     void Update()
     {
@@ -23,12 +25,14 @@ public class PlayerHealth : MonoBehaviour
                 }
         }
         else if (healthSlider == null){
-            healthSlider = FindFirstObjectByType<Slider>();
+            // healthSlider = FindFirstObjectByType<Slider>();
             Debug.LogError("healthslider  is == null");
         }
   
         if (Input.GetKeyDown(KeyCode.Space)){
-            takeDamage(10);
+            takeDamage(10); 
+             healthSlider.value = currentHealth;
+
         }
         // if (healthSlider.value != easeHealthSlider.value)
         // {
