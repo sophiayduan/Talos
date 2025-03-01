@@ -29,9 +29,7 @@ public class EnemyScript : MonoBehaviour
 
     public float LastAttack;
     public GameObject EnemyBullet;
-    public Vector3 Direction;
-    public Vector3 Heading;
-    public float Distance;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -66,10 +64,10 @@ public class EnemyScript : MonoBehaviour
                     seePlayer = false;
                 }
                 else {
-                    
-                    Heading = Target.transform.position - transform.position;
-                    Distance = Heading.magnitude;
-                    Direction = Heading / Distance;
+
+                    var Heading = Target.transform.position - transform.position;
+                    var Distance = Heading.magnitude;
+                    var Direction = Heading / Distance;
 
                     Vector3 Move = new Vector3(Direction.x *Speed, 0, Direction.z * Speed);
 
