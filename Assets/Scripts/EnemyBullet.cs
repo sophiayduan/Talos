@@ -12,17 +12,19 @@ public class EnemyBullet : MonoBehaviour
     public float KOtime;
     // public int damage = 2;
     private PlayerHealth playerHealth;
+    // private float variance;
+    public  ParticleSystem particles;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        // variance = UnityEngine.Random.Range(-0.25f, 0.25f);
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        target = new Vector3(player.position.x, player.position.y, player.position.z);
+        target = new Vector3(player.position.x, player.position.y + 1, player.position.z );
 
         if(player != null)
         {
             
-            playerHealth = player.GetComponent<PlayerHealth>();
+            // playerHealth = player.GetComponent<PlayerHealth>();
 
             if(playerHealth != null){
                 playerHealth.takeDamage(amount);
@@ -58,6 +60,8 @@ public class EnemyBullet : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         if(transform.position.x == target.x && transform.position.y == target.y){
             DestroyEnemyBullet();
+            Instantiate(particles,transform.position,Quaternion.identity);
+            // Destroy(particles, 1f);
         }
 
 
@@ -76,6 +80,7 @@ public class EnemyBullet : MonoBehaviour
             playerHealth.takeDamage(amount);
         }
     }
+
 }
 
 

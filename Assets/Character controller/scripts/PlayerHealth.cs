@@ -1,12 +1,17 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {        
-    public Slider healthSlider;
+    public Slider Slider;
+
 
     public float maxHealth = 100f;
     // [SerializeField] private float currentHealth;
     public float currentHealth;
+    [SerializeField] private ParticleSystem particles;
+    // private ParticleSystem damageparticlesInstance;
+
     // public Slider easeHealthSlider;
     // private float lerpSpeed = 0.05f;
 
@@ -14,24 +19,27 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthSlider = GameObject.Find("HealthSlider").GetComponent<Slider>();
+        Slider = FindFirstObjectByType<Slider>();
+
     }
     void Update()
     {
-        if (healthSlider != null){
-            if (healthSlider.value != currentHealth)
+        if (Slider != null){
+            if (Slider.value != currentHealth)
                 {
-                    healthSlider.value = currentHealth;
+                    Slider.value = currentHealth;
                 }
         }
-        else if (healthSlider == null){
-            // healthSlider = FindFirstObjectByType<Slider>();
+        else if (Slider == null){
+            // Slider = FindFirstObjectByType<Slider>();
             Debug.LogError("healthslider  is == null");
         }
   
         if (Input.GetKeyDown(KeyCode.Space)){
             takeDamage(10); 
-             healthSlider.value = currentHealth;
+            Slider.value = currentHealth;
+            Instantiate(particles,transform.position,Quaternion.identity);
+
 
         }
         // if (healthSlider.value != easeHealthSlider.value)
@@ -58,5 +66,7 @@ public class PlayerHealth : MonoBehaviour
     //     Destroy(gameObject);
 
     // }
+
+
 }
     

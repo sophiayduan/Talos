@@ -53,15 +53,19 @@ public class EnemyScript : MonoBehaviour
                     Target = HitCollider.gameObject;
                     seePlayer = true;
                 }
+                else{
+                    Debug.LogError("icant see the player");
+                }
             }
         }
         else
         {
-            if(Physics.Raycast(transform.position, (Target.transform.position -transform.position), out Hit, SightRange))
+            if(Physics.Raycast(transform.position, Target.transform.position -transform.position, out Hit, SightRange))
             {
                 if(Hit.collider.tag != "Player")
                 {
                     seePlayer = false;
+                    Debug.Log("i cCAN see the player");
                 }
                 else {
 
@@ -94,10 +98,10 @@ public class EnemyScript : MonoBehaviour
             
                     }
 
-                    // else 
-                    // {
-                    //     rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, Time.deltaTime * 5);
-                    // }
+                    else 
+                    {
+                        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, Time.deltaTime * 5);
+                    }
             }
 
         }
