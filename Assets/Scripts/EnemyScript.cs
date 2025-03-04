@@ -50,6 +50,7 @@ public class EnemyScript : MonoBehaviour
                 {
                     Target = HitCollider.gameObject;
                     seePlayer = true;
+                    Debug.Log("ooh its the player");
                     break;
                 }
                 else{
@@ -61,14 +62,9 @@ public class EnemyScript : MonoBehaviour
         {
             if(Physics.Raycast(transform.position, Target.transform.position -transform.position, out Hit, SightRange))
             Debug.DrawRay(transform.position, Target.transform.position - transform.position, Color.red);
-
+            Debug.Log("Raycast hit: " + Hit.collider.name);
             {
-                if(Hit.collider.tag != "Player")
-                {
-                    seePlayer = false;
-                    Debug.Log("this is not the player"); //@sophia test this line
-                }
-                else {
+                if (Hit.collider.CompareTag("Player")) {
                     Debug.Log("okay this is the player");
                     var Heading = Target.transform.position - transform.position;
                     var Distance = Heading.magnitude;
@@ -101,17 +97,29 @@ public class EnemyScript : MonoBehaviour
 
                     else if (Distance > MaxAttackRange)
                     {
-                        new Vector3(Direction.x * Speed, 0, Direction.z * Speed);
-
                         rb.linearVelocity = Move;
                         transform.forward = Move;
 
                     }
-            }
+            
+                }
+                else if (Hit.collider.gameObject == gameObject){
+                    // seePlayer = false;
+                    Debug.Log("this is itself");
+                 //@sophia test this line
+                }
+                else {
+                    Debug.LogError("wtf did i hit");
+                    Debug.Log("hit something else " + Hit.collider.name);
 
-        }
+                }
+
+            }
+      
+            
+        
         
     }
     }
-
+    
 }
