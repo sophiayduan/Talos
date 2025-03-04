@@ -19,7 +19,7 @@ public class EnemyScript : MonoBehaviour
     public Rigidbody rb;
     public GameObject Target;
     private bool seePlayer;
-    public bool grounded = true;
+    // public bool grounded = true;
 
     // public float Health;
 
@@ -41,8 +41,6 @@ public class EnemyScript : MonoBehaviour
     void Update()
 
     {
-        
-
         if (!seePlayer)
         {
             hitColliders = Physics.OverlapSphere(transform.position, DetectionRange);
@@ -52,28 +50,31 @@ public class EnemyScript : MonoBehaviour
                 {
                     Target = HitCollider.gameObject;
                     seePlayer = true;
+                    break;
                 }
                 else{
-                    Debug.LogError("icant see the player");
+                    Debug.LogError("didn't hit the player");
                 }
             }
         }
         else
         {
             if(Physics.Raycast(transform.position, Target.transform.position -transform.position, out Hit, SightRange))
+            Debug.DrawRay(transform.position, Target.transform.position - transform.position, Color.red);
+
             {
                 if(Hit.collider.tag != "Player")
                 {
                     seePlayer = false;
-                    Debug.Log("i cCAN see the player");
+                    Debug.Log("this is not the player"); //@sophia test this line
                 }
                 else {
-
+                    Debug.Log("okay this is the player");
                     var Heading = Target.transform.position - transform.position;
                     var Distance = Heading.magnitude;
                     var Direction = Heading / Distance;
 
-                    Vector3 Move = new Vector3(Direction.x *Speed, 0, Direction.z * Speed);
+                    Vector3 Move = new Vector3(Direction.x * Speed, 0, Direction.z * Speed);
 
                     rb.linearVelocity = Move;
                     transform.forward = Move;
@@ -98,9 +99,13 @@ public class EnemyScript : MonoBehaviour
             
                     }
 
-                    else 
+                    else if (Distance > MaxAttackRange)
                     {
-                        rb.linearVelocity = Vector3.Lerp(rb.linearVelocity, Vector3.zero, Time.deltaTime * 5);
+                        new Vector3(Direction.x * Speed, 0, Direction.z * Speed);
+
+                        rb.linearVelocity = Move;
+                        transform.forward = Move;
+
                     }
             }
 

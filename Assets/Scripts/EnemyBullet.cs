@@ -60,9 +60,14 @@ public class EnemyBullet : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         if(transform.position.x == target.x && transform.position.y == target.y){
             DestroyEnemyBullet();
-            Instantiate(particles,transform.position,Quaternion.identity);
+            if(player.position.x <= 0.25+ transform.position.x && player.position.z <= 0.25 + transform.position.z && player.position.y <= 0.25 + transform.position.y ){
+                Instantiate(particles,transform.position,Quaternion.identity);
+
+            }
+            // Instantiate(particles,transform.position,Quaternion.identity);
             // Destroy(particles, 1f);
         }
+
 
 
 
