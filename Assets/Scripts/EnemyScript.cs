@@ -18,7 +18,7 @@ public class EnemyScript : MonoBehaviour
 
     public Rigidbody rb;
     public GameObject Target;
-    private bool seePlayer;
+    public bool seePlayer;
     // public bool grounded = true;
 
     // public float Health;
@@ -29,6 +29,7 @@ public class EnemyScript : MonoBehaviour
 
     public float LastAttack;
     public GameObject EnemyBullet;
+    public bool attackRange;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -78,7 +79,7 @@ public class EnemyScript : MonoBehaviour
 
                     if(Distance <= MaxAttackRange && Distance >= MinAttackRange){ 
 //hi sia, and me, basically it only attacks if its in range AND the total time the game has been running is more than the timestamp of its last attack + the cooldown for the attack
-                        
+                        attackRange = true;
                         if (Time.time >= LastAttack + Cooldown){
                             transform.LookAt(Target.transform.position);
                             Instantiate(EnemyBullet, transform.position, Quaternion.identity);
@@ -89,6 +90,7 @@ public class EnemyScript : MonoBehaviour
 
                     }
                     else if (Distance < MinAttackRange){
+                        attackRange = false;
                         Vector3 AwayDirection = (transform.position - Target.transform.position).normalized;
                         Vector3 MoveAway = new Vector3(AwayDirection.x * Speed, 0, AwayDirection.z * Speed);
                         rb.linearVelocity = MoveAway;
@@ -97,6 +99,7 @@ public class EnemyScript : MonoBehaviour
 
                     else if (Distance > MaxAttackRange)
                     {
+                        attackRange = false;
                         rb.linearVelocity = Move;
                         transform.forward = Move;
 
