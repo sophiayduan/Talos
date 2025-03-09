@@ -1,6 +1,3 @@
-using System;
-using Charactercontroller;
-using UnityEditor;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
@@ -23,8 +20,7 @@ public class EnemyBullet : MonoBehaviour
 
         if(player != null)
         {
-            
-            // playerHealth = player.GetComponent<PlayerHealth>();
+            playerHealth = player.GetComponent<PlayerHealth>();
 
             if(playerHealth != null){
                 playerHealth.takeDamage(amount);
@@ -36,24 +32,17 @@ public class EnemyBullet : MonoBehaviour
                 Debug.Log("wow this is ok"); 
             }
             else {
-                Debug.LogError("playerhealth issue");
+                playerHealth = player.GetComponent<PlayerHealth>();
+                Debug.LogError("playerhealth null (enemy bullet)");
 
             }
 
         }
         else 
         {
-            Debug.LogError("issue w player");
-        }
-
- 
-        
-            
+            Debug.LogError("player itself == null");
+        }          
     }
-
-
-
-
     // Update is called once per frame
     void Update()
     {        
@@ -67,22 +56,20 @@ public class EnemyBullet : MonoBehaviour
             // Instantiate(particles,transform.position,Quaternion.identity);
             // Destroy(particles, 1f);
         }
-
-
-
-
     }
-
 
     void DestroyEnemyBullet(){
     Destroy(gameObject);
 }
     void OnTriggerEnter(Collider other)
     {
-        PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
-        if(playerHealth!=null)
+        if (other.CompareTag("Player"))
         {
-            playerHealth.takeDamage(amount);
+            PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
+            if(playerHealth != null)
+            {
+                playerHealth.takeDamage(amount);
+            }
         }
     }
 

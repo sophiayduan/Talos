@@ -4,8 +4,6 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {        
     public Slider Slider;
-
-
     public float maxHealth = 100f;
     // [SerializeField] private float currentHealth;
     public float currentHealth;
@@ -20,6 +18,8 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         Slider = FindFirstObjectByType<Slider>();
+        Debug.Log($"slider: {Slider.name}");
+
 
     }
     void Update()
@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
                 }
         }
         else if (Slider == null){
-            // Slider = FindFirstObjectByType<Slider>();
+            Slider = FindFirstObjectByType<Slider>();
             Debug.LogError("healthslider  is == null");
         }
   
@@ -39,7 +39,6 @@ public class PlayerHealth : MonoBehaviour
             takeDamage(10); 
             Slider.value = currentHealth;
             Instantiate(particles,transform.position,Quaternion.identity);
-
 
         }
         // if (healthSlider.value != easeHealthSlider.value)

@@ -1,41 +1,45 @@
-using Unity.VisualScripting;
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using System.Runtime.CompilerServices;
-using UnityEngine.UIElements;
-using UnityEngine.ProBuilder.MeshOperations;
-using Charactercontroller;
+using UnityEngine.AI;
+
 
 public class EnemyScript : MonoBehaviour
-{
+{    
+    public Rigidbody rb;
     public float Maxspeed;
     private float Speed;
-    private Collider[] hitColliders;
-    private RaycastHit Hit;
+    private NavMeshAgent agent;
+
     public float SightRange;
     public float DetectionRange;
-
-    public Rigidbody rb;
     public GameObject Target;
     public bool seePlayer;
+    private Collider[] hitColliders;
+    private RaycastHit Hit;
+
     // public bool grounded = true;
 
     // public float Health;
 
+    //Attacking 
     public float Cooldown;
     public float MinAttackRange;
     public float MaxAttackRange;
-
     public float LastAttack;
     public GameObject EnemyBullet;
     public bool attackRange;
 
+    public LayerMask GroundLayer;
 
+    // Patrolling 
+    public Vector3 walkPoint;
+    bool walkPointSet;
+    public float walkPointRange;
+    [SerializeField] private LayerMask layerMask;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Speed = Maxspeed;
+        
     }
 
     // Update is called once per frame
@@ -44,6 +48,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (!seePlayer)
         {
+            Patrolling();
             hitColliders = Physics.OverlapSphere(transform.position, DetectionRange);
             foreach (var HitCollider in hitColliders)
             {
@@ -61,11 +66,9 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            if(Physics.Raycast(transform.position, Target.transform.position -transform.position, out Hit, SightRange))
-            Debug.DrawRay(transform.position, Target.transform.position - transform.position, Color.red);
-            Debug.Log("Raycast hit: " + Hit.collider.name);
-            {
-                if (Hit.collider.CompareTag("Player")) {
+            if(Physics.Raycast(transform.position, Target.transform.position -transform.position, out Hit, SightRange, layerMask)){
+                Debug.Log("Raycast hit: " + Hit.collider.name);
+                
                     Debug.Log("okay this is the player");
                     var Heading = Target.transform.position - transform.position;
                     var Distance = Heading.magnitude;
@@ -76,53 +79,59 @@ public class EnemyScript : MonoBehaviour
                     rb.linearVelocity = Move;
                     transform.forward = Move;
 
-
-                    if(Distance <= MaxAttackRange && Distance >= MinAttackRange){ 
-//hi sia, and me, basically it only attacks if its in range AND the total time the game has been running is more than the timestamp of its last attack + the cooldown for the attack
+                    if(Distance <= MaxAttackRange && Distance >= MinAttackRange)
+                    { 
                         attackRange = true;
-                        if (Time.time >= LastAttack + Cooldown){
-                            transform.LookAt(Target.transform.position);
-                            Instantiate(EnemyBullet, transform.position, Quaternion.identity);
-                            // transform.position = transform.position;
-
-                            LastAttack = Time.time; //reset cooldown basically
-                        }
-
+                        rb.linearVelocity = Vector3.zero;
+                        Attack();
                     }
-                    else if (Distance < MinAttackRange){
+     
+                    else if(Distance < MinAttackRange)
+                    {
                         attackRange = false;
                         Vector3 AwayDirection = (transform.position - Target.transform.position).normalized;
                         Vector3 MoveAway = new Vector3(AwayDirection.x * Speed, 0, AwayDirection.z * Speed);
                         rb.linearVelocity = MoveAway;
-            
                     }
 
-                    else if (Distance > MaxAttackRange)
+                    else if(Distance > MaxAttackRange)
                     {
                         attackRange = false;
                         rb.linearVelocity = Move;
                         transform.forward = Move;
 
                     }
-            
-                }
-                else if (Hit.collider.gameObject == gameObject){
-                    // seePlayer = false;
-                    Debug.Log("this is itself");
-                 //@sophia test this line
-                }
-                else {
-                    Debug.LogError("wtf did i hit");
-                    Debug.Log("hit something else " + Hit.collider.name);
-
-                }
-
             }
-      
-            
-        
-        
-    }
+        }
     }
     
+    private void Patrolling(){
+        if(!walkPointSet) SearchWalkPoint();
+        if(walkPointSet)
+            agent.SetDestination(walkPoint);
+        
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        if(distanceToWalkPoint.magnitude < 1f)
+            walkPointSet = false;
+    }
+    private void SearchWalkPoint(){
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        walkPoint = new Vector3(transform.position.x + randomX,transform.position.y, transform.position.z + randomZ);
+
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, GroundLayer))
+            walkPointSet = true;
+    }
+    // private void Follow(){
+        //tbd if want to change it do this
+    // }
+    private void Attack(){
+        if (Time.time >= LastAttack + Cooldown){
+            transform.LookAt(Target.transform.position);
+            Instantiate(EnemyBullet, transform.position, Quaternion.identity);
+            LastAttack = Time.time; //reset cooldown basically
+        }
+    }
 }
