@@ -6,12 +6,11 @@ public class EnemyBullet : MonoBehaviour
     private Transform player;
     private Vector3 target;
     public float amount = 10;
-    public float KOtime;
+    // public float KOtime;
     // public int damage = 2;
     private PlayerHealth playerHealth;
     // private float variance;
     public  ParticleSystem particles;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // variance = UnityEngine.Random.Range(-0.25f, 0.25f);
@@ -22,10 +21,7 @@ public class EnemyBullet : MonoBehaviour
         {
             playerHealth = player.GetComponent<PlayerHealth>();
 
-            if(playerHealth != null){
-                playerHealth.takeDamage(amount);
-                Debug.Log($"Damage Amount: {amount}");
-                DestroyEnemyBullet();
+            if(playerHealth != null){;
                 
                 target = player.transform.position;
                 transform.LookAt(target);
@@ -42,7 +38,6 @@ public class EnemyBullet : MonoBehaviour
             Debug.LogError("player itself == null");
         }          
     }
-    // Update is called once per frame
     void Update()
     {        
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
@@ -52,22 +47,27 @@ public class EnemyBullet : MonoBehaviour
                 Instantiate(particles,transform.position,Quaternion.identity);
 
             }
-            // Instantiate(particles,transform.position,Quaternion.identity);
-            // Destroy(particles, 1f);
+ 
         }
     }
 
     void DestroyEnemyBullet(){
-    Destroy(gameObject);
-}
+        Destroy(gameObject);
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
+
             if(playerHealth != null)
             {
                 playerHealth.takeDamage(amount);
+
+            }
+            else 
+            {
+                Debug.LogError("playerhealth bottom = null");
             }
         }
     }

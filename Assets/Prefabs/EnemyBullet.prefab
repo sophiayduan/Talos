@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6825483139546767404}
   - component: {fileID: 4259990218178931594}
   - component: {fileID: 3510186136879983718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  amount: 2
+  amount: 10
   KOtime: 0
   particles: {fileID: 1078360017053888719, guid: 887608799f4f68b41b63dd500e57d132, type: 3}
 --- !u!96 &3510186136879983718
