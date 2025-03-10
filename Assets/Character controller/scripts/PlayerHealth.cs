@@ -1,49 +1,54 @@
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {        
-    public Slider Slider;
+    public Slider healthSlider;
+    public Slider easeHealthSlider;
     public float maxHealth = 100f;
-    // [SerializeField] private float currentHealth;
     public float currentHealth;
     [SerializeField] private ParticleSystem particles;
-    // private ParticleSystem damageparticlesInstance;
-
-    // public Slider easeHealthSlider;
-    // private float lerpSpeed = 0.05f;
+    private float lerpSpeed = 0.05f;
+    // public Canvas DeathScreen;
+    public GameObject diedscreen;
 
 
     void Start()
-    {
+    { 
         currentHealth = maxHealth;
-        Slider = FindFirstObjectByType<Slider>();
-        Debug.Log($"slider: {Slider.name}");
+        healthSlider.value = currentHealth;
+        easeHealthSlider.value = currentHealth;
+        diedscreen.SetActive(false);
 
 
     }
     void Update()
     {
-        if (Slider != null){
-            if (Slider.value != currentHealth)
-                {
-                    Slider.value = currentHealth;
-                }
+        if (healthSlider.value != currentHealth)
+        {
+            healthSlider.value = currentHealth;
         }
-        else if (Slider == null){
-            Slider = FindFirstObjectByType<Slider>();
-            Debug.LogError("healthslider  is == null");
-        }
-  
         if (Input.GetKeyDown(KeyCode.Space)){
             takeDamage(10); 
-            Slider.value = currentHealth;
+            healthSlider.value = currentHealth;
             Instantiate(particles,transform.position,Quaternion.identity);
 
         }
+        if (Mathf.Abs(easeHealthSlider.value - currentHealth) < 0.1f)  
+        {
+            easeHealthSlider.value = currentHealth;
+        }
+
+        if (healthSlider.value != easeHealthSlider.value)  
+        {
+            easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, healthSlider.value, lerpSpeed );
+        } 
+
+
         // if (healthSlider.value != easeHealthSlider.value)
         // {
-        //     easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed);
+        //     easeHealthSlider.value = Mathf.MoveTowards(easeHealthSlider.value, currentHealth, lerpSpeed * Time.deltaTime * 10);
         // }
     }
 
@@ -54,17 +59,22 @@ public class PlayerHealth : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            // youdied();
+            died();
             Debug.Log("you died");
             currentHealth = maxHealth;
         }
  
     }
-    // void youdied()
-    // {
-    //     Destroy(gameObject);
+    void died()
+    {
+        diedscreen.SetActive(true);
+        Time.timeScale = 0f;
+        currentHealth =
+        easeHealthSlider.value = currentHealth;
+        healthSlider.value = currentHealth;
 
-    // }
+
+    }
 
 
 }

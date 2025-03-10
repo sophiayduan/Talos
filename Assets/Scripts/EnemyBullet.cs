@@ -34,7 +34,6 @@ public class EnemyBullet : MonoBehaviour
             else {
                 playerHealth = player.GetComponent<PlayerHealth>();
                 Debug.LogError("playerhealth null (enemy bullet)");
-
             }
 
         }
