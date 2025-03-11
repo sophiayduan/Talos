@@ -55,9 +55,13 @@ public class EnemyBullet : MonoBehaviour
         Destroy(gameObject);
     }
     void OnTriggerEnter(Collider other)
+
     {
+        Debug.Log($"Bullet hit: {other.name} on layer {other.gameObject.layer}");
+
         if (other.CompareTag("Player"))
         {
+            Debug.Log("bullet hit the player!");
             PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
 
             if(playerHealth != null)
