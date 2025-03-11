@@ -8,20 +8,29 @@ public class EnemyScript : MonoBehaviour
     public float Maxspeed;
     private float Speed;
     private NavMeshAgent agent;
+
     public float SightRange;
     public float DetectionRange;
     public GameObject Target;
     public bool seePlayer;
     private Collider[] hitColliders;
     private RaycastHit Hit;
+
+    // public bool grounded = true;
+
+    // public float Health;
+
+    //Attacking 
     public float Cooldown;
     public float MinAttackRange;
     public float MaxAttackRange;
     public float LastAttack;
     public GameObject EnemyBullet;
     public bool attackRange;
+
     public LayerMask GroundLayer;
 
+    // Patrolling 
     public Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
