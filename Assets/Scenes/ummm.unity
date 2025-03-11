@@ -771,7 +771,7 @@ Transform:
   m_GameObject: {fileID: 1207611018}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -612.3162, y: -283.3215, z: 1.8266764}
+  m_LocalPosition: {x: -500, y: -283.3215, z: 1.8266764}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1157,9 +1157,9 @@ RectTransform:
   m_Father: {fileID: 1880589309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 612, y: 288.5}
-  m_SizeDelta: {x: 1224, y: 577}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1511357758
 GameObject:
@@ -2368,6 +2368,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5937574899650009551, guid: 6f4bbb702bd2de24e8763e08d41e6226, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2464,6 +2468,22 @@ PrefabInstance:
     - target: {fileID: 7532199911313874651, guid: 63c086c1103228d44a55a030f5207882, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143237639674390129, guid: 63c086c1103228d44a55a030f5207882, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143237639674390129, guid: 63c086c1103228d44a55a030f5207882, type: 3}
+      propertyPath: m_Color.b
+      value: 0.09433961
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143237639674390129, guid: 63c086c1103228d44a55a030f5207882, type: 3}
+      propertyPath: m_Color.g
+      value: 0.09433961
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143237639674390129, guid: 63c086c1103228d44a55a030f5207882, type: 3}
+      propertyPath: m_Color.r
+      value: 0.09433961
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

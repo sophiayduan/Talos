@@ -19,10 +19,12 @@ public class EnemyBullet : MonoBehaviour
 
         if(player != null)
         {
+            Debug.Log("Player != null (enemybullet)");
             playerHealth = player.GetComponent<PlayerHealth>();
 
             if(playerHealth != null){;
-                
+                Debug.Log("Playerhealth != null (enemybullet)");
+
                 target = player.transform.position;
                 transform.LookAt(target);
                 Debug.Log("wow this is ok"); 
@@ -58,11 +60,13 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Ontriggerener tag is player");
             PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
 
             if(playerHealth != null)
             {
                 playerHealth.takeDamage(amount);
+                Debug.Log("playerHealth took damage");
 
             }
             else 

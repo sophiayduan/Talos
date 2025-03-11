@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {        
-    public static Slider healthSlider;
-    public static Slider easeHealthSlider;
-    public static float maxHealth = 100f;
+    public Slider healthSlider;
+    public Slider easeHealthSlider;
+    public float maxHealth = 100f;
     public float currentHealth;
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     { 
         currentHealth = maxHealth;
-        // healthSlider.value = currentHealth;
+        healthSlider.value = currentHealth;
         easeHealthSlider.value = currentHealth;
         diedscreen.SetActive(false);
 
