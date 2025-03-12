@@ -10,42 +10,45 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
-    // public Canvas DeathScreen;
     public GameObject diedscreen;
 
 
     void Start()
     { 
         currentHealth = maxHealth;
-        healthSlider.value = currentHealth;
-        easeHealthSlider.value = currentHealth;
         diedscreen.SetActive(false);
+        if (diedscreen == null){
+            Debug.LogError("fuck");
+        }
 
 
     }
     void Update()
     {   
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             takeDamage(10); 
             healthSlider.value = currentHealth;
             // Instantiate(particles,transform.position,Quaternion.identity);
         }
+
         if (healthSlider.value != currentHealth)
         {
             healthSlider.value = currentHealth;
         }
+
         if (easeHealthSlider.value - healthSlider.value < 0.1f) easeHealthSlider.value = healthSlider.value;
 
         if (healthSlider.value != easeHealthSlider.value)  
         {
-            easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed * Time.deltaTime * 20);
+            easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed );
         }
     }
     public void takeDamage(float amount)
     {
         currentHealth -= amount;
         Debug.Log($"Current health: {currentHealth}");
-        healthSlider.value = currentHealth;
+
         if(currentHealth <= 0)
         {
             died();
@@ -57,10 +60,6 @@ public class PlayerHealth : MonoBehaviour
     {
         diedscreen.SetActive(true);
         Time.timeScale = 0f;
-        // currentHealth = maxHealth;
-        easeHealthSlider.value = currentHealth;
-        healthSlider.value = currentHealth;
-
 
     }
 
