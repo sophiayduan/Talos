@@ -17,9 +17,15 @@ public class Status : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        debug.text = $" Cooldown: {enemy.Cooldown + enemy.LastAttack - Time.time:F2}s \n seePlayer {enemy.seePlayer} \n In attack range: {enemy.attackRange} \n Current Health: {player.currentHealth} \n Ease Slider: {player.easeHealthSlider.value}";
+    {   
+        // if (Time.timeScale != 0f){
+        //     debug.text = $" Cooldown: {enemy.Cooldown + enemy.LastAttack - Time.time:F2}s \n seePlayer {enemy.seePlayer} \n In attack range: {enemy.attackRange} \n Current Health: {player.currentHealth} \n Ease Slider: {player.easeHealthSlider.value}";
+        // }
 
     }
+
+
+
+    
 
 }

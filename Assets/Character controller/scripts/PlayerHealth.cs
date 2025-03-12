@@ -60,7 +60,7 @@ public class PlayerHealth : MonoBehaviour
     {
         GameManager.instance.GameOver();
         gameObject.SetActive(false);
-        // Time.timeScale = 0f;
+        Time.timeScale = 0f;
 
     }
 
