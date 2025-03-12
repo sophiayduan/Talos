@@ -896,7 +896,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866288917}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 77ec806e5a576df48b3d46e186a6c412, type: 3}
   m_Controller: {fileID: 9100000, guid: 3e131027043c6fd4f918b4af9dab4801, type: 2}
   m_CullingMode: 0
@@ -1054,7 +1054,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ed4fa67d0905c0f409f0746dcceb30da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2060721022}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ed4fa67d0905c0f409f0746dcceb30da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2060721021}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ed4fa67d0905c0f409f0746dcceb30da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2060721020}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ed4fa67d0905c0f409f0746dcceb30da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2060721019}
   m_SourcePrefab: {fileID: 100100000, guid: ed4fa67d0905c0f409f0746dcceb30da, type: 3}
 --- !u!1 &1304430876
 GameObject:
@@ -1635,6 +1647,109 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781790281}
   m_CullTransparentMesh: 1
+--- !u!1 &2060721017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ed4fa67d0905c0f409f0746dcceb30da, type: 3}
+  m_PrefabInstance: {fileID: 1257402069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2060721019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060721017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85f551c8c590c094ab0460af5f04297e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Maxspeed: 3
+  SightRange: 20
+  DetectionRange: 10
+  rb: {fileID: 2060721022}
+  Target: {fileID: 80234098}
+  grounded: 1
+  Cooldown: 3
+  MinAttackRange: 3
+  MaxAttackRange: 5
+  LastAttack: 0
+  EnemyBullet: {fileID: 3321875004569940165, guid: d18b11c176785c243bf09acd53f111db, type: 3}
+  Direction: {x: 0, y: 0, z: 0}
+  Heading: {x: 0, y: 0, z: 0}
+  Distance: 0
+--- !u!136 &2060721020
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060721017}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!95 &2060721021
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060721017}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 77ec806e5a576df48b3d46e186a6c412, type: 3}
+  m_Controller: {fileID: 9100000, guid: 3e131027043c6fd4f918b4af9dab4801, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &2060721022
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060721017}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1001 &211943912873303070
 PrefabInstance:
   m_ObjectHideFlags: 0

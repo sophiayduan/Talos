@@ -32,11 +32,13 @@ public class EnemyScript : MonoBehaviour
     public Vector3 Direction;
     public Vector3 Heading;
     public float Distance;
+    private Animator _animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Speed = Maxspeed;
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -54,6 +56,7 @@ public class EnemyScript : MonoBehaviour
                 {
                     Target = HitCollider.gameObject;
                     seePlayer = true;
+                    _animator.SetBool("isRunning", true);
                 }
             }
         }
@@ -64,6 +67,7 @@ public class EnemyScript : MonoBehaviour
                 if(Hit.collider.tag != "Player")
                 {
                     seePlayer = false;
+                    _animator.SetBool("isRunning", false);
                 }
                 else {
                     

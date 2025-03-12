@@ -9,6 +9,7 @@ namespace Charactercontroller{
 
         private PlayerInputs _playerinputs;
         private PlayerState _playerState;
+        private PlayerController _playerController;
 
         private static int inputXHash = Animator.StringToHash("inputX");
         private static int inputYHash = Animator.StringToHash("inputY");
@@ -16,12 +17,14 @@ namespace Charactercontroller{
         private static int isGroundedHash = Animator.StringToHash("isGrounded");
         private static int isFallingHash = Animator.StringToHash("isFalling");
         private static int isJumpingHash = Animator.StringToHash("isJumping");
+        private static int rotationMismatchHash = Animator.StringToHash("rotationMismatch");
 
         private Vector3 _currentBlendInput = Vector3.zero;
 
         private void Awake(){
             _playerinputs = GetComponent<PlayerInputs>();
             _playerState = GetComponent<PlayerState>();
+            _playerController = GetComponent<PlayerController>();
         }
 
         private void Update(){
@@ -47,6 +50,7 @@ namespace Charactercontroller{
             _animator.SetFloat(inputXHash, _currentBlendInput.x);
             _animator.SetFloat(inputYHash, _currentBlendInput.y);
             _animator.SetFloat(inputMagHash, _currentBlendInput.magnitude);
+            _animator.SetFloat(rotationMismatchHash, _playerController.RotationMismatch);
 
         }
     }
