@@ -58,6 +58,7 @@ public class PlayerHealth : MonoBehaviour
     }
     private void died()
     {
+        Camera.main.transform.parent = null;
         GameManager.instance.GameOver();
         gameObject.SetActive(false);
         Time.timeScale = 0f;
