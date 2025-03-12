@@ -10,16 +10,16 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
-    public GameObject diedscreen;
+    // public GameObject diedscreen;
 
 
     void Start()
     { 
         currentHealth = maxHealth;
-        diedscreen.SetActive(false);
-        if (diedscreen == null){
-            Debug.LogError("fuck");
-        }
+        // diedscreen.SetActive(false);
+        // if (diedscreen == null){
+        //     Debug.LogError("fuck");
+        // }
 
 
     }
@@ -56,10 +56,11 @@ public class PlayerHealth : MonoBehaviour
         }
  
     }
-    void died()
+    private void died()
     {
-        diedscreen.SetActive(true);
-        Time.timeScale = 0f;
+        GameManager.instance.GameOver();
+        gameObject.SetActive(false);
+        // Time.timeScale = 0f;
 
     }
 
