@@ -5,27 +5,77 @@ public class EnemyBullet : MonoBehaviour
     public float speed;
     private Transform player;
     private Vector3 target;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float amount = 10;
+    // public float KOtime;
+    // public int damage = 2;
+    private PlayerHealth playerHealth;
+    // private float variance;
+    public  ParticleSystem particles;
     void Start()
     {
-
+        // variance = UnityEngine.Random.Range(-0.25f, 0.25f);
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        target = new Vector3(player.position.x, player.position.y + 1, player.position.z );
 
-        // target = new Vector3(player.position.x, player.position.y, player.position.z);
-        target = player.transform.position;
-        transform.LookAt(target);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Vector3.Distance(transform.position, target) < 0.5f) 
+        if(player != null)
         {
-            Destroy(gameObject);
+            Debug.Log("Player != null (enemybullet)");
+            playerHealth = player.GetComponent<PlayerHealth>();
+
+            if(playerHealth != null){;
+                Debug.Log("Playerhealth != null (enemybullet)");
+
+                target = player.transform.position;
+                transform.LookAt(target);
+                Debug.Log("wow this is ok"); 
+            }
+            else {
+                playerHealth = player.GetComponent<PlayerHealth>();
+                Debug.LogError("playerhealth null (enemy bullet)");
+            }
+
         }
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
-
+        else 
+        {
+            Debug.LogError("player itself == null");
+        }          
     }
+    void Update()
+    {        
+        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        if(transform.position.x == target.x && transform.position.y == target.y){
+            DestroyEnemyBullet();
+            if(player.position.x <= 0.25+ transform.position.x && player.position.z <= 0.25 + transform.position.z && player.position.y <= 0.25 + transform.position.y ){
+                Instantiate(particles,transform.position,Quaternion.identity);
+
+            }
+ 
+        }
+    }
+
+    void DestroyEnemyBullet(){
+        Destroy(gameObject);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Ontriggerener tag is player");
+            PlayerHealth playerHealth = other.GetComponentInParent<PlayerHealth>();
+
+            if(playerHealth != null)
+            {
+                playerHealth.takeDamage(amount);
+                Debug.Log("playerHealth took damage");
+
+            }
+            else 
+            {
+                Debug.LogError("playerhealth bottom = null");
+            }
+        }
+    }
+
 }
+
+
