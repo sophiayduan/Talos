@@ -35,6 +35,7 @@ namespace Charactercontroller{
 
         private void UpdateAnimationState(){
             bool isIdling = _playerState.CurrentPlayerMovementState == PlayerMovementState.Idling;
+            bool isRunning = _playerState.CurrentPlayerMovementState == PlayerMovementState.Running;
             bool isSprintng = _playerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting;
             bool isJumping = _playerState.CurrentPlayerMovementState == PlayerMovementState.Jumping;
             bool isFalling = _playerState.CurrentPlayerMovementState == PlayerMovementState.Falling;
@@ -43,7 +44,8 @@ namespace Charactercontroller{
 
 
 
-            Vector2 inputTarget = isSprintng ? _playerinputs.MovementInput * 1.5f : _playerinputs.MovementInput;
+            Vector2 inputTarget = isSprintng ? _playerinputs.MovementInput * 1.5f : 
+                                  isRunning ? _playerinputs.MovementInput * 1f : _playerinputs.MovementInput * 0.5f;
             _currentBlendInput = Vector3.Lerp(_currentBlendInput, inputTarget, locomotionBlendSpeed * Time.deltaTime);
             
             _animator.SetBool(isGroundedHash, isGrounded);
