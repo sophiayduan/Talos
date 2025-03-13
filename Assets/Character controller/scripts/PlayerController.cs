@@ -12,10 +12,12 @@ namespace Charactercontroller {
       public bool IsRotatingToTarget {get; private set;} = false;   
       
       [Header("Base Movement")]
-      public float runSpeed = 4f;
+      public float walkAcceleration = 0.15f;
+      public float walkSpeed = 3f;
+      public float runSpeed = 6f;
       public float runAcceleration = 0.25f;
       public float sprintAcceleration = 0.5f;
-      public float sprintSpeed = 7f;
+      public float sprintSpeed = 9f;
       public float drag = 0.1f;
       public float movingThreshold = 0.01f;
       public float gravity = 25f;
@@ -34,6 +36,7 @@ namespace Charactercontroller {
       private Vector2 _cameraRotation = Vector2.zero;
       private Vector2 _playerTargetRotation = Vector2.zero;
 
+      private bool _isRotatingClockwise = false;
       private float _rotatingToTargetTimer = 0f;
       private float _verticalVelocity = 0f;
 
@@ -49,12 +52,15 @@ namespace Charactercontroller {
       }
       
       private void UpdateMovementState(){
+        bool canRun = CanRun();
         bool isMovementInput = _playerLocomotionInput.MovementInput != Vector2.zero;
         bool isMovingLaterally = IsMovingLaterally();
         bool isSprintng = _playerLocomotionInput.SprintToggledOn && isMovingLaterally;
+        bool isWalking = (isMovingLaterally && !canRun) || _playerLocomotionInput.WalkToggledOn;
         bool isGrounded = IsGrounded();
 
-        PlayerMovementState lateralState = isSprintng ? PlayerMovementState.Sprinting :
+        PlayerMovementState lateralState = isWalking ? PlayerMovementState.Walking :
+                                           isSprintng ? PlayerMovementState.Sprinting :
                                            isMovingLaterally || isMovementInput ? PlayerMovementState.Running : PlayerMovementState.Idling;
         _playerState.SetPlayerMovementState(lateralState);
 
@@ -81,9 +87,12 @@ namespace Charactercontroller {
       private void HandleLateralMovement(){
         bool isSprintng = _playerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting;
         bool isGrounded = _playerState.InGroundedState();
+        bool isWalking = _playerState.CurrentPlayerMovementState == PlayerMovementState.Walking;
 
-        float lateralAcceleration = isSprintng ? sprintAcceleration : runAcceleration;
-        float clampLateralMagnitude = isSprintng ?sprintSpeed : runSpeed;
+        float lateralAcceleration = isWalking ? walkAcceleration : 
+                                    isSprintng ? sprintAcceleration : runAcceleration;
+        float clampLateralMagnitude = isWalking ? walkSpeed : 
+                                      isSprintng ? sprintSpeed : runSpeed;
 
         Vector3 cameraForwardXZ = new Vector3(_playerCamera.transform.forward.x, 0f, _playerCamera.transform.forward.z).normalized;
         Vector3 cameraRightXZ = new Vector3(_playerCamera.transform.right.x, 0f, _playerCamera.transform.right.z).normalized;
@@ -110,20 +119,19 @@ namespace Charactercontroller {
         _cameraRotation.y = Mathf.Clamp(_cameraRotation.y - lookSenseV * _playerLocomotionInput.LookInput.y, -lookLimitV, lookLimitV);
 
         _playerTargetRotation.x += transform.eulerAngles.x + lookSenseH * _playerLocomotionInput.LookInput.x;
-
-        //if rotation mismatch not within tolerance or rotate to target timer is active, ROTATE
-        //also ratate when not idling
+        
         float rotationTolerence = 90f;
         bool isIdling = _playerState.CurrentPlayerMovementState == PlayerMovementState.Idling;
         IsRotatingToTarget = _rotatingToTargetTimer > 0;
-        if(!isIdling || Mathf.Abs(RotationMismatch) > rotationTolerence || IsRotatingToTarget){
-          Quaternion targetRotationX = Quaternion.Euler(0f, _playerTargetRotation.x, 0f);
-          transform.rotation = Quaternion.Lerp(transform.rotation, targetRotationX, playerModelRotationSpeed * Time.deltaTime);
+        //rotate when not idling
+        if (!isIdling){
 
-          if (Mathf.Abs(RotationMismatch) > rotationTolerence){
-            _rotatingToTargetTimer = rotateToTargetTime;
-          }
-          _rotatingToTargetTimer -= Time.deltaTime;
+          RotatePlayerToTarget();
+
+        }
+        //if rotation mismatch not within tolerance or rotate to target timer is active, ROTATE
+        else if(Mathf.Abs(RotationMismatch) > rotationTolerence || IsRotatingToTarget){
+          UpdateIdleRotation(rotationTolerence);
         }
 
         _playerCamera.transform.rotation = Quaternion.Euler(_cameraRotation.y, _cameraRotation.x, 0f);
@@ -133,7 +141,26 @@ namespace Charactercontroller {
         float sign = Mathf.Sign(Vector3.Dot(crossProduct, transform.up));
         RotationMismatch = sign * Vector3.Angle(transform.forward, camFowardProjectedXZ);
       }
+      private void UpdateIdleRotation(float rotationTolerence){
+                  
+        //initiate new rotation direction
+        if (Mathf.Abs(RotationMismatch) > rotationTolerence){
 
+          _rotatingToTargetTimer = rotateToTargetTime;
+          _isRotatingClockwise = RotationMismatch > rotationTolerence;
+        }
+        _rotatingToTargetTimer -= Time.deltaTime;
+        
+        //rotate player
+        if(_isRotatingClockwise && RotationMismatch > 0f || !_isRotatingClockwise && RotationMismatch < 0f){
+          RotatePlayerToTarget();
+        }
+        
+      }
+      private void RotatePlayerToTarget(){
+        Quaternion targetRotationX = Quaternion.Euler(0f, _playerTargetRotation.x, 0f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotationX, playerModelRotationSpeed * Time.deltaTime);
+      }
       private bool IsMovingLaterally(){
         Vector3 LateralVelocity = new Vector3(_characterController.velocity.x, 0f, _characterController.velocity.y);
         return LateralVelocity.magnitude > movingThreshold;
@@ -141,6 +168,11 @@ namespace Charactercontroller {
 
       private bool IsGrounded(){
         return _characterController.isGrounded;
+      }
+
+      private bool CanRun(){
+        //if player is moving diagonally at 45 or forward it can run
+        return _playerLocomotionInput.MovementInput.y >= Mathf.Abs(_playerLocomotionInput.MovementInput.x);
       }
     }
 }

@@ -17,6 +17,8 @@ namespace Charactercontroller{
         private static int isGroundedHash = Animator.StringToHash("isGrounded");
         private static int isFallingHash = Animator.StringToHash("isFalling");
         private static int isJumpingHash = Animator.StringToHash("isJumping");
+        private static int isIdlingHash = Animator.StringToHash("isIdling");
+        private static int isRotatingToTargetHash = Animator.StringToHash("isRotatingToTarget");
         private static int rotationMismatchHash = Animator.StringToHash("rotationMismatch");
 
         private Vector3 _currentBlendInput = Vector3.zero;
@@ -47,6 +49,8 @@ namespace Charactercontroller{
             _animator.SetBool(isGroundedHash, isGrounded);
             _animator.SetBool(isFallingHash, isFalling);
             _animator.SetBool(isJumpingHash, isJumping);
+            _animator.SetBool(isIdlingHash, isIdling);
+            _animator.SetBool(isRotatingToTargetHash, _playerController.IsRotatingToTarget);
             _animator.SetFloat(inputXHash, _currentBlendInput.x);
             _animator.SetFloat(inputYHash, _currentBlendInput.y);
             _animator.SetFloat(inputMagHash, _currentBlendInput.magnitude);

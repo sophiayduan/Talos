@@ -1843,6 +1843,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
+      propertyPath: runSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: lookSenseH
       value: 0.5
       objectReference: {fileID: 0}
@@ -1852,7 +1856,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: sprintSpeed
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: MouseSenstivity
@@ -1861,6 +1865,14 @@ PrefabInstance:
     - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: runAcceleration
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
+      propertyPath: walkAcceleration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
+      propertyPath: rotateToTargetTime
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 333234966636798963, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: sprintAcceleration
@@ -1925,6 +1937,14 @@ PrefabInstance:
     - target: {fileID: 6699002736241131304, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7120593651249117687, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
+      propertyPath: Lens.FieldOfView
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414551815688433200, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
+      propertyPath: field of view
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 8660931657972133467, guid: ca9786c2d29056f4e827fe94ad40c75e, type: 3}
       propertyPath: m_Controller
