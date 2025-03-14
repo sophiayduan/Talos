@@ -18,6 +18,7 @@ namespace Charactercontroller {
       public float runAcceleration = 0.25f;
       public float sprintAcceleration = 0.5f;
       public float sprintSpeed = 9f;
+      public float inAirAcceleration = 0.15f;
       public float drag = 0.1f;
       public float movingThreshold = 0.01f;
       public float gravity = 25f;
@@ -30,19 +31,28 @@ namespace Charactercontroller {
       public float lookSenseH = 0.1f;
       public float lookSenseV = 0.1f;
       public float lookLimitV = 89f;
+
+      [Header("Environmental Details")]
+      [SerializeField] private LayerMask _groundLayers;
       
       private PlayerInputs _playerLocomotionInput;
       private PlayerState _playerState;
+
       private Vector2 _cameraRotation = Vector2.zero;
       private Vector2 _playerTargetRotation = Vector2.zero;
 
+      private bool _jumpedLastFrame = false;
       private bool _isRotatingClockwise = false;
       private float _rotatingToTargetTimer = 0f;
       private float _verticalVelocity = 0f;
+      private float _antiBump;
+      private float _stepOffset;
 
       private void Awake(){
         _playerLocomotionInput = GetComponent<PlayerInputs>();
         _playerState = GetComponent<PlayerState>();
+        _antiBump = sprintSpeed;
+        _stepOffset = _characterController.stepOffset;
       }
 
       private void Update(){
@@ -57,30 +67,39 @@ namespace Charactercontroller {
         bool isMovingLaterally = IsMovingLaterally();
         bool isSprintng = _playerLocomotionInput.SprintToggledOn && isMovingLaterally;
         bool isWalking = (isMovingLaterally && !canRun) || _playerLocomotionInput.WalkToggledOn;
+        bool isPunching = _playerLocomotionInput.PunchPressed;
         bool isGrounded = IsGrounded();
 
         PlayerMovementState lateralState = isWalking ? PlayerMovementState.Walking :
                                            isSprintng ? PlayerMovementState.Sprinting :
+                                           isPunching ? PlayerMovementState.Punching :
                                            isMovingLaterally || isMovementInput ? PlayerMovementState.Running : PlayerMovementState.Idling;
         _playerState.SetPlayerMovementState(lateralState);
 
-        if (!isGrounded && _characterController.velocity.y >= 0f){
+        if ((!isGrounded || _jumpedLastFrame) && _characterController.velocity.y >= 0f){
           _playerState.SetPlayerMovementState(PlayerMovementState.Jumping);
+          _jumpedLastFrame = false;
+          _characterController.stepOffset = 0f;
         }
-        else if (!isGrounded && _characterController.velocity.y < 0f){
+        else if ((!isGrounded || _jumpedLastFrame) && _characterController.velocity.y < 0f){
           _playerState.SetPlayerMovementState(PlayerMovementState.Falling);
+        }
+        else{
+          _characterController.stepOffset = _stepOffset;
         }
       }
 
       private void HandleVerticalMovment(){
         bool isGrounded = _playerState.InGroundedState();
-        if (isGrounded && _verticalVelocity < 0)
-          _verticalVelocity = 0f;
-        
+
         _verticalVelocity -= gravity * Time.deltaTime;
+        if (isGrounded && _verticalVelocity < 0)
+          _verticalVelocity = -_antiBump;
+
 
         if(_playerLocomotionInput.JumpPressed && isGrounded){
-          _verticalVelocity += Mathf.Sqrt(jumpSpeed * 3 * gravity);
+          _verticalVelocity += _antiBump + Mathf.Sqrt(jumpSpeed * 3 * gravity);
+          _jumpedLastFrame = true;
         }
       }
 
@@ -89,9 +108,11 @@ namespace Charactercontroller {
         bool isGrounded = _playerState.InGroundedState();
         bool isWalking = _playerState.CurrentPlayerMovementState == PlayerMovementState.Walking;
 
-        float lateralAcceleration = isWalking ? walkAcceleration : 
+        float lateralAcceleration = !isGrounded ? inAirAcceleration :
+                                    isWalking ? walkAcceleration : 
                                     isSprintng ? sprintAcceleration : runAcceleration;
-        float clampLateralMagnitude = isWalking ? walkSpeed : 
+        float clampLateralMagnitude = !isGrounded ? sprintSpeed :
+                                      isWalking ? walkSpeed : 
                                       isSprintng ? sprintSpeed : runSpeed;
 
         Vector3 cameraForwardXZ = new Vector3(_playerCamera.transform.forward.x, 0f, _playerCamera.transform.forward.z).normalized;
@@ -103,7 +124,7 @@ namespace Charactercontroller {
 
         Vector3 currentDrag = newVelocity.normalized * drag * Time.deltaTime;
         newVelocity = (newVelocity.magnitude > drag * Time.deltaTime) ? newVelocity - currentDrag : Vector3.zero;
-        newVelocity = Vector3.ClampMagnitude(newVelocity, clampLateralMagnitude);
+        newVelocity = Vector3.ClampMagnitude(new Vector3(newVelocity.x, 0f, newVelocity.z), clampLateralMagnitude);
         newVelocity.y += _verticalVelocity;
 
         _characterController.Move(newVelocity * Time.deltaTime);
@@ -167,6 +188,18 @@ namespace Charactercontroller {
       }
 
       private bool IsGrounded(){
+        bool grounded = _playerState.InGroundedState() ? IsGroundedWhileGrounded() : IsGroundedWhileAirborne();
+        return grounded;
+      }
+
+      private bool IsGroundedWhileGrounded()
+      {
+        Vector3 shpherePosition = new Vector3(transform.position.x, transform.position.y - _characterController.radius, transform.position.z);
+        bool grounded = Physics.CheckSphere(shpherePosition, _characterController.radius, _groundLayers, QueryTriggerInteraction.Ignore);
+        return grounded;
+      }
+
+      private bool IsGroundedWhileAirborne(){
         return _characterController.isGrounded;
       }
 

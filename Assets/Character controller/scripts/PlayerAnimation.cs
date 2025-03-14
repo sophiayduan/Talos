@@ -18,6 +18,7 @@ namespace Charactercontroller{
         private static int isFallingHash = Animator.StringToHash("isFalling");
         private static int isJumpingHash = Animator.StringToHash("isJumping");
         private static int isIdlingHash = Animator.StringToHash("isIdling");
+        private static int isPunchingHash = Animator.StringToHash("isPunching");
         private static int isRotatingToTargetHash = Animator.StringToHash("isRotatingToTarget");
         private static int rotationMismatchHash = Animator.StringToHash("rotationMismatch");
 
@@ -39,6 +40,7 @@ namespace Charactercontroller{
             bool isSprintng = _playerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting;
             bool isJumping = _playerState.CurrentPlayerMovementState == PlayerMovementState.Jumping;
             bool isFalling = _playerState.CurrentPlayerMovementState == PlayerMovementState.Falling;
+            bool isPunching = _playerState.CurrentPlayerMovementState == PlayerMovementState.Punching;
             bool isGrounded = _playerState.InGroundedState();
 
 
@@ -49,6 +51,7 @@ namespace Charactercontroller{
             _currentBlendInput = Vector3.Lerp(_currentBlendInput, inputTarget, locomotionBlendSpeed * Time.deltaTime);
             
             _animator.SetBool(isGroundedHash, isGrounded);
+            _animator.SetBool(isPunchingHash, isPunching);
             _animator.SetBool(isFallingHash, isFalling);
             _animator.SetBool(isJumpingHash, isJumping);
             _animator.SetBool(isIdlingHash, isIdling);

@@ -15,6 +15,7 @@ namespace Charactercontroller
         public Vector2 MovementInput {get; private set;}
         public Vector2 LookInput {get; private set;}
         public bool JumpPressed {get; private set;}
+        public bool PunchPressed {get; private set;}
         private void OnEnable(){
             InputActions = new InputActions();
             InputActions.Enable();
@@ -30,6 +31,7 @@ namespace Charactercontroller
         private void LateUpdate()
         {
             JumpPressed = false;
+            PunchPressed = false;
         }
         public void OnMovement(InputAction.CallbackContext context)
         {
@@ -66,6 +68,14 @@ namespace Charactercontroller
                 return;
 
             WalkToggledOn = !WalkToggledOn;
+        }
+
+        public void OnPunch(InputAction.CallbackContext context)
+        {
+            if(!context.performed)
+                return;
+            
+            PunchPressed = true;
         }
     }
 }

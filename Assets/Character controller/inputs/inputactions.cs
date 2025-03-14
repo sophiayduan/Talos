@@ -137,6 +137,15 @@ namespace Charactercontroller.Inputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Punch"",
+                    ""type"": ""Button"",
+                    ""id"": ""10f483bd-4ca4-47ad-a7a9-b0708e8943fa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -293,6 +302,17 @@ namespace Charactercontroller.Inputs
                     ""action"": ""ToggleWalk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2515694e-f5d8-435c-81a8-75f8dd498ffd"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Punch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -306,6 +326,7 @@ namespace Charactercontroller.Inputs
             m_PlayerLocomotionMap_ToggleSprint = m_PlayerLocomotionMap.FindAction("ToggleSprint", throwIfNotFound: true);
             m_PlayerLocomotionMap_Jump = m_PlayerLocomotionMap.FindAction("Jump", throwIfNotFound: true);
             m_PlayerLocomotionMap_ToggleWalk = m_PlayerLocomotionMap.FindAction("ToggleWalk", throwIfNotFound: true);
+            m_PlayerLocomotionMap_Punch = m_PlayerLocomotionMap.FindAction("Punch", throwIfNotFound: true);
         }
 
         ~@InputActions()
@@ -391,6 +412,7 @@ namespace Charactercontroller.Inputs
         private readonly InputAction m_PlayerLocomotionMap_ToggleSprint;
         private readonly InputAction m_PlayerLocomotionMap_Jump;
         private readonly InputAction m_PlayerLocomotionMap_ToggleWalk;
+        private readonly InputAction m_PlayerLocomotionMap_Punch;
         /// <summary>
         /// Provides access to input actions defined in input action map "PlayerLocomotionMap".
         /// </summary>
@@ -422,6 +444,10 @@ namespace Charactercontroller.Inputs
             /// Provides access to the underlying input action "PlayerLocomotionMap/ToggleWalk".
             /// </summary>
             public InputAction @ToggleWalk => m_Wrapper.m_PlayerLocomotionMap_ToggleWalk;
+            /// <summary>
+            /// Provides access to the underlying input action "PlayerLocomotionMap/Punch".
+            /// </summary>
+            public InputAction @Punch => m_Wrapper.m_PlayerLocomotionMap_Punch;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -463,6 +489,9 @@ namespace Charactercontroller.Inputs
                 @ToggleWalk.started += instance.OnToggleWalk;
                 @ToggleWalk.performed += instance.OnToggleWalk;
                 @ToggleWalk.canceled += instance.OnToggleWalk;
+                @Punch.started += instance.OnPunch;
+                @Punch.performed += instance.OnPunch;
+                @Punch.canceled += instance.OnPunch;
             }
 
             /// <summary>
@@ -489,6 +518,9 @@ namespace Charactercontroller.Inputs
                 @ToggleWalk.started -= instance.OnToggleWalk;
                 @ToggleWalk.performed -= instance.OnToggleWalk;
                 @ToggleWalk.canceled -= instance.OnToggleWalk;
+                @Punch.started -= instance.OnPunch;
+                @Punch.performed -= instance.OnPunch;
+                @Punch.canceled -= instance.OnPunch;
             }
 
             /// <summary>
@@ -564,6 +596,13 @@ namespace Charactercontroller.Inputs
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnToggleWalk(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Punch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnPunch(InputAction.CallbackContext context);
         }
     }
 }

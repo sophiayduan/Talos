@@ -24,4 +24,5 @@ namespace Charactercontroller{
         Jumping = 4,
         Falling = 5,
         Strafing = 6,
+        Punching = 7,
     }
