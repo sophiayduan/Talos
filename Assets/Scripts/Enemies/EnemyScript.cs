@@ -7,7 +7,7 @@ public class EnemyScript : MonoBehaviour
     public Rigidbody rb;
     public float Maxspeed;
     private float Speed;
-    private NavMeshAgent agent;
+    // public NavMeshAgent agent;
 
     public float SightRange;
     public float DetectionRange;
@@ -30,6 +30,11 @@ public class EnemyScript : MonoBehaviour
 
     public LayerMask GroundLayer;
 
+    private Vector3 lastKnownPosition;
+    private bool lostPlayer;
+
+    private float lastSeenTime;
+    public float searchTime = 5f;
     // Patrolling 
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -39,6 +44,7 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         Speed = Maxspeed;
+        // agent = GetComponent<NavMeshAgent>();
         
     }
 
@@ -47,7 +53,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (!seePlayer)
         {
-            Patrolling();
+            // Patrolling();
             hitColliders = Physics.OverlapSphere(transform.position, DetectionRange);
             foreach (var HitCollider in hitColliders)
             {
@@ -60,6 +66,7 @@ public class EnemyScript : MonoBehaviour
                 }
                 else{
                     Debug.LogError("didn't hit the player");
+                    seePlayer = false;
                 }
             }
         }
@@ -67,7 +74,8 @@ public class EnemyScript : MonoBehaviour
         {
             if(Physics.Raycast(transform.position, Target.transform.position -transform.position, out Hit, SightRange, layerMask)){
                 Debug.Log("Raycast hit: " + Hit.collider.name);
-                
+                if (Hit.collider.tag == "Player"){
+                    // agent.SetDestination(Hit.point);
                     Debug.Log("okay this is the player");
                     var Heading = Target.transform.position - transform.position;
                     var Distance = Heading.magnitude;
@@ -81,11 +89,16 @@ public class EnemyScript : MonoBehaviour
                     if(Distance <= MaxAttackRange && Distance >= MinAttackRange)
                     { 
                         attackRange = true;
-                        rb.linearVelocity = Vector3.zero;
+                        rb.linearVelocity = Move;
+                        transform.forward = Move;
+                        // rb.linearVelocity = Vector3.zero;
                         Attack();
+                        if (Distance > MinAttackRange && Distance < MinAttackRange +1 ){
+                            rb.linearVelocity = Vector3.zero;
+                        }
                     }
      
-                    else if(Distance < MinAttackRange)
+                    else if(Distance < MinAttackRange )
                     {
                         attackRange = false;
                         Vector3 AwayDirection = (transform.position - Target.transform.position).normalized;
@@ -100,29 +113,45 @@ public class EnemyScript : MonoBehaviour
                         transform.forward = Move;
 
                     }
+                }   
+                else if (Hit.collider.tag == "Object"){
+                    // lostPlayer = true;
+                     //also add for noise and if reaches last known position and there is nothing, then patrol
+                }
+                // if (lostPlayer){
+                //     agent.SetDestination(lastKnownPosition);
+                //     Vector3.Distance(transform.position, lastKnownPosition);
+                
+ 
+                        
+                        
+
+                //     }
+
+                }
             }
         }
-    }
     
-    private void Patrolling(){
-        if(!walkPointSet) SearchWalkPoint();
-        if(walkPointSet)
-            agent.SetDestination(walkPoint);
+    
+    // private void Patrolling(){
+    //     if(!walkPointSet) SearchWalkPoint();
+    //     if(walkPointSet)
+    //         agent.SetDestination(walkPoint);
         
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+    //     Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        if(distanceToWalkPoint.magnitude < 1f)
-            walkPointSet = false;
-    }
-    private void SearchWalkPoint(){
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
+    //     if(distanceToWalkPoint.magnitude < 1f)
+    //         walkPointSet = false;
+    // }
+    // private void SearchWalkPoint(){
+    //     float randomZ = Random.Range(-walkPointRange, walkPointRange);
+    //     float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(transform.position.x + randomX,transform.position.y, transform.position.z + randomZ);
+    //     walkPoint = new Vector3(transform.position.x + randomX,transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, GroundLayer))
-            walkPointSet = true;
-    }
+    //     if (Physics.Raycast(walkPoint, -transform.up, 2f, GroundLayer))
+    //         walkPointSet = true;
+    // }
     // private void Follow(){
         //tbd if want to change it do this
     // }
