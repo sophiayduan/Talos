@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
+    public GameObject playerModel;
     // public GameObject diedscreen;
 
 
@@ -58,9 +59,8 @@ public class PlayerHealth : MonoBehaviour
     }
     private void died()
     {
-        Camera.main.transform.parent = null;
         GameManager.instance.GameOver();
-        gameObject.SetActive(false);
+        playerModel.SetActive(false);
         Time.timeScale = 0f;
 
     }
