@@ -26,11 +26,11 @@ public class UIManager : MonoBehaviour
         
     }
         public void ToggleSettingsPanel() {
-            if (SceneManager.GetActiveScene().buildIndex == 0){
+            if (SceneManager.GetActiveScene().buildIndex == 1){
                 pausePanel.SetActive(!pausePanel.activeSelf);
                 settingsPanel.SetActive(!settingsPanel.activeSelf);
             }
-            else if (SceneManager.GetActiveScene().buildIndex == 1) {
+            else if (SceneManager.GetActiveScene().buildIndex == 2) {
                 settingsPanel.SetActive(!settingsPanel.activeSelf);
 
             }
