@@ -19,11 +19,6 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     { 
         currentHealth = maxHealth;
-        // diedscreen.SetActive(false);
-        // if (diedscreen == null){
-        //     Debug.LogError("fuck");
-        // }
-
 
     }
     void Update()

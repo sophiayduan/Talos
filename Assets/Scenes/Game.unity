@@ -569,6 +569,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8433384197789631410, guid: bb40ca51209a0d74abc1dec5f7c3b1ce, type: 3}
+      propertyPath: map
+      value: 
+      objectReference: {fileID: 610878881}
+    - target: {fileID: 8433384197789631410, guid: bb40ca51209a0d74abc1dec5f7c3b1ce, type: 3}
       propertyPath: particles
       value: 
       objectReference: {fileID: 1078360017053888719, guid: 887608799f4f68b41b63dd500e57d132, type: 3}
@@ -2092,6 +2096,11 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &942118485 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1895871354781339281, guid: 5a5178d1fbf5c9c479a8938cd2d93993, type: 3}
+  m_PrefabInstance: {fileID: 1613603272}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &945452187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3411,6 +3420,10 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 13125247}
+    - target: {fileID: 4510637185947197915, guid: 5a5178d1fbf5c9c479a8938cd2d93993, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 942118485}
     - target: {fileID: 4510637185947197915, guid: 5a5178d1fbf5c9c479a8938cd2d93993, type: 3}
       propertyPath: seePlayer
       value: 0

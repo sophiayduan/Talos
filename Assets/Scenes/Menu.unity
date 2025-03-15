@@ -1184,6 +1184,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StateManager, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 5479056887152413720, guid: 27eb158d434c84047bac36776b1811fd, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Game
+      objectReference: {fileID: 0}
     - target: {fileID: 5768297141312508338, guid: 27eb158d434c84047bac36776b1811fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.1827793
