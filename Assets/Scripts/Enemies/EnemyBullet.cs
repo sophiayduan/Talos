@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using CameraShake;
 public class EnemyBullet : MonoBehaviour
 {
     public float speed;
@@ -12,6 +12,8 @@ public class EnemyBullet : MonoBehaviour
     // private float variance;
     public  ParticleSystem particles;
     public float higher = 2f;
+    [SerializeField] 
+    PerlinShake.Params shakeParams;
     void Start()
     {
         // variance = UnityEngine.Random.Range(-0.25f, 0.25f);
@@ -46,6 +48,7 @@ public class EnemyBullet : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         if(transform.position.x == target.x && transform.position.y == target.y){
             DestroyEnemyBullet();
+            CameraShaker.Shake(new PerlinShake(shakeParams));
             // if(player.position.x <= 0.25+ transform.position.x && player.position.z <= 0.25 + transform.position.z && player.position.y <= 0.25 + transform.position.y ){
             //     Instantiate(particles,transform.position,Quaternion.identity);
 
