@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +23,7 @@ namespace Charactercontroller {
       public float drag = 0.1f;
       public float movingThreshold = 0.01f;
       public float gravity = 25f;
+      public float terminalVelocity = 50f;
       public float jumpSpeed = 1f;
       [Header("Animation")]
       public float playerModelRotationSpeed = 10f;
@@ -108,6 +110,10 @@ namespace Charactercontroller {
 
         if(_playerState.IsStateGroundedState(_lastMovementState) && !isGrounded){
           _verticalVelocity += _antiBump; 
+        }
+
+        if(Mathf.Abs(_verticalVelocity) > Mathf.Abs(terminalVelocity)){
+          _verticalVelocity = -1f * Math.Abs(terminalVelocity);
         }
       }
 
