@@ -2031,7 +2031,7 @@ MonoBehaviour:
     m_Bits: 8
   searchTime: 5
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 5
+  walkPointRange: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 576
