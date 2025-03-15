@@ -140,6 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d325d0fea1e3543944dafe0fbe785d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &47758950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2904442968631138324, guid: 5a5178d1fbf5c9c479a8938cd2d93993, type: 3}
+  m_PrefabInstance: {fileID: 1613603272}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &51170933
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,12 +2064,34 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4510637185947197915, guid: 5a5178d1fbf5c9c479a8938cd2d93993, type: 3}
   m_PrefabInstance: {fileID: 1613603272}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 47758950}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85f551c8c590c094ab0460af5f04297e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!195 &942118482
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47758950}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &945452187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3377,6 +3404,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4510637185947197915, guid: 5a5178d1fbf5c9c479a8938cd2d93993, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 942118482}
+    - target: {fileID: 4510637185947197915, guid: 5a5178d1fbf5c9c479a8938cd2d93993, type: 3}
       propertyPath: Target
       value: 
       objectReference: {fileID: 13125247}
@@ -3583,7 +3614,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2904442968631138324, guid: 5a5178d1fbf5c9c479a8938cd2d93993, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 942118482}
   m_SourcePrefab: {fileID: 100100000, guid: 5a5178d1fbf5c9c479a8938cd2d93993, type: 3}
 --- !u!1 &1654334786
 GameObject:

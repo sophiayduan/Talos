@@ -30,13 +30,12 @@ public class EnemyScript : MonoBehaviour
 
     public LayerMask GroundLayer;
 
-    private Vector3 lastKnownPosition;
-    private bool lostPlayer;
+    // private Vector3 lastKnownPosition;
+    // private bool lostPlayer;
 
-    private float lastSeenTime;
-    public float searchTime = 5f;
+    // private float lastSeenTime;
+    // public float searchTime = 5f;
 
-    public string range;
     // Patrolling 
     // public Vector3 walkPoint;
     // bool walkPointSet;
@@ -113,7 +112,6 @@ public class EnemyScript : MonoBehaviour
 
                     else if(Distance > MaxAttackRange)
                     {
-                        range = "Distance > MaxAttackRange";
                         agent.isStopped = false;
                         attackRange = false;
                         agent.SetDestination(Hit.point);
