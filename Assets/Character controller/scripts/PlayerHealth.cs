@@ -1,3 +1,4 @@
+using System.Data;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
     public GameObject playerModel;
+    public GameObject map;
     // public GameObject diedscreen;
 
 
@@ -61,6 +63,7 @@ public class PlayerHealth : MonoBehaviour
     {
         GameManager.instance.GameOver();
         playerModel.SetActive(false);
+        map.SetActive(false);
         Time.timeScale = 0f;
 
     }
