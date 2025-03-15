@@ -48,6 +48,8 @@ namespace Charactercontroller {
       private float _antiBump;
       private float _stepOffset;
 
+      private PlayerMovementState _lastMovementState = PlayerMovementState.Falling;
+
       private void Awake(){
         _playerLocomotionInput = GetComponent<PlayerInputs>();
         _playerState = GetComponent<PlayerState>();
@@ -62,6 +64,8 @@ namespace Charactercontroller {
       }
       
       private void UpdateMovementState(){
+        _lastMovementState = _playerState.CurrentPlayerMovementState;
+
         bool canRun = CanRun();
         bool isMovementInput = _playerLocomotionInput.MovementInput != Vector2.zero;
         bool isMovingLaterally = IsMovingLaterally();
@@ -98,8 +102,12 @@ namespace Charactercontroller {
 
 
         if(_playerLocomotionInput.JumpPressed && isGrounded){
-          _verticalVelocity += _antiBump + Mathf.Sqrt(jumpSpeed * 3 * gravity);
+          _verticalVelocity += Mathf.Sqrt(jumpSpeed * 3 * gravity);
           _jumpedLastFrame = true;
+        }
+
+        if(_playerState.IsStateGroundedState(_lastMovementState) && !isGrounded){
+          _verticalVelocity += _antiBump; 
         }
       }
 
@@ -126,6 +134,7 @@ namespace Charactercontroller {
         newVelocity = (newVelocity.magnitude > drag * Time.deltaTime) ? newVelocity - currentDrag : Vector3.zero;
         newVelocity = Vector3.ClampMagnitude(new Vector3(newVelocity.x, 0f, newVelocity.z), clampLateralMagnitude);
         newVelocity.y += _verticalVelocity;
+        newVelocity = !isGrounded ? HandleSteepWalls(newVelocity) : newVelocity;
 
         _characterController.Move(newVelocity * Time.deltaTime);
       }
@@ -182,6 +191,18 @@ namespace Charactercontroller {
         Quaternion targetRotationX = Quaternion.Euler(0f, _playerTargetRotation.x, 0f);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotationX, playerModelRotationSpeed * Time.deltaTime);
       }
+
+      private Vector3 HandleSteepWalls(Vector3 velocity){
+        Vector3 normal = CharacterControllerUtils.GetNormalWithSphereCast(_characterController, _groundLayers);
+        float angle = Vector3.Angle(normal, Vector3.up);
+        bool validAngle = angle <= _characterController.slopeLimit;
+
+        if(!validAngle && _verticalVelocity < 0f){
+          velocity = Vector3.ProjectOnPlane(velocity, normal);
+        }
+
+        return velocity;
+      }
       private bool IsMovingLaterally(){
         Vector3 LateralVelocity = new Vector3(_characterController.velocity.x, 0f, _characterController.velocity.y);
         return LateralVelocity.magnitude > movingThreshold;
@@ -200,7 +221,11 @@ namespace Charactercontroller {
       }
 
       private bool IsGroundedWhileAirborne(){
-        return _characterController.isGrounded;
+        Vector3 normal = CharacterControllerUtils.GetNormalWithSphereCast(_characterController, _groundLayers);
+        float angle = Vector3.Angle(normal, Vector3.up);
+        bool validAngle = angle <= _characterController.slopeLimit;
+
+        return _characterController.isGrounded && validAngle;
       }
 
       private bool CanRun(){
