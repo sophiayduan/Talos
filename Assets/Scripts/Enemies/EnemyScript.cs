@@ -40,10 +40,15 @@ public class EnemyScript : MonoBehaviour
     // public Vector3 walkPoint;
     // bool walkPointSet;
     // public float walkPointRange;
+    [SerializeField] private Animator _animator;
+    private static int isIdleHash = Animator.StringToHash("isIdle");
     [SerializeField] private LayerMask layerMask;
     void Start()
     {
         Speed = Maxspeed;
+        _animator = GetComponent<Animator>();
+
+       
         
     }
 
@@ -89,6 +94,7 @@ public class EnemyScript : MonoBehaviour
                         agent.isStopped = false;
                         Attack();
                         agent.SetDestination(Hit.point);
+                        //_animator.SetBool("isRunning", false);
                     }
                     else if(Distance < MinAttackRange + 1 && Distance > MinAttackRange)
                     {
@@ -96,6 +102,7 @@ public class EnemyScript : MonoBehaviour
                         agent.velocity = Vector3.zero;
                         transform.LookAt(Target.transform.position);
                         attackRange = true;
+                  
                         // Attack();
                     }
 
@@ -108,6 +115,7 @@ public class EnemyScript : MonoBehaviour
                         agent.SetDestination(MoveAway);
                         Quaternion lookRotation = Quaternion.LookRotation(Target.transform.position - transform.position);
                         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime *10f);
+                       
                     }
 
                     else if(Distance > MaxAttackRange)
@@ -115,12 +123,32 @@ public class EnemyScript : MonoBehaviour
                         agent.isStopped = false;
                         attackRange = false;
                         agent.SetDestination(Hit.point);
+                      
+                        
                     }
+                    print(Distance); 
+                   
+                    if(Distance > 3.1f) {
+                        _animator.SetBool("isRunning", true);
+                        _animator.SetBool(isIdleHash, false);
+
+                    }
+                    else if (Distance < 2.5f){
+                        _animator.SetBool("isBackrun", true);
+                        _animator.SetBool(isIdleHash, false);
+                    }
+                    else{
+                        _animator.SetBool("isRunning", false);
+                        _animator.SetBool(isIdleHash, true);
+                        _animator.SetBool("isBackrun", false);
+                    }
+                    
                 }   
 
                 }
             }
         }
+        
     
     
     private void Attack(){
