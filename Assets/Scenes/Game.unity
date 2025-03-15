@@ -1613,7 +1613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &786169124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2016,6 +2016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 866288920}
   Maxspeed: 3
+  agent: {fileID: 866288927}
   SightRange: 20
   DetectionRange: 15
   Target: {fileID: 2215803325162520673}
@@ -2030,11 +2031,32 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   searchTime: 5
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 5
+  range: 
   layerMask:
     serializedVersion: 2
     m_Bits: 576
+--- !u!195 &866288927
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 866288917}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &915119296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3836,6 +3858,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6534288195563818152, guid: 4f01ea8c511621f4395db0e131982b0f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 866288923}
+    - targetCorrespondingSourceObject: {fileID: 6534288195563818152, guid: 4f01ea8c511621f4395db0e131982b0f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 866288927}
   m_SourcePrefab: {fileID: 100100000, guid: 4f01ea8c511621f4395db0e131982b0f, type: 3}
 --- !u!114 &831562221936699118
 MonoBehaviour:
@@ -4359,6 +4384,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7262392636921331232, guid: 87093a5145fc6ab41a74db5e95c49c7b, type: 3}
+      propertyPath: map
+      value: 
+      objectReference: {fileID: 610878881}
     - target: {fileID: 7262392636921331232, guid: 87093a5145fc6ab41a74db5e95c49c7b, type: 3}
       propertyPath: playerModel
       value: 

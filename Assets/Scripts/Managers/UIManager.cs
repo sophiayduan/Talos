@@ -11,9 +11,7 @@ public class UIManager : MonoBehaviour
 
     private bool isPaused = false;
 
-    
-
-
+ 
     public void ToggleDeathPanel() {
          deathPanel.SetActive(!deathPanel.activeSelf);
 
