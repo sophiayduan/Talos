@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
     private float lerpSpeed = 0.05f;
     public GameObject playerModel;
     public GameObject map;
+    
     // public GameObject diedscreen;
 
 

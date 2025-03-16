@@ -19,7 +19,7 @@ public class EnemyBullet : MonoBehaviour
         // variance = UnityEngine.Random.Range(-0.25f, 0.25f);
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        target = new Vector3(player.position.x, player.position.y +2f, player.position.z );
+        target = new Vector3(player.position.x, player.position.y + 0f, player.position.z );
         if(player != null)
         {
             Debug.Log("Player != null (enemybullet)");
