@@ -72,9 +72,9 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {   
-            // Vector3 theorigin = transform.position;
-            // transform.position = new Vector3(theorigin.x, theorigin.y * 1.2f, theorigin.z);
-            if(Physics.Raycast(transform.position, Target.transform.position - transform.position, out Hit, SightRange, layerMask)){
+            Vector3 theorigin = transform.position;
+            transform.position = new Vector3(theorigin.x, theorigin.y * 1.2f, theorigin.z);
+            if(Physics.Raycast(theorigin, Target.transform.position - transform.position, out Hit, SightRange, layerMask)){
                 Debug.Log("Raycast hit: " + Hit.collider.name);
 
                 if (Hit.collider.tag == "Player")
