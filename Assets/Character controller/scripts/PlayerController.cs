@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
 
 namespace Charactercontroller {
     [DefaultExecutionOrder(-1)]
@@ -50,6 +52,7 @@ namespace Charactercontroller {
       private float _antiBump;
       private float _stepOffset;
 
+
       private PlayerMovementState _lastMovementState = PlayerMovementState.Falling;
 
       private void Awake(){
@@ -89,9 +92,11 @@ namespace Charactercontroller {
         }
         else if ((!isGrounded || _jumpedLastFrame) && _characterController.velocity.y < 0f){
           _playerState.SetPlayerMovementState(PlayerMovementState.Falling);
+          
         }
         else{
           _characterController.stepOffset = _stepOffset;
+          
         }
       }
 
