@@ -40,7 +40,7 @@ namespace Charactercontroller{
             _playerController = GetComponent<PlayerController>();
             _playerActionInputs = GetComponent<PlayerActionInputs>();
 
-            actionHashes = new int[] {isGrabingHash, isPunchingHash};
+            actionHashes = new int[] {isGrabingHash};
         }
 
         private void Update(){

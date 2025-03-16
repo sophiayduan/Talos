@@ -8,8 +8,16 @@ namespace Charactercontroller
     [DefaultExecutionOrder(-2)]
     public class PlayerActionInputs : MonoBehaviour, InputActions.IPlayerActionMapActions
     {
+        private PlayerInputs _playerInputs;
+        private PlayerState _playerState;
         public bool AttackPressed {get; private set;}
         public bool GrabPressed {get; private set;}
+
+        private void Awake()
+        {
+            _playerInputs = GetComponent<PlayerInputs>();
+            _playerState = GetComponent<PlayerState>();
+        }
 
         private void OnEnable(){
             if(PlayerInputManager.Instance?.InputActions == null){
@@ -31,7 +39,12 @@ namespace Charactercontroller
         }
         private void Update()
         {
-            
+            if(_playerInputs.MovementInput != Vector2.zero ||
+                _playerState.CurrentPlayerMovementState == PlayerMovementState.Jumping ||
+                _playerState.CurrentPlayerMovementState == PlayerMovementState.Falling)
+            {
+                GrabPressed = false;
+            }
         }
         public void SetGrabPressedFalse(){
             GrabPressed = false;
