@@ -35,22 +35,23 @@ public class PlayerBullet : MonoBehaviour
     {
         if (other.CompareTag("Object"))
         Instantiate(particles,other.transform.position,Quaternion.identity);
-        // if (other.CompareTag("Player"))
-        // {
-        //     // EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
+        if (other.CompareTag("Enemy"))
+        {            
+            EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
 
-        //     if(enemyHealth != null)
-        //     {
-        //         enemyHealth.takeDamage(amount);
-        //         Instantiate(particles,transform.position,Quaternion.identity);
 
-        //         Debug.Log("playerHealth took damage");
+            if(enemyHealth != null)
+            {
+                enemyHealth.takeDamage(amount);
+                Instantiate(particles,transform.position,Quaternion.identity);
 
-        //     }
-        //     else 
-        //     {
-        //         Debug.LogError("playerhealth bottom = null");
-        //     }
-        // }
+                Debug.Log("enemyHealth took damage");
+
+            }
+            else 
+            {
+                Debug.LogError("enemyhealth bottom = null");
+            }
+        }
     }
 }
