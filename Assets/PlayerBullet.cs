@@ -8,16 +8,12 @@ public class PlayerBullet : MonoBehaviour
     public ParticleSystem particles;
     public float amount = 10;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
         if (playerShoot == null){Debug.LogError("freak"); }
         else target = playerShoot.destination; Debug.Log("yayay");
     }
-
-    // Update is called once per frame
     void Update()
     {   if (target == Vector3.zero)
         {
@@ -34,9 +30,11 @@ public class PlayerBullet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Object"))
-        Instantiate(particles,other.transform.position,Quaternion.identity);
+        print("it is object");
+        // Instantiate(particles,other.transform.position,Quaternion.identity);
         if (other.CompareTag("Enemy"))
         {            
+            print("it is the enemy!");
             EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
 
 

@@ -4,13 +4,16 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
-{        
+{   
+    [Header(" ")]     
     public Slider healthSlider;
     public Slider easeHealthSlider;
-    public float maxHealth = 100f;
+    private float lerpSpeed = 0.05f;
+
+    [Header(" ")]
+    public float maxHealth = 50f;
     public float enemyHealth;
     [SerializeField] private ParticleSystem enemyParticles;
-    private float lerpSpeed = 0.05f;
 
 
     void Start()
@@ -24,13 +27,15 @@ public class EnemyHealth : MonoBehaviour
         {
             takeDamage(10); 
             healthSlider.value = enemyHealth;
-            // Instantiate(particles,transform.position,Quaternion.identity);
+            // Instantiate(enemyParticles,transform.position,Quaternion.identity);
         }
 
         if (healthSlider.value != enemyHealth)
         {
             healthSlider.value = enemyHealth;
         }
+        if (healthSlider == null) print("shit");
+        if (easeHealthSlider == null) print("fuck");
 
         if (easeHealthSlider.value - healthSlider.value < 0.1f) easeHealthSlider.value = healthSlider.value;
 

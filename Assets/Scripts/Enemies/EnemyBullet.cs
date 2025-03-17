@@ -7,16 +7,13 @@ public class EnemyBullet : MonoBehaviour
     private Vector3 target;
     public float amount = 10;
     // public float KOtime;
-    // public int damage = 2;
     private PlayerHealth playerHealth;
-    // private float variance;
     public  ParticleSystem particles;
     public float higher = 2f;
     [SerializeField] 
     PerlinShake.Params shakeParams;
-    void Start()
+    void Awake()
     {
-        // variance = UnityEngine.Random.Range(-0.25f, 0.25f);
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         target = new Vector3(player.position.x, player.position.y + 0f, player.position.z );
@@ -49,11 +46,7 @@ public class EnemyBullet : MonoBehaviour
         if(transform.position.x == target.x && transform.position.y == target.y){
             DestroyEnemyBullet();
             CameraShaker.Shake(new PerlinShake(shakeParams));
-            // if(player.position.x <= 0.25+ transform.position.x && player.position.z <= 0.25 + transform.position.z && player.position.y <= 0.25 + transform.position.y ){
-            //     Instantiate(particles,transform.position,Quaternion.identity);
-
-            // }
- 
+    
         }
     }
 

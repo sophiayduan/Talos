@@ -114,8 +114,10 @@ public class EnemyScript : MonoBehaviour
         Vector3 AwayDirection = (transform.position - Target.transform.position).normalized;
         Vector3 MoveAway = transform.position + AwayDirection * (MinAttackRange - Distance); 
         agent.SetDestination(MoveAway);
-        Quaternion lookRotation = Quaternion.LookRotation(Target.transform.position - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime *10f);
+        transform.LookAt(transform.position);
+
+        // Quaternion lookRotation = Quaternion.LookRotation(Target.transform.position - transform.position);
+        // transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime *10f);
     }
 
     private void Chase(){
