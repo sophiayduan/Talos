@@ -25,6 +25,8 @@ public class PlayerBullet : MonoBehaviour
          if (Vector3.Distance(transform.position, target) < 0.1f)
         {
             Destroy(gameObject);
+            Instantiate(particles,target,Quaternion.identity);
+
         }    
     }
     void OnTriggerEnter(Collider other)
@@ -41,7 +43,7 @@ public class PlayerBullet : MonoBehaviour
             if(enemyHealth != null)
             {
                 enemyHealth.takeDamage(amount);
-                Instantiate(particles,transform.position,Quaternion.identity);
+                // Instantiate(particles,other.transform.position,Quaternion.identity);
 
                 Debug.Log("enemyHealth took damage");
 

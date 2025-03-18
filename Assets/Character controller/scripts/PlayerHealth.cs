@@ -58,12 +58,11 @@ public class PlayerHealth : MonoBehaviour
     private void died()
     {
         GameManager.instance.GameOver();
-        // player.SetActive(false);
-        // if(gameObject.CompareTag("Respawn")){
-        //     gameObject.SetActive(false);
-        // }
+        player.SetActive(false);
+        // gameObject.SetActive(false);
+        
 
-        // map.SetActive(false);
+        map.SetActive(false);
         Time.timeScale = 0f;
 
     }

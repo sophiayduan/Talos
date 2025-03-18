@@ -1,5 +1,6 @@
 using System.IO;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -72,9 +73,9 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {   
-            Vector3 theorigin = transform.position;
-            transform.position = new Vector3(theorigin.x, theorigin.y * 1.2f, theorigin.z);
-            if(Physics.Raycast(theorigin, Target.transform.position - transform.position, out Hit, SightRange, layerMask)){
+            Vector3 theorigin = transform.position + Vector3.up * 2f;
+            if(Physics.Raycast(theorigin, (Target.transform.position - theorigin).normalized, out Hit, SightRange, layerMask)){
+                Debug.DrawRay(theorigin,  (Target.transform.position - theorigin).normalized* SightRange, Color.black, 2f);
                 Debug.Log("Raycast hit: " + Hit.collider.name);
 
                 if (Hit.collider.tag == "Player")
@@ -97,7 +98,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Attack(){
         if (Time.time >= LastAttack + Cooldown){
-            transform.LookAt(Target.transform.position);
+            // transform.LookAt(Target.transform.position);
             Instantiate(EnemyBullet, firepoint.transform.position , Quaternion.identity);
             LastAttack = Time.time;
         }
@@ -106,7 +107,13 @@ public class EnemyScript : MonoBehaviour
     {
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
-        transform.LookAt(Target.transform.position);
+        agent.updateRotation = false;
+
+        Vector3 targetPosition = Target.transform.position;
+        targetPosition.y = transform.position.y;
+
+        Quaternion lookRotation = Quaternion.LookRotation(targetPosition - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime *10f);
     }
 
     private void Retreat(){
@@ -114,10 +121,11 @@ public class EnemyScript : MonoBehaviour
         Vector3 AwayDirection = (transform.position - Target.transform.position).normalized;
         Vector3 MoveAway = transform.position + AwayDirection * (MinAttackRange - Distance); 
         agent.SetDestination(MoveAway);
-        transform.LookAt(transform.position);
+       Vector3 targetPosition = Target.transform.position;
+        targetPosition.y = transform.position.y;
 
-        // Quaternion lookRotation = Quaternion.LookRotation(Target.transform.position - transform.position);
-        // transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime *10f);
+        Quaternion lookRotation = Quaternion.LookRotation(targetPosition - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime *10f);
     }
 
     private void Chase(){

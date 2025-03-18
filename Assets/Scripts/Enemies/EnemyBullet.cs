@@ -9,7 +9,6 @@ public class EnemyBullet : MonoBehaviour
     // public float KOtime;
     private PlayerHealth playerHealth;
     public  ParticleSystem particles;
-    public float higher = 2f;
     [SerializeField] 
     PerlinShake.Params shakeParams;
     void Awake()
@@ -17,35 +16,35 @@ public class EnemyBullet : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         target = new Vector3(player.position.x, player.position.y + 0f, player.position.z );
-        if(player != null)
-        {
-            Debug.Log("Player != null (enemybullet)");
-            playerHealth = player.GetComponent<PlayerHealth>();
+        // if(player != null)
+        // {
+        //     Debug.Log("Player != null (enemybullet)");
+        //     playerHealth = player.GetComponent<PlayerHealth>();
 
-            if(playerHealth != null){;
-                Debug.Log("Playerhealth != null (enemybullet)");
+        //     if(playerHealth != null){;
+        //         Debug.Log("Playerhealth != null (enemybullet)");
 
-                target = player.transform.position;
-                transform.LookAt(target);
-                Debug.Log("wow this is ok"); 
-            }
-            else {
-                playerHealth = player.GetComponent<PlayerHealth>();
-                Debug.LogError("playerhealth null (enemy bullet)");
-            }
+        //         target = player.transform.position;
+        //         transform.LookAt(target);
+        //         Debug.Log("wow this is ok"); 
+        //     }
+        //     else {
+        //         playerHealth = player.GetComponent<PlayerHealth>();
+        //         Debug.LogError("playerhealth null (enemy bullet)");
+        //     }
 
-        }
-        else 
-        {
-            Debug.LogError("player itself == null");
-        }          
+        // }
+        // else 
+        // {
+        //     Debug.LogError("player itself == null");
+        // }          
     }
     void Update()
-    {        
+    {   
+        
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         if(transform.position.x == target.x && transform.position.y == target.y){
             DestroyEnemyBullet();
-            CameraShaker.Shake(new PerlinShake(shakeParams));
     
         }
     }
@@ -64,6 +63,7 @@ public class EnemyBullet : MonoBehaviour
             {
                 playerHealth.takeDamage(amount);
                 Instantiate(particles,transform.position,Quaternion.identity);
+                CameraShaker.Shake(new PerlinShake(shakeParams));
 
                 Debug.Log("playerHealth took damage");
 

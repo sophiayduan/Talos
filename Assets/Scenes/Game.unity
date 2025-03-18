@@ -2260,7 +2260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &786169124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12309,7 +12309,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   particles: {fileID: 1078360017053888719, guid: 887608799f4f68b41b63dd500e57d132, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 4920897367195716077}
   map: {fileID: 610878881}
 --- !u!114 &8433384197499012828
 MonoBehaviour:
