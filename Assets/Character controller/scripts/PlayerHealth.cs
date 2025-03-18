@@ -13,6 +13,11 @@ public class PlayerHealth : MonoBehaviour
     private float lerpSpeed = 0.05f;
     public GameObject player;
     public GameObject map;
+    public float lastHeal;
+    public float healAmount = 5f;
+        public float cooldown = 5f;
+
+
     
     // public GameObject diedscreen;
 
@@ -42,6 +47,18 @@ public class PlayerHealth : MonoBehaviour
         {
             easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed );
         }
+        do {
+            if (lastHeal - Time.time > cooldown)
+            currentHealth = currentHealth + healAmount;
+            if (healthSlider.value != currentHealth){
+                healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth, lerpSpeed);
+            }
+            if (easeHealthSlider.value != healthSlider.value){
+                healthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed);
+                lastHeal = Time.time;
+            }
+        } 
+        while (currentHealth < 100f);
     }
     public void takeDamage(float amount)
     {
