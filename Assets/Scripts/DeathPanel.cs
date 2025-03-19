@@ -12,7 +12,7 @@ public class DeathPanel  : MonoBehaviour
     void Update()
     {
         respawnButton.onClick.AddListener(respawn);
-        endButton.onClick.AddListener(gameover);
+        
 
     }
     void respawn()
@@ -21,8 +21,5 @@ public class DeathPanel  : MonoBehaviour
         Instantiate(Player,new Vector3(0, 0), Quaternion.identity);
     }
 
-    void gameover()
-    {
-
-    }
+ 
 }
