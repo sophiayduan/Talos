@@ -9,7 +9,7 @@ public class PlayerShoot : MonoBehaviour
     // public Slider cooldownSlider;
     private float speed = 2f;
     // public GameObject where;
-    public float maxDistance = 20f;
+    public float maxDistance = 10f;
     private RaycastHit hit;
     public Vector3 destination;
     public float lastAttack;
@@ -28,17 +28,20 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {               
-        Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, layerMask))       {
+        Vector3 screenCenter = new Vector3(Screen.width * 0.52f, Screen.height * 0.5f, 1);
+        Ray ray = cam.ScreenPointToRay(screenCenter);
+
+        // Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, layerMask)){
 
             destination = hit.point;
             Debug.Log("found");
             Debug.DrawLine(ray.origin, hit.point, Color.red, 2f);
             }
         else {
-            Debug.LogError("not finding ");
-            destination = ray.origin + transform.forward * maxDistance;  
-            Debug.DrawLine(ray.origin, hit.point, Color.blue, 2f);
+            // Debug.LogError("not finding ");
+            destination = ray.origin + ray.direction * maxDistance;  
+            Debug.DrawLine(ray.origin, destination, Color.blue, 2f);
        
         }
         if(Input.GetKeyDown(KeyCode.C))

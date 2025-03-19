@@ -46,9 +46,10 @@ public class EnemyBullet : MonoBehaviour
     {   
         
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        if(transform.position.x == target.x && transform.position.y == target.y){
-            DestroyEnemyBullet();
-            Instantiate(playerparticles,transform.position,Quaternion.identity);
+        // if(transform.position.x == target.x && transform.position.y == target.y){
+        if (Vector3.Distance(transform.position, target) < 0.1f){
+            // DestroyEnemyBullet();
+            // Instantiate(playerparticles,transform.position,Quaternion.identity);
 
     
         }
@@ -59,7 +60,7 @@ public class EnemyBullet : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {   
-        // if (hasHit) return;
+        if (hasHit) return;
                       
         if (other.CompareTag("Player"))
         {
@@ -68,7 +69,7 @@ public class EnemyBullet : MonoBehaviour
 
             if(playerHealth != null)
             {
-                // hasHit = true;
+                hasHit = true;
                 playerHealth.takeDamage(amount);
                 Instantiate(particles,transform.position,Quaternion.identity);
                 CameraShaker.Shake(new PerlinShake(shakeParams));

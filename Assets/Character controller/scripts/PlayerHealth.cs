@@ -73,7 +73,7 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth = Mathf.Clamp(currentHealth + healAmount, 0, maxHealth);
             healthSlider.value = currentHealth;
-            lastHeal = Time.time;
+            lastHeal = Time.time;;
 
         }
     }
