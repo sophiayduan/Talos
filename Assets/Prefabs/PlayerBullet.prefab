@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 529480009909868160}
   - component: {fileID: 6825483139546767404}
   - component: {fileID: 3510186136879983718}
+  - component: {fileID: 4011303865403302519}
   m_Layer: 8
   m_Name: PlayerBullet
   m_TagString: Untagged
@@ -234,3 +235,15 @@ TrailRenderer:
   m_Autodestruct: 1
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &4011303865403302519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3321875004569940165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aac6e91633951c94a9ca065bca877bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
