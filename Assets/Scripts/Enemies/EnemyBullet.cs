@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using CameraShake;
 public class EnemyBullet : MonoBehaviour
 {
     public float speed;
@@ -7,16 +7,17 @@ public class EnemyBullet : MonoBehaviour
     private Vector3 target;
     public float amount = 10;
     // public float KOtime;
-    // public int damage = 2;
     private PlayerHealth playerHealth;
-    // private float variance;
     public  ParticleSystem particles;
-    void Start()
-    {
-        // variance = UnityEngine.Random.Range(-0.25f, 0.25f);
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        target = new Vector3(player.position.x, player.position.y + 1, player.position.z );
+    private bool hasHit = false;
 
+    [SerializeField] 
+    PerlinShake.Params shakeParams;
+    void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        target = new Vector3(player.position.x, player.position.y + 0f, player.position.z );
         if(player != null)
         {
             Debug.Log("Player != null (enemybullet)");
@@ -41,15 +42,15 @@ public class EnemyBullet : MonoBehaviour
         }          
     }
     void Update()
-    {        
+    {   
+        
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        if(transform.position.x == target.x && transform.position.y == target.y){
-            DestroyEnemyBullet();
-            if(player.position.x <= 0.25+ transform.position.x && player.position.z <= 0.25 + transform.position.z && player.position.y <= 0.25 + transform.position.y ){
-                Instantiate(particles,transform.position,Quaternion.identity);
+        // if(transform.position.x == target.x && transform.position.y == target.y){
+        if (Vector3.Distance(transform.position, target) < 0.1f){
+            // DestroyEnemyBullet();
+            // Instantiate(playerparticles,transform.position,Quaternion.identity);
 
-            }
- 
+    
         }
     }
 
@@ -57,7 +58,9 @@ public class EnemyBullet : MonoBehaviour
         Destroy(gameObject);
     }
     void OnTriggerEnter(Collider other)
-    {
+    {   
+        if (hasHit) return;
+                      
         if (other.CompareTag("Player"))
         {
             Debug.Log("Ontriggerener tag is player");
@@ -65,7 +68,11 @@ public class EnemyBullet : MonoBehaviour
 
             if(playerHealth != null)
             {
+                hasHit = true;
                 playerHealth.takeDamage(amount);
+                Instantiate(particles,transform.position,Quaternion.identity);
+                CameraShaker.Shake(new PerlinShake(shakeParams));
+
                 Debug.Log("playerHealth took damage");
 
             }
@@ -73,7 +80,11 @@ public class EnemyBullet : MonoBehaviour
             {
                 Debug.LogError("playerhealth bottom = null");
             }
+            Destroy(gameObject);
+
         }
+        else  Debug.Log($"OK FINE THIS TAG {other.tag}");
+
     }
 
 }
