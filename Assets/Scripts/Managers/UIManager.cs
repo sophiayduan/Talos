@@ -13,7 +13,10 @@ public class UIManager : MonoBehaviour
 
  
     public void ToggleDeathPanel() {
-         deathPanel.SetActive(!deathPanel.activeSelf);
+        if (deathPanel.activeSelf == true){
+            return;
+        }
+        else deathPanel.SetActive(true);
 
     }
     public void TogglePausePanel() {
