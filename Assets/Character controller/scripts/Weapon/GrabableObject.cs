@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class GrabableObject : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Rigidbody objectRigidbody;
+    private Transform objectGrabPointTransform;
+
+    private void Awake()
     {
-        
+        objectRigidbody = GetComponent<Rigidbody>();
+    }
+    public void Grab(Transform objectGrabPointTransform){
+        this.objectGrabPointTransform = objectGrabPointTransform;
+        objectRigidbody.useGravity = false;
+    }
+    private void FixedUpdate()
+    {
+        if(objectGrabPointTransform != null){
+            objectRigidbody.MovePosition(objectGrabPointTransform.position);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
