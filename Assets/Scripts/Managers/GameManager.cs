@@ -21,5 +21,15 @@ public class GameManager : MonoBehaviour
         if (_ui != null) {
             _ui.ToggleDeathPanel();
         } 
+        GameObject[] respawnObjects = GameObject.FindGameObjectsWithTag("Respawn") ;
+        foreach (GameObject obj in respawnObjects)
+        {
+            obj.SetActive(false);
+        }
+        GameObject[] respawnEnemy = GameObject.FindGameObjectsWithTag("Enemy") ;
+        foreach (GameObject obj in respawnEnemy)
+        {
+            obj.SetActive(false);
+        }
     }
 }

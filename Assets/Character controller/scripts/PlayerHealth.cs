@@ -1,6 +1,3 @@
-using System.Data;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
@@ -11,19 +8,15 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
-    public GameObject playerModel;
+    public GameObject player;
     public GameObject map;
-    // public GameObject diedscreen;
-
+    public float lastHeal;
+    public float healAmount = 1f;
+    public float cooldown = 5f;
 
     void Start()
     { 
         currentHealth = maxHealth;
-        // diedscreen.SetActive(false);
-        // if (diedscreen == null){
-        //     Debug.LogError("fuck");
-        // }
-
 
     }
     void Update()
@@ -46,7 +39,14 @@ public class PlayerHealth : MonoBehaviour
         {
             easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed );
         }
-    }
+        if (currentHealth < 100)
+        {
+            heal();
+            Debug.Log("heal time");
+        }
+
+    } 
+      
     public void takeDamage(float amount)
     {
         currentHealth -= amount;
@@ -57,17 +57,25 @@ public class PlayerHealth : MonoBehaviour
             died();
             Debug.Log("you died");
         }
- 
     }
     private void died()
     {
         GameManager.instance.GameOver();
-        playerModel.SetActive(false);
+        player.SetActive(false);        
+
         map.SetActive(false);
         Time.timeScale = 0f;
 
     }
+    private void heal()
+    {
+        if (Time.time - lastHeal > cooldown)
+        {
+            currentHealth = Mathf.Clamp(currentHealth + healAmount, 0, maxHealth);
+            healthSlider.value = currentHealth;
+            lastHeal = Time.time;;
 
-
+        }
+    }
 }
     
