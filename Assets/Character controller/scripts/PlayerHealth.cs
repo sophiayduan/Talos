@@ -12,19 +12,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
     public GameObject playerModel;
-    public GameObject map;
-    // public GameObject diedscreen;
-
 
     void Start()
     { 
         currentHealth = maxHealth;
-        // diedscreen.SetActive(false);
-        // if (diedscreen == null){
-        //     Debug.LogError("fuck");
-        // }
-
-
     }
     void Update()
     {   
@@ -57,17 +48,13 @@ public class PlayerHealth : MonoBehaviour
             died();
             Debug.Log("you died");
         }
- 
     }
     private void died()
     {
         GameManager.instance.GameOver();
         playerModel.SetActive(false);
-        map.SetActive(false);
         Time.timeScale = 0f;
 
     }
-
-
 }
     

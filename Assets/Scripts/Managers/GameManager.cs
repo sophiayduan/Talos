@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (GameManager.instance == null) {
+        if (instance == null) {
             instance = this;
         }
         else Destroy(gameObject);
@@ -21,5 +21,9 @@ public class GameManager : MonoBehaviour
         if (_ui != null) {
             _ui.ToggleDeathPanel();
         } 
+        GameObject[] respawns = GameObject.FindGameObjectsWithTag("Respawn");
+        foreach (GameObject obj in respawns){
+            Destroy(obj);
+        }
     }
 }

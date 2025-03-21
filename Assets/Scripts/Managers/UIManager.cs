@@ -1,30 +1,36 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject deathPanel;
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject settingsPanel;
     
-
     private bool isPaused = false;
 
- 
     public void ToggleDeathPanel() {
         if (deathPanel.activeSelf == true){
             return;
         }
         else deathPanel.SetActive(true);
-
     }
     public void TogglePausePanel() {
         isPaused = !isPaused;
         pausePanel.SetActive(!pausePanel.activeSelf);
-        if (isPaused == true)Time.timeScale = 0f;
-        else Time.timeScale = 1f;
-        
+        GameObject[] respawns = GameObject.FindGameObjectsWithTag("Respawn");
+
+        if (isPaused == true){
+            Time.timeScale = 0f;
+            foreach (GameObject obj in respawns){
+            obj.SetActive(false);
+        }        
+        }
+        else {
+            Time.timeScale = 1f;            
+            foreach (GameObject obj in respawns){
+                obj.SetActive(true);
+            }
+        }
     }
         public void ToggleSettingsPanel() {
             if (SceneManager.GetActiveScene().buildIndex == 1){
@@ -33,13 +39,6 @@ public class UIManager : MonoBehaviour
             }
             else if (SceneManager.GetActiveScene().buildIndex == 2) {
                 settingsPanel.SetActive(!settingsPanel.activeSelf);
-
             }
-
-
-
-        
     }
-
-
 }

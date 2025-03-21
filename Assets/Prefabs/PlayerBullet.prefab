@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3321875004569940165}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.6984326, z: -0, w: 0.7156759}
-  m_LocalPosition: {x: 0.867, y: -1.757, z: 8.277}
+  m_LocalPosition: {x: 2.88, y: -1.757, z: 1.08}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -173,22 +173,22 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.50177336
-        value: 0.044769287
-        inSlope: -0.16846566
-        outSlope: -0.16846566
+        time: 0.24818754
+        value: 0.06878662
+        inSlope: -0.6552269
+        outSlope: -0.6552269
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.15037853
       - serializedVersion: 3
-        time: 0.9935261
-        value: 0.029849607
-        inSlope: 0
-        outSlope: 0
+        time: 1
+        value: 0
+        inSlope: 0.57074547
+        outSlope: 0.57074547
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.22201501
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -247,6 +247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac6e91633951c94a9ca065bca877bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 15
   particles: {fileID: 1078360017053888719, guid: 887608799f4f68b41b63dd500e57d132, type: 3}
-  amount: 10
+  amount: 8
