@@ -1,4 +1,5 @@
 using UnityEngine;
+using CameraShake;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -10,7 +11,12 @@ public class PlayerShoot : MonoBehaviour
     public Vector3 destination;
     public float lastAttack;
     public GameObject firepoint;
+    public Transform flashpoint;
+
     public Camera cam;
+    public ParticleSystem muzzleFlash;
+    [SerializeField] 
+    PerlinShake.Params shakeParams;
     [SerializeField] private LayerMask layerMask;
 
     void Update()
@@ -39,6 +45,11 @@ public class PlayerShoot : MonoBehaviour
         if (Time.time >= lastAttack + Cooldown){
             // transform.LookAt(destination.normalized);
             Instantiate(playerBullet, firepoint.transform.position, Quaternion.identity);
+            
+            ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
+            flash.transform.parent = flashpoint;
+            // flash.Play();
+            CameraShaker.Shake(new PerlinShake(shakeParams));
             lastAttack = Time.time;
         }
     }

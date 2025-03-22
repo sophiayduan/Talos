@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
@@ -7,7 +8,7 @@ public class PlayerBullet : MonoBehaviour
     private PlayerShoot playerShoot;
     public ParticleSystem particles;
     public float amount = 10;
-
+    private bool hasInstantiated;
     void Start()
     {
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
@@ -15,7 +16,7 @@ public class PlayerBullet : MonoBehaviour
         if (target == Vector3.zero)
         {
             Debug.LogError("Bullet target is Vector3.zero, destroying bullet.");
-            Destroy(gameObject);
+            Destroy(gameObject,0.01f);
         }
     }
     void Update()
@@ -24,11 +25,11 @@ public class PlayerBullet : MonoBehaviour
             return;
         }
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-         if (Vector3.Distance(transform.position, target) < 0.1f)
+         if (!hasInstantiated && Vector3.Distance(transform.position, target) < 0.1f)
         {
-            Destroy(gameObject);
-            // Instantiate(particles,target,Quaternion.identity);
-
+            hasInstantiated = true;
+            Instantiate(particles,target,Quaternion.identity);
+            Destroy(gameObject,0.01f);
         }    
     }
     void OnTriggerEnter(Collider other)
@@ -47,6 +48,7 @@ public class PlayerBullet : MonoBehaviour
                 enemyHealth.takeDamage(amount);
                 Instantiate(particles,other.transform.position,Quaternion.identity);
 
+
                 Debug.Log("enemyHealth took damage");
 
             }
@@ -55,5 +57,6 @@ public class PlayerBullet : MonoBehaviour
                 Debug.LogError("enemyhealth bottom = null");
             }
         }
+
     }
 }
