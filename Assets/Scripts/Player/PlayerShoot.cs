@@ -6,7 +6,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject playerBullet;
     public float Cooldown = 3f;
     // public Slider cooldownSlider;
-    public float maxDistance = 10f;
+    public float maxDistance = 15f;
     private RaycastHit hit;
     public Vector3 destination;
     public float lastAttack;
@@ -18,6 +18,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] 
     PerlinShake.Params shakeParams;
     [SerializeField] private LayerMask layerMask;
+    public string destinationpoint;
 
     void Update()
     {               
@@ -30,10 +31,13 @@ public class PlayerShoot : MonoBehaviour
             destination = hit.point;
             Debug.Log("found");
             Debug.DrawLine(ray.origin, hit.point, Color.red, 2f);
+            destinationpoint = "hit";
+
             }
         else {
             destination = ray.origin + ray.direction * maxDistance;  
             Debug.DrawLine(ray.origin, destination, Color.blue, 2f);
+            destinationpoint = "air";
        
         }
         if(Input.GetKeyDown(KeyCode.C))
