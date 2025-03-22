@@ -25,5 +25,12 @@ public class GameManager : MonoBehaviour
         foreach (GameObject obj in respawns){
             Destroy(obj);
         }
+        
+    }
+    public void Respawn(){
+        StateManager _state = GetComponent<StateManager>();
+        if (_state != null) {
+            _state.ReloadCurrentScene();
+        } 
     }
 }

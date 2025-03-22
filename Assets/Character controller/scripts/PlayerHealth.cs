@@ -45,8 +45,9 @@ public class PlayerHealth : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            died();
-            Debug.Log("you died");
+            // lifetime
+            // if(lifetime > 0) Respawn();
+            // else died();
         }
     }
     private void died()
