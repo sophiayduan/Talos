@@ -19,7 +19,7 @@ public class Status : MonoBehaviour
 
     void Update()
     {               
-        debug.text = $"\n Enemy Health: {enemy.enemyHealth} \n Hit: {bullet.hittag} \n {player.destinationpoint} " ;
+        debug.text = $"\n Enemy Health: {enemy.enemyHealth} \n {player.destinationpoint} " ;
 
 
 

@@ -6,7 +6,7 @@ public class PlayerShoot : MonoBehaviour
     public GameObject playerBullet;
     public float Cooldown = 3f;
     // public Slider cooldownSlider;
-    public float maxDistance = 15f;
+    public float maxDistance;
     private RaycastHit hit;
     public Vector3 destination;
     public float lastAttack;

@@ -12357,7 +12357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBullet: {fileID: 3321875004569940165, guid: e04d8cd7eb16a3c469813974cab17c9d, type: 3}
   Cooldown: 0
-  maxDistance: 10
+  maxDistance: 20
   destination: {x: 0, y: 0, z: 0}
   lastAttack: 0
   firepoint: {fileID: 251778410863322777}
