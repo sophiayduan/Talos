@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
     public GameObject playerModel;
+    public Lifetime life;
 
     void Start()
     { 
@@ -42,20 +43,18 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= amount;
         Debug.Log($"Current health: {currentHealth}");
-
         if(currentHealth <= 0)
         {
-            // lifetime
-            // if(lifetime > 0) Respawn();
-            // else died();
+            if(life.lifetime <= 0)
+            {
+                GameManager.instance.GameOver();
+            }
+            else 
+            {
+                print("respawn");
+                GameManager.instance.Respawn();
+            }    
         }
-    }
-    private void died()
-    {
-        GameManager.instance.GameOver();
-        playerModel.SetActive(false);
-        Time.timeScale = 0f;
-
     }
 }
     

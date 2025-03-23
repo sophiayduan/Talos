@@ -2,13 +2,24 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Lifetime : MonoBehaviour
 {
-    public float lifetime;
+    public  float lifetime;
     public float maxLifetime = 100f;
     public float deathSpeed;
     public Slider healthSlider;
-    void Start()
+    public static Lifetime instance;
+    void Awake()
     {
-        lifetime = maxLifetime;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); 
+            lifetime = 100f;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 
     void Update()
