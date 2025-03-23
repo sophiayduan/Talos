@@ -24,11 +24,6 @@ public class GameManager : MonoBehaviour
         }
         
     }
-    public void Respawn(){
-        StateManager _state = GetComponent<StateManager>();
-        if (_state != null) {
-            _state.ReloadCurrentScene();
-        } 
-    }
+  
  
 }

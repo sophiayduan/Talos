@@ -41,4 +41,7 @@ public class Lifetime : MonoBehaviour
 
        
     }
+    public bool running(){
+        return lifetime > 0;
+    }
 }

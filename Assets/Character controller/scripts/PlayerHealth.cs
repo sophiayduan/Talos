@@ -12,11 +12,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
     public GameObject playerModel;
-    public Lifetime life;
+    private Lifetime lifetime;
+    public GameObject  respawnpoint;
 
     void Start()
     { 
         currentHealth = maxHealth;
+        lifetime = FindFirstObjectByType<Lifetime>();
     }
     void Update()
     {   
@@ -45,16 +47,20 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Current health: {currentHealth}");
         if(currentHealth <= 0)
         {
-            if(life.lifetime <= 0)
+            if(lifetime != null && lifetime.running())
             {
-                GameManager.instance.GameOver();
+                Respawn();
             }
             else 
             {
                 print("respawn");
-                GameManager.instance.Respawn();
+                GameManager.instance.GameOver();
             }    
         }
+    }
+    void Respawn(){
+        currentHealth = maxHealth;
+        transform.position = respawnpoint.transform.position;
     }
 }
     

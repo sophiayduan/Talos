@@ -1,5 +1,6 @@
 using UnityEngine;
 using CameraShake;
+using System;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -12,33 +13,27 @@ public class PlayerShoot : MonoBehaviour
     public float lastAttack;
     public GameObject firepoint;
     public Transform flashpoint;
-
+public Transform aimPos;
+    [SerializeField] float aimSmoothSpeed = 20f;
+    public string destinationpoint;
     public Camera cam;
     public ParticleSystem muzzleFlash;
     [SerializeField] 
     PerlinShake.Params shakeParams;
     [SerializeField] private LayerMask layerMask;
-    public string destinationpoint;
+    
 
     void Update()
     {               
-        Vector3 screenCenter = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 1);
-        Ray ray = cam.ScreenPointToRay(screenCenter);
-
-
-        if (Physics.Raycast(ray, out hit, maxDistance, layerMask)){
-
-            destination = hit.point;
-            Debug.Log("found");
-            Debug.DrawLine(ray.origin, hit.point, Color.red, 2f);
-            destinationpoint = "hit";
-
+        Vector2 screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask)){
+            aimPos.position = Vector3.Lerp(aimPos.position, hit.point, aimSmoothSpeed * Time.deltaTime );
             }
         else {
-            destination = ray.origin + ray.direction * maxDistance;  
-            Debug.DrawLine(ray.origin, destination, Color.blue, 2f);
+            Vector3 destination = ray.origin + ray.direction * maxDistance;  
+            aimPos.position = Vector3.Lerp(aimPos.position, destination, aimSmoothSpeed * Time.deltaTime);
             destinationpoint = "air";
-       
         }
         if(Input.GetKeyDown(KeyCode.C))
         {
@@ -49,11 +44,8 @@ public class PlayerShoot : MonoBehaviour
         if (Time.time >= lastAttack + Cooldown){
             // transform.LookAt(destination.normalized);
             Instantiate(playerBullet, firepoint.transform.position, Quaternion.identity);
-            
-            ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
-            flash.transform.parent = flashpoint;
-            // flash.Play();
-            CameraShaker.Shake(new PerlinShake(shakeParams));
+            Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
+            Destroy(muzzleFlash, 1f);
             lastAttack = Time.time;
         }
     }

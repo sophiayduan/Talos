@@ -11,6 +11,7 @@ public class EnemyBullet : MonoBehaviour
     public  ParticleSystem particles;
     private bool hasHit = false;
 
+
     [SerializeField] 
     PerlinShake.Params shakeParams;
     void Awake()
@@ -46,7 +47,7 @@ public class EnemyBullet : MonoBehaviour
         
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         // if(transform.position.x == target.x && transform.position.y == target.y){
-        if (Vector3.Distance(transform.position, target) < 0.1f){
+        if (Vector3.Distance(transform.position, target) < 0.1f && hasHit == false){
             // DestroyEnemyBullet();
             // Instantiate(playerparticles,transform.position,Quaternion.identity);
 
