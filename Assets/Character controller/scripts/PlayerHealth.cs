@@ -1,6 +1,3 @@
-using System.Data;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour

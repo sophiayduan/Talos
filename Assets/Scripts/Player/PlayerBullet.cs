@@ -29,9 +29,9 @@ public class PlayerBullet : MonoBehaviour
         }
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         if (Vector3.Distance(transform.position, target) < 0.1f && !hashit && !hasInstantiated){
-            if (target == playerShoot.cam.transform.position + playerShoot.cam.transform.forward * playerShoot.maxDistance){
-                Destroy(gameObject);
-            }
+            // if (target == Camera.main.transform.position + Camera.main.transform.forward * playerShoot.maxDistance){
+            //     Destroy(gameObject);
+            // }
     
         }    
     }

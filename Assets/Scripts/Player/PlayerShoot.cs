@@ -42,10 +42,9 @@ public Transform aimPos;
     }
     private void Shoot(){
         if (Time.time >= lastAttack + Cooldown){
-            // transform.LookAt(destination.normalized);
             Instantiate(playerBullet, firepoint.transform.position, Quaternion.identity);
-            Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
-            Destroy(muzzleFlash, 1f);
+            ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
+            Destroy(flash.gameObject, 0.1f);
             lastAttack = Time.time;
         }
     }
