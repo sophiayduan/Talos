@@ -11,6 +11,9 @@ public class PlayerHealth : MonoBehaviour
     public GameObject playerModel;
     private Lifetime lifetime;
     public GameObject  respawnpoint;
+    public float lastHeal ;
+    public float healAmount = 5f;
+    public float cooldown = 5f;
 
     void Start()
     { 
@@ -36,6 +39,16 @@ public class PlayerHealth : MonoBehaviour
         if (healthSlider.value != easeHealthSlider.value)  
         {
             easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed );
+        }
+
+        
+        if (currentHealth < 100f)
+        {
+            if (Time.time >= lastHeal+ cooldown && easeHealthSlider.value == healthSlider.value){
+                Debug.Log("healing");
+                currentHealth += healAmount;
+                lastHeal = Time.time;
+            }
         }
     }
     public void takeDamage(float amount)
