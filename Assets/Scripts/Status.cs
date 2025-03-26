@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 public class Status : MonoBehaviour
 {
     public TMP_Text debug;
-    public EnemyHealth enemy;
+    public EnemyScript enemy;
     public PlayerShoot player;
     public PlayerBullet bullet;
 
@@ -19,7 +19,7 @@ public class Status : MonoBehaviour
 
     void Update()
     {               
-        debug.text = $"\n Enemy Health: {enemy.enemyHealth} \n {player.destinationpoint} " ;
+        debug.text = $"\n See Player: {enemy.seePlayer} \n  " ;
 
 
 

@@ -1,8 +1,9 @@
 using System.IO;
-using Unity.Mathematics;
+// using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+
 
 
 public class EnemyScript : MonoBehaviour
@@ -25,22 +26,22 @@ public class EnemyScript : MonoBehaviour
     public float MaxAttackRange;
     public float LastAttack;
     public GameObject EnemyBullet;
-
     public LayerMask GroundLayer;
     private Vector3 Heading;
     private float Distance;
     public GameObject firepoint;
 
-    // private Vector3 lastKnownPosition;
-    // private bool lostPlayer;
+    private Vector3 lastKnownPosition;
+    private bool lostPlayer;
 
-    // private float lastSeenTime;
-    // public float searchTime = 5f;
+    private float lastSeenTime;
+    public float searchTime = 5f;
 
     // Patrolling 
-    // public Vector3 walkPoint;
-    // bool walkPointSet;
-    // public float walkPointRange;
+    public Transform walksphere;
+    public Vector3 walkPoint;
+    public bool walkPointSet;
+    public int walkPointRange = 10;
     [SerializeField] private Animator _animator;
     private static int isIdleHash = Animator.StringToHash("isIdle");
     [SerializeField] private LayerMask layerMask;
@@ -53,6 +54,8 @@ public class EnemyScript : MonoBehaviour
     {
         if (!seePlayer)
         {
+            Debug.Log("Time to patrol");
+            Patrol();
             hitColliders = Physics.OverlapSphere(transform.position, DetectionRange);
             foreach (var HitCollider in hitColliders)
             {
@@ -66,7 +69,8 @@ public class EnemyScript : MonoBehaviour
 
                 }
                 else{
-                    Debug.LogError("didn't hit the player");
+                    Debug.Log("start patrol");
+                    Patrol();
                     seePlayer = false;
                 }
             }
@@ -90,8 +94,11 @@ public class EnemyScript : MonoBehaviour
                     else if(Distance < MinAttackRange)Retreat();
                     else if(Distance > MaxAttackRange) Chase();
                 }   
+                
 
             }
+            else Patrol(); Debug.Log("donde estas");
+
         }
     }
         
@@ -132,6 +139,7 @@ public class EnemyScript : MonoBehaviour
         agent.isStopped = false;
         agent.SetDestination(Hit.point);
     }
+
     private void Animation(){
         if (Distance > 3.1f) {
             _animator.SetBool("isRunning", true);
@@ -148,4 +156,23 @@ public class EnemyScript : MonoBehaviour
             _animator.SetBool("isBackrun", false);
         }
     }
+        private void Patrol()
+        {
+        Animation();
+        if(!walkPointSet) SearchWalkPoint();
+        if(walkPointSet) agent.SetDestination(walkPoint); Debug.Log("set dedestination");
+        
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        if(distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
+        }
+        private void SearchWalkPoint(){
+            float randomZ = Random.Range(-walkPointRange, walkPointRange);
+            float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+            walkPoint = new Vector3(transform.position.x + randomX,transform.position.y, transform.position.z + randomZ);
+            walksphere.position = Vector3.Lerp(walksphere.position, walkPoint, 4 * Time.deltaTime );
+            walkPointSet = true;
+            // if (Physics.Raycast(walkPoint, walkPoint, 10f, GroundLayer)) walkPointSet = true; Debug.Log("found one");
+        }
 }

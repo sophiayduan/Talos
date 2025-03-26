@@ -3571,7 +3571,7 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 0
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
@@ -10051,7 +10051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &4922111030884517305
 GameObject:
   m_ObjectHideFlags: 0
@@ -13177,6 +13177,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   firepoint: {fileID: 3370421458564726172}
+  searchTime: 5
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointSet: 0
+  walkPointRange: 0
   _animator: {fileID: 8637695247425988886}
   layerMask:
     serializedVersion: 2
@@ -13663,6 +13667,9 @@ MonoBehaviour:
   particles: {fileID: 1078360017053888719, guid: 887608799f4f68b41b63dd500e57d132, type: 3}
   playerModel: {fileID: 5481576003329673043}
   respawnpoint: {fileID: 1406411519}
+  lastHeal: 0
+  healAmount: 5
+  cooldown: 8
 --- !u!114 &8433384197499012828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14091,7 +14098,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
