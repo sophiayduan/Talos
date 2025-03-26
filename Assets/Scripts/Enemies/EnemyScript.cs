@@ -45,6 +45,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private Animator _animator;
     private static int isIdleHash = Animator.StringToHash("isIdle");
     [SerializeField] private LayerMask layerMask;
+    public float startPause;
+    public float pauseTime;
     void Start()
     {
         Speed = Maxspeed;
@@ -128,7 +130,7 @@ public class EnemyScript : MonoBehaviour
         Vector3 AwayDirection = (transform.position - Target.transform.position).normalized;
         Vector3 MoveAway = transform.position + AwayDirection * (MinAttackRange - Distance); 
         agent.SetDestination(MoveAway);
-       Vector3 targetPosition = Target.transform.position;
+        Vector3 targetPosition = Target.transform.position;
         targetPosition.y = transform.position.y;
 
         Quaternion lookRotation = Quaternion.LookRotation(targetPosition - transform.position);
@@ -156,23 +158,52 @@ public class EnemyScript : MonoBehaviour
             _animator.SetBool("isBackrun", false);
         }
     }
-        private void Patrol()
-        {
+    private void Patrol()
+    {
         Animation();
         if(!walkPointSet) SearchWalkPoint();
-        if(walkPointSet) agent.SetDestination(walkPoint); Debug.Log("set dedestination");
+
+        if(walkPointSet)  agent.SetDestination(walkPoint); Debug.Log("set dedestination");
         
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        if(distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
+        if(distanceToWalkPoint.magnitude <= 1f){
+            startPause = Time.time;
+            walkPointSet = false;
+            
+            Pause();
+            agent.isStopped = false;
         }
-        private void SearchWalkPoint(){
-            float randomZ = Random.Range(-walkPointRange, walkPointRange);
-            float randomX = Random.Range(-walkPointRange, walkPointRange);
+    }
+    private void SearchWalkPoint()
+    {
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-            walkPoint = new Vector3(transform.position.x + randomX,transform.position.y, transform.position.z + randomZ);
-            walksphere.position = Vector3.Lerp(walksphere.position, walkPoint, 4 * Time.deltaTime );
-            walkPointSet = true;
-            // if (Physics.Raycast(walkPoint, walkPoint, 10f, GroundLayer)) walkPointSet = true; Debug.Log("found one");
+        walkPoint = new Vector3(transform.position.x + randomX,transform.position.y, transform.position.z + randomZ);
+        // walksphere.position = Vector3.Lerp(walksphere.position, walkPoint, 4 * Time.deltaTime );
+        walkPointSet = true;
+        // if (Physics.Raycast(walkPoint, -transform.up , 5f, GroundLayer)){
+        //     walkPointSet = true;
+        // }
+        // else walkPointSet = false;
+    }
+
+    void Pause()
+    {  
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        agent.updateRotation = false;
+        _animator.SetBool("isRunning", false);
+        _animator.SetBool(isIdleHash, true);
+        _animator.SetBool("isBackrun", false);
+            // Debug.Log($"current time: {Time.time}");
+            // Debug.Log($"startPause : {startPause}");
+    
+       
+        if(Time.time > startPause + pauseTime) {
+            agent.isStopped = false; 
+            return; 
         }
+    }
 }
