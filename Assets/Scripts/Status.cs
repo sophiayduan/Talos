@@ -19,7 +19,7 @@ public class Status : MonoBehaviour
 
     void Update()
     {               
-        debug.text = $"\n See Player: {enemy.seePlayer} \n  " ;
+        debug.text = $"\n Status: {enemy.status} \n  " ;
 
 
 

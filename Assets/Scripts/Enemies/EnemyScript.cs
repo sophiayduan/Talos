@@ -1,6 +1,8 @@
-using System.IO;
+// using System.Numerics;
+
 // using Unity.Mathematics;
-using Unity.VisualScripting;
+// using System.Numerics;
+// using System.Numerics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -47,6 +49,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     public float startPause;
     public float pauseTime;
+    public string status = "nada";
+    public Vector3 shootDestination;
     void Start()
     {
         Speed = Maxspeed;
@@ -71,18 +75,21 @@ public class EnemyScript : MonoBehaviour
 
                 }
                 else{
-                    Debug.Log("start patrol");
-                    Patrol();
+                    // Debug.Log("start patrol");
                     seePlayer = false;
+                    status = " !seePlayer";
+
                 }
             }
         }
         else
         {   
+            lastKnownPosition = transform.position + Vector3.forward * 0.5f;
             Vector3 theorigin = transform.position + Vector3.up * 2f;
             if(Physics.Raycast(theorigin, (Target.transform.position - theorigin).normalized, out Hit, SightRange, layerMask)){
                 Debug.DrawRay(theorigin,  (Target.transform.position - theorigin).normalized* SightRange, Color.black, 2f);
                 Debug.Log("Raycast hit: " + Hit.collider.name);
+                // shootDestination = Hit.point;
 
                 if (Hit.collider.tag == "Player")
                 {
@@ -90,21 +97,45 @@ public class EnemyScript : MonoBehaviour
                     Heading = Target.transform.position - transform.position;
                     Distance = Heading.magnitude;
                     Debug.Log("okay this is the player");
+                    status = "Hit.collider.tag = Player";
+                    lastKnownPosition = Hit.point;
 
-                    if(Distance <= MaxAttackRange && Distance >= MinAttackRange){Chase();Attack();}
+                    if(Distance <= MaxAttackRange && Distance >= MinAttackRange) {Chase();Attack();}
                     else if(Distance < MinAttackRange + 1 && Distance > MinAttackRange){Stop();Attack();}
                     else if(Distance < MinAttackRange)Retreat();
                     else if(Distance > MaxAttackRange) Chase();
+
+                }
+                else
+                {
+                    status = "Hit.collider.tag != Player";
+                    LastPosition();
                 }   
                 
 
             }
-            else Patrol(); Debug.Log("donde estas");
+            else {
+                status = "no raycast";
+                LastPosition();
+                // Patrol(); 
+                // Debug.Log("donde estas");
+            }
 
         }
     }
         
 
+    private void LastPosition(){
+        agent.SetDestination(lastKnownPosition);
+                status = "Set Destination LKP";
+                if ((transform.position - lastKnownPosition).magnitude <  0.3f ){
+                    status = "Reached LKP";
+                    startPause = Time.time;
+                    Stop();
+                    status = "stopped";
+                    // Pause();
+                }
+    }
     private void Attack(){
         if (Time.time >= LastAttack + Cooldown){
             // transform.LookAt(Target.transform.position);
@@ -171,8 +202,8 @@ public class EnemyScript : MonoBehaviour
             startPause = Time.time;
             walkPointSet = false;
             
-            Pause();
-            agent.isStopped = false;
+            // Pause();
+            // agent.isStopped = false;
         }
     }
     private void SearchWalkPoint()
@@ -181,12 +212,13 @@ public class EnemyScript : MonoBehaviour
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
         walkPoint = new Vector3(transform.position.x + randomX,transform.position.y, transform.position.z + randomZ);
-        // walksphere.position = Vector3.Lerp(walksphere.position, walkPoint, 4 * Time.deltaTime );
-        walkPointSet = true;
-        // if (Physics.Raycast(walkPoint, -transform.up , 5f, GroundLayer)){
-        //     walkPointSet = true;
-        // }
-        // else walkPointSet = false;
+        // walksphere.position = Vector3.Lerp(transform.position, walkPoint, 4 * Time.deltaTime );
+        // walkPointSet = true;
+        if (Physics.Raycast(walkPoint, -transform.up , out Hit, 2.5f, GroundLayer)){
+            Debug.DrawRay(walkPoint, Hit.point,Color.blue, 2f);
+            walkPointSet = true;
+        }
+        else walkPointSet = false;
     }
 
     void Pause()

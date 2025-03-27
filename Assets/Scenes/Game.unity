@@ -1678,7 +1678,7 @@ Transform:
   m_GameObject: {fileID: 786169123}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6069,7 +6069,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -0.1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1290953107348524194
@@ -13273,6 +13273,10 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 576
+  startPause: 0
+  pauseTime: 0
+  status: nada
+  shootDestination: {x: 0, y: 0, z: 0}
 --- !u!4 &7914834446687672869
 Transform:
   m_ObjectHideFlags: 0

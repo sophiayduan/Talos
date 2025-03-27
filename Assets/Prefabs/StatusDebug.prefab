@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &9058552757910576680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,3 +254,4 @@ MonoBehaviour:
   debug: {fileID: 697342159672999454}
   enemy: {fileID: 0}
   player: {fileID: 0}
+  bullet: {fileID: 0}
