@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace Charactercontroller.scripts{
     public class PickUpDown : MonoBehaviour
@@ -7,25 +8,71 @@ namespace Charactercontroller.scripts{
         [SerializeField][Range(0.0f, 2.0f)] private float rayLength;
         [SerializeField] private Vector3 rayOffset;
         [SerializeField] private LayerMask gunMask;
-        [SerializeField] private Transform equipPos;
-        [SerializeField] private Transform aimingPos;
+        [SerializeField] private Transform rightHandPos;
+        [SerializeField] private Transform leftHandPos;
 
+        [Header("Right Hand Target")]
+        [SerializeField] private TwoBoneIKConstraint rightHandIK;
+        [SerializeField] private Transform rightHandTarget;
+
+        [Header("Left Hand Target")]
+        [SerializeField] private TwoBoneIKConstraint leftHandIK;
+        [SerializeField] private Transform leftHandTarget;
+
+        [SerializeField] private Transform IKRightHandPos;
+        [SerializeField] private Transform IKLeftHandPos;
         private RaycastHit topRayHitInfo;
         public bool isAiming = false;
+        public bool isShooting = false;
         private Gun currentWeapon;
 
+        private PlayerInputs _playerInputs;
+        private RigBuilder _rigBuilder;
+        private void Awake()
+        {
+            _rigBuilder = GetComponent<RigBuilder>();
+            var rigs = GetComponentInChildren<Rig>();
+
+            _playerInputs = GetComponent<PlayerInputs>();
+        }
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.E)){
                 Equip();
             }
-            if(currentWeapon){
-                currentWeapon.transform.parent = equipPos.transform;
-                currentWeapon.transform.position = equipPos.position;
-                currentWeapon.transform.rotation = equipPos.rotation;
-                isAiming = true;
+            if(Input.GetKeyDown(KeyCode.Mouse0)){
+                isShooting = true;
             }
+            if(Input.GetKeyUp(KeyCode.Mouse0)){
+                isShooting = false;
+            }
+            if(currentWeapon){
+                
+                    currentWeapon.transform.parent = rightHandPos.transform;
+                    currentWeapon.transform.position = rightHandPos.position;
+                    currentWeapon.transform.rotation = rightHandPos.rotation;
+                    isAiming = true;
+                    
+                    //leftHandIK.weight = 0f;
+                
+                    //leftHandPos.transform.parent = leftHandPos.transform;
+                    //IKLeftHandPos.transform.position = leftHandPos.position;
+                    //currentWeapon.transform.rotation = leftHandPos.rotation;
+                    //isAiming = true;
+
+                    //leftHandIK.weight = 1f;
+                    //leftHandTarget.position = IKLeftHandPos.position;
+                    //leftHandTarget.rotation = IKLeftHandPos.rotation;
+
+                
+            }
+            
+
+            //rightHandIK.weight = 1f;
+            //rightHandTarget.position = IKRightHandPos.position;
+            //rightHandTarget.rotation = IKRightHandPos.rotation;
         }
+
         void FixedUpdate()
         {
             RaycastsHandler();
