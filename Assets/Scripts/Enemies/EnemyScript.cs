@@ -49,10 +49,11 @@ public class EnemyScript : MonoBehaviour
     private static int isIdleHash = Animator.StringToHash("isIdle");
     [SerializeField] private LayerMask layerMask;
     public float startPause;
-    public float pauseTime = 5f;
+    public float pauseTime = 0;
     public string status = "nada";
     public Vector3 shootDestination;
     public bool isPaused;
+    public Transform LKPsphere;
     void Start()
     {
         Speed = Maxspeed;
@@ -92,7 +93,6 @@ public class EnemyScript : MonoBehaviour
             if(Physics.Raycast(theorigin, (Target.transform.position - theorigin).normalized, out Hit, SightRange, layerMask)){
                 Debug.DrawRay(theorigin,  (Target.transform.position - theorigin).normalized* SightRange, Color.black, 2f);
                 Debug.Log("Raycast hit: " + Hit.collider.name);
-                // shootDestination = Hit.point;
 
                 if (Hit.collider.tag == "Player")
                 {
@@ -101,7 +101,9 @@ public class EnemyScript : MonoBehaviour
                     Distance = Heading.magnitude;
                     Debug.Log("okay this is the player");
                     status = "Hit.collider.tag = Player";
-                    lastKnownPosition = Hit.point;
+                    lastKnownPosition = Hit.point; 
+                    LKPsphere.position = Hit.point;
+
 
                     if(Distance <= MaxAttackRange && Distance >= MinAttackRange) {Chase();Attack();}
                     else if(Distance < MinAttackRange + 1 && Distance > MinAttackRange){Stop();Attack();}
@@ -129,17 +131,14 @@ public class EnemyScript : MonoBehaviour
         
 
     private void LastPosition(){
-        Pause();
-        agent.SetDestination(lastKnownPosition);
+        // Pause();
+        agent.SetDestination(LKPsphere.position);
         Debug.DrawRay(transform.position, lastKnownPosition, Color.green);
         status = "Set Destination LKP";
-        if ((transform.position - lastKnownPosition).magnitude < 0.3f ){
+        if ((transform.position - lastKnownPosition).magnitude < 0.1f ){
             status = "Reached LKP";
             return;
-            // startPause = Time.time;
-            // Stop();
-            // status = "stopped";
-            // // Pause();
+      
         }
     }
     private void Attack(){
@@ -204,13 +203,8 @@ public class EnemyScript : MonoBehaviour
         
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        if(distanceToWalkPoint.magnitude <= 0.1f && !isPaused){       
-            startPause = Time.time;
-            isPaused = true;
-            walkPointSet = false;
+        if(distanceToWalkPoint.magnitude <= 0.1f){       
             Pause();
-            status = "pause in patrol";
-            agent.isStopped = false;
 
         }
     }
@@ -223,29 +217,43 @@ public class EnemyScript : MonoBehaviour
 
         if (Physics.Raycast(walkPoint, -transform.up , out Hit, 2.5f, GroundLayer)){
             Debug.DrawRay(walkPoint, Hit.point,Color.blue, 2f);
+            
             walkPointSet = true;
         }
         else walkPointSet = false;
     }
 
     private void Pause()
-    {              
-        if(Time.time < startPause + pauseTime)
-        {
-            Debug.Log("correct!!! pause");
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
-            // agent.updateRotation = false;
-            status = "pausing CORRECT";
-            walkPointSet = false;
-        }
-   
-        else if(Time.time >= startPause + pauseTime) {
-            Debug.Log("unpause correeect!");
-            agent.isStopped = false; 
-            agent.updateRotation = true;
-            isPaused = false;
-            return; 
+    {     
+        if (!isPaused){
+            startPause = Time.time; 
+            isPaused = true;   
+
+        }     
+        if (isPaused) {
+            if(Time.time < startPause + pauseTime)
+            {
+                Debug.Log("correct!!! pause");
+                status = "pausing CORRECT";
+
+                agent.isStopped = true;
+                agent.velocity = Vector3.zero;
+                agent.updateRotation = false;
+
+                _animator.SetBool("isRunning", false);
+                _animator.SetBool(isIdleHash, true);
+                _animator.SetBool("isBackrun", false);
+            }
+    
+            else {
+                Debug.Log("unpause correeect!");
+                status = "unpausing!";
+                agent.isStopped = false; 
+                agent.updateRotation = true;
+                isPaused = false;
+                walkPointSet = false;
+                // return; 
+            }
         }
 
     }
