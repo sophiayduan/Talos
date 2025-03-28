@@ -1,5 +1,6 @@
 using System.Linq;
 using Charactercontroller.Inputs;
+using Charactercontroller.scripts;
 using UnityEngine;
 
 namespace Charactercontroller{
@@ -12,6 +13,7 @@ namespace Charactercontroller{
         private PlayerState _playerState;
         private PlayerController _playerController;
         private PlayerActionInputs _playerActionInputs;
+        private PickUpDown _pickUpDown;
 
         private static int inputXHash = Animator.StringToHash("inputX");
         private static int inputYHash = Animator.StringToHash("inputY");
@@ -23,6 +25,8 @@ namespace Charactercontroller{
         private static int isPunchingHash = Animator.StringToHash("isPunching");
         private static int isGrabingHash = Animator.StringToHash("isGrabing");
         private static int isPlayingActionsHash = Animator.StringToHash("isPlayingAction");
+        private static int isAimingHash = Animator.StringToHash("isAiming");
+        private static int isShootingHash = Animator.StringToHash("isShooting");
         private int[] actionHashes;
         private static int isRotatingToTargetHash = Animator.StringToHash("isRotatingToTarget");
         private static int rotationMismatchHash = Animator.StringToHash("rotationMismatch");
@@ -39,8 +43,9 @@ namespace Charactercontroller{
             _playerState = GetComponent<PlayerState>();
             _playerController = GetComponent<PlayerController>();
             _playerActionInputs = GetComponent<PlayerActionInputs>();
+            _pickUpDown = GetComponent<PickUpDown>();
 
-            actionHashes = new int[] {isGrabingHash};
+            actionHashes = new int[] {isGrabingHash, isFallingHash};
         }
 
         private void Update(){
@@ -52,9 +57,10 @@ namespace Charactercontroller{
             bool isRunning = _playerState.CurrentPlayerMovementState == PlayerMovementState.Running;
             bool isSprintng = _playerState.CurrentPlayerMovementState == PlayerMovementState.Sprinting;
             bool isJumping = _playerState.CurrentPlayerMovementState == PlayerMovementState.Jumping;
-            bool isFalling = _playerState.CurrentPlayerMovementState == PlayerMovementState.Falling;
             bool isGrounded = _playerState.InGroundedState();
+            bool isFalling = _playerState.CurrentPlayerMovementState == PlayerMovementState.Falling && !isGrounded;
             bool isPlayingAction = actionHashes.Any(hash => _animator.GetBool(hash));
+            bool isShooting = _playerActionInputs.AttackPressed;
 
             bool isRunBlendValue = isRunning || isJumping || isFalling;
 
@@ -75,7 +81,8 @@ namespace Charactercontroller{
             _animator.SetFloat(rotationMismatchHash, _playerController.RotationMismatch);
             _animator.SetBool(isPunchingHash, _playerActionInputs.AttackPressed);
             _animator.SetBool(isGrabingHash, _playerActionInputs.GrabPressed);
-
+            _animator.SetBool(isAimingHash, _pickUpDown.isAiming);
+            _animator.SetBool(isShootingHash, _pickUpDown.isShooting);
         }
     }
 
