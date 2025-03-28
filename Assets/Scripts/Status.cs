@@ -19,7 +19,7 @@ public class Status : MonoBehaviour
 
     void Update()
     {               
-        debug.text = $"\n Status: {enemy.status} \n  " ;
+        debug.text = $"\n Status: {enemy.status} \n Real Time: {Time.time} \n Pause Start: {enemy.startPause} \n Is Paused: {enemy.isPaused}" ;
 
 
 

@@ -19,7 +19,7 @@ public class PlayerBullet : MonoBehaviour
         if (target == Vector3.zero)
         {
             Debug.LogError("Bullet target is Vector3.zero, destroying bullet.");
-            Destroy(gameObject,0.01f);
+            Destroy(gameObject);
         }
     }
     void Update()
