@@ -25,7 +25,7 @@ namespace Charactercontroller.scripts{
         public bool isAiming = false;
         public bool isShooting = false;
         private Gun currentWeapon;
-
+        
         private PlayerInputs _playerInputs;
         private RigBuilder _rigBuilder;
         private void Awake()
@@ -39,6 +39,12 @@ namespace Charactercontroller.scripts{
         {
             if(Input.GetKeyDown(KeyCode.E)){
                 Equip();
+                if(currentWeapon){
+                    if(!isAiming){
+                        
+                        currentWeapon.pickedUp = true;
+                    }
+                }
             }
             if(Input.GetKeyDown(KeyCode.Mouse0)){
                 isShooting = true;
@@ -48,31 +54,28 @@ namespace Charactercontroller.scripts{
             }
             if(currentWeapon){
                 
+                if(currentWeapon.wasPickedUp){
+                    
                     currentWeapon.transform.parent = rightHandPos.transform;
                     currentWeapon.transform.position = rightHandPos.position;
                     currentWeapon.transform.rotation = rightHandPos.rotation;
                     isAiming = true;
                     
-                    //leftHandIK.weight = 0f;
-                
-                    //leftHandPos.transform.parent = leftHandPos.transform;
-                    //IKLeftHandPos.transform.position = leftHandPos.position;
-                    //currentWeapon.transform.rotation = leftHandPos.rotation;
-                    //isAiming = true;
-
-                    //leftHandIK.weight = 1f;
-                    //leftHandTarget.position = IKLeftHandPos.position;
-                    //leftHandTarget.rotation = IKLeftHandPos.rotation;
-
+                }
                 
             }
             
-
-            //rightHandIK.weight = 1f;
-            //rightHandTarget.position = IKRightHandPos.position;
-            //rightHandTarget.rotation = IKRightHandPos.rotation;
+            
         }
-
+        /*void LateUpdate()
+        {
+            if (currentWeapon) 
+            {
+                Debug.Log("pick up false");
+                currentWeapon.pickedUp = false;
+            }
+        }
+        */
         void FixedUpdate()
         {
             RaycastsHandler();
@@ -88,6 +91,7 @@ namespace Charactercontroller.scripts{
         private void Equip(){
             if(topRayHitInfo.collider != null){
                 currentWeapon = topRayHitInfo.transform.gameObject.GetComponent<Gun>();
+                
             }
 
             if(!currentWeapon) return;
