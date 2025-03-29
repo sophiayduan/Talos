@@ -47,17 +47,17 @@ public class EnemyBullet : MonoBehaviour
         
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         // if(transform.position.x == target.x && transform.position.y == target.y){
-        if (Vector3.Distance(transform.position, target) < 0.1f && hasHit == false){
-            // DestroyEnemyBullet();
+        if (Vector3.Distance(transform.position, target) < 0.001f && hasHit == false){
+            // Destroy(gameObject,0.1f);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed * Time.deltaTime);
+
             // Instantiate(playerparticles,transform.position,Quaternion.identity);
 
     
         }
     }
 
-    void DestroyEnemyBullet(){
-        Destroy(gameObject);
-    }
+ 
     void OnTriggerEnter(Collider other)
     {   
         if (hasHit) return;
