@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.7433963, g: 0.63392967, b: 0.5259879, a: 1}
+  m_FogColor: {r: 0.5254902, g: 0.56058407, b: 0.74509805, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.005
   m_LinearFogStart: 0
@@ -338,9 +338,9 @@ GameObject:
   - component: {fileID: 110611552}
   - component: {fileID: 110611551}
   - component: {fileID: 110611550}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain_(1000.00, 0.00, 0.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -431,9 +431,9 @@ GameObject:
   - component: {fileID: 156771068}
   - component: {fileID: 156771067}
   - component: {fileID: 156771066}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain_(2000.00, 0.00, -1000.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2019,9 +2019,9 @@ GameObject:
   - component: {fileID: 998727217}
   - component: {fileID: 998727216}
   - component: {fileID: 998727215}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain_(2000.00, 0.00, 0.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2112,9 +2112,9 @@ GameObject:
   - component: {fileID: 998842567}
   - component: {fileID: 998842566}
   - component: {fileID: 998842565}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain_(1000.00, 0.00, -1000.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2638,9 +2638,9 @@ GameObject:
   - component: {fileID: 1318088863}
   - component: {fileID: 1318088862}
   - component: {fileID: 1318088861}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain_(0.00, 0.00, -1000.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -3979,7 +3979,7 @@ Transform:
   m_GameObject: {fileID: 4166316884581083891}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.77, y: 0, z: -5.64}
+  m_LocalPosition: {x: 150, y: 127.64, z: 806.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6677,7 +6677,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
