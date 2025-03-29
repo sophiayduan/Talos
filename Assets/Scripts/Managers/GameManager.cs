@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver() {
         UIManager _ui = GetComponent<UIManager>();
+        Time.timeScale = 0f;
         if (_ui != null) {
             _ui.ToggleDeathPanel();
         } 
