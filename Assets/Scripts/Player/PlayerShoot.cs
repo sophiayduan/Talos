@@ -6,10 +6,8 @@ using Unity.VisualScripting;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public GameObject playerBullet, playerGun;
-    public float cooldown, maxDistance, bulletsPerShot, spreadRange, timeBetweenShots, currentBulletAmount, maxBulletAmount, shotsAmount;
-
-    public float spread;
+    public GameObject playerBullet;
+    public float cooldown, maxDistance, bulletsPerShot, timeBetweenShots, currentBulletAmount, maxBulletAmount;
     public float lastAttack;
     public GameObject firepoint;
     public Transform aimPos;
@@ -25,7 +23,6 @@ public class PlayerShoot : MonoBehaviour
     void Start()
     {
         currentBulletAmount = maxBulletAmount;
-        spread = Random.Range(-spreadRange,spreadRange);
     }
     void Update()
     {               
@@ -34,6 +31,7 @@ public class PlayerShoot : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
 
         text.text = currentBulletAmount + "/" + maxBulletAmount;
+        if (currentBulletAmount < 1) currentBulletAmount = 0;
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
         {
@@ -56,9 +54,10 @@ public class PlayerShoot : MonoBehaviour
         if (Time.time >= lastAttack + cooldown)
         {
             Debug.Log("shooting");
-            currentBulletAmount -= 1;
-            if (currentBulletAmount <= 0) {gunBreaks(); return;}
+            if (currentBulletAmount <= 0) {Destroy(gameObject); return;}
+
             Instantiate(playerBullet, firepoint.transform.position, Quaternion.identity);
+            currentBulletAmount -= 1;
 
             ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
             Destroy(flash.gameObject, 0.1f);
@@ -80,7 +79,5 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    private void gunBreaks(){
-        Destroy(playerGun);
-    }
+
 }

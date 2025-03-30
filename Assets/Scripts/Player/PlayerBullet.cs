@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    public float speed =10f;
+    public float speed = 10f;
     private Vector3 target;
     private PlayerShoot playerShoot;
     public ParticleSystem particles;
