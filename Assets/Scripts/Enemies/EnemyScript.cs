@@ -11,7 +11,6 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {    
-    public Rigidbody rb;
     public float Maxspeed;
     private float Speed;
     public NavMeshAgent agent;
@@ -35,10 +34,6 @@ public class EnemyScript : MonoBehaviour
     public GameObject firepoint;
 
     private Vector3 lastKnownPosition;
-    private bool lostPlayer;
-
-    private float lastSeenTime;
-    public float searchTime = 5f;
 
     // Patrolling 
     public Transform walksphere;

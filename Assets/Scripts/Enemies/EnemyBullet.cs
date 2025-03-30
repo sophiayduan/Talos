@@ -1,5 +1,6 @@
 using UnityEngine;
 using CameraShake;
+// using System.Numerics;
 public class EnemyBullet : MonoBehaviour
 {
     public float speed;
@@ -46,10 +47,10 @@ public class EnemyBullet : MonoBehaviour
     {   
         
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        // if(transform.position.x == target.x && transform.position.y == target.y){
-        if (Vector3.Distance(transform.position, target) < 0.001f && hasHit == false){
-            // Destroy(gameObject,0.1f);
-            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed * Time.deltaTime);
+        if (Vector3.Distance(transform.position, target) < 0.01f && hasHit == false){
+            Destroy(gameObject,0.1f);
+            // transform.position = transform.forward * speed * Time.deltaTime;
+            // return;
 
             // Instantiate(playerparticles,transform.position,Quaternion.identity);
 
