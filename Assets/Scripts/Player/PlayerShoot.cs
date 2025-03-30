@@ -15,11 +15,7 @@ public class PlayerShoot : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public TextMeshProUGUI text;
     [SerializeField] private LayerMask layerMask;
-    public void Shoot()
-    {
-        StartCoroutine(ShootRoutine());
-        Debug.Log("ok Shoot() is running");
-    }
+
     void Start()
     {
         currentBulletAmount = maxBulletAmount;
@@ -46,7 +42,7 @@ public class PlayerShoot : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.C))
         {
-            Shoot();
+            StartCoroutine(ShootRoutine());
 
         }
     }
@@ -54,10 +50,15 @@ public class PlayerShoot : MonoBehaviour
         if (Time.time >= lastAttack + cooldown)
         {
             Debug.Log("shooting");
-            if (currentBulletAmount <= 0) {Destroy(gameObject); return;}
+            if (currentBulletAmount <= 0) 
+            {
+                Destroy(gameObject); 
+                return;
+            }
+
+            currentBulletAmount -= 1;
 
             Instantiate(playerBullet, firepoint.transform.position, Quaternion.identity);
-            currentBulletAmount -= 1;
 
             ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
             Destroy(flash.gameObject, 0.1f);
@@ -77,6 +78,7 @@ public class PlayerShoot : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenShots);
 
         }
+        
     }
 
 

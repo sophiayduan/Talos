@@ -5,17 +5,15 @@ public class PlayerBullet : MonoBehaviour
 {
     public float speed = 10f;
     private Vector3 target;
-    private PlayerShoot playerShoot;
-    public ParticleSystem particles;
-    public ParticleSystem blueparticles;
+    public ParticleSystem groundParticles;
+    public ParticleSystem enemyParticles;
     public float amount = 10;
-    private bool hasInstantiated = false;
     private bool hashit = false;
-    private bool triggered = false;
     void Start()
     {
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
         target = playerShoot.aimPos.position; 
+
         if (target == Vector3.zero)
         {
             Debug.LogError("Bullet target is Vector3.zero, destroying bullet.");
@@ -23,61 +21,60 @@ public class PlayerBullet : MonoBehaviour
         }
     }
     void Update()
-    {   if (target == Vector3.zero)
+    {   
+        if (target == Vector3.zero)
         {
+            Destroy(gameObject);
             return;
         }
+
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, target) < 0.1f && !hashit && !hasInstantiated){
-            // if (target == Camera.main.transform.position + Camera.main.transform.forward * playerShoot.maxDistance){
-            //     Destroy(gameObject);
-            // }
-    
+        if (Vector3.Distance(transform.position, target) <= 0f && !hashit){
+            // Instantiate(enemyParticles, transform.position, Quaternion.identity);
+            // Destroy(gameObject);
+            
         }    
     }
     void OnTriggerEnter(Collider other)
     {
-
+        Debug.Log("i been triggered");
         if(hashit) return;
-        triggered = true;
-        if (other.CompareTag("Object"))
+        hashit = true;
+      
+      
+        if (other.CompareTag("Ground"))
         {
             print("it is object");
-            Instantiate(blueparticles,transform.position,Quaternion.identity);
-            hashit = true;
+            Instantiate(groundParticles,transform.position,Quaternion.identity);
             Destroy(gameObject);
-            hasInstantiated = true;
-
 
 
         }
-        else if (other.CompareTag("Enemy"))
-        {            
-            print("it is the enemy!");
-            Instantiate(particles,other.transform.position,Quaternion.identity);
-            EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
-                    hasInstantiated = true;
+        // else if (other.CompareTag("Enemy"))
+        // {            
+        //     print("it is the enemy!");
+        //     Instantiate(enemyParticles,other.transform.position,Quaternion.identity);
+        //     EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
 
-            hashit = true;
 
-            if(enemyHealth != null)
-            {
-                enemyHealth.takeDamage(amount);
-                Destroy(gameObject);
-                Debug.Log("enemyHealth took damage");
-            }
-            else 
-            {
-                Debug.LogError("enemyhealth bottom = null");
-            }
-        }
-        else if (other.CompareTag("Ground")){
-            hashit = true;
-            Instantiate(blueparticles,target,Quaternion.identity);
-            hasInstantiated = true;
-            Debug.Log("GROUND");
-            Destroy(gameObject);
-        }
+        //     if(enemyHealth != null)
+        //     {
+        //         enemyHealth.takeDamage(amount);
+        //         Destroy(gameObject);
+        //         Debug.Log("enemyHealth took damage");
+        //     }
+        //     else 
+        //     {
+        //         Debug.LogError("enemyhealth bottom = null");
+        //     }
+        // }
+        // else if (other.CompareTag("Ground")){
+
+        //     Instantiate(groundParticles,target,Quaternion.identity);
+            
+        //     Debug.Log("GROUND OK");
+        //     Destroy(gameObject);
+        // }
     }
     
 }
