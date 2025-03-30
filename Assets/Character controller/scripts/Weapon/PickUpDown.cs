@@ -11,19 +11,11 @@ namespace Charactercontroller.scripts{
         [SerializeField] private Transform rightHandPos;
         [SerializeField] private Transform leftHandPos;
 
-        [Header("Right Hand Target")]
-        [SerializeField] private TwoBoneIKConstraint rightHandIK;
-        [SerializeField] private Transform rightHandTarget;
 
-        [Header("Left Hand Target")]
-        [SerializeField] private TwoBoneIKConstraint leftHandIK;
-        [SerializeField] private Transform leftHandTarget;
-
-        [SerializeField] private Transform IKRightHandPos;
-        [SerializeField] private Transform IKLeftHandPos;
         private RaycastHit topRayHitInfo;
         public bool isAiming = false;
         public bool isShooting = false;
+        public bool hasWeapon = false;
         private Gun currentWeapon;
         
         private PlayerInputs _playerInputs;
@@ -40,11 +32,21 @@ namespace Charactercontroller.scripts{
             if(Input.GetKeyDown(KeyCode.E)){
                 Equip();
                 if(currentWeapon){
-                    if(!isAiming){
-                        
+                    //if(!isAiming){
                         currentWeapon.pickedUp = true;
+                    //}
+                    
+
+                    /*
+                    if(currentWeapon.wasPickedUp && isAiming){
+                        Destroy(currentWeapon.gameObject);
+                        hasWeapon = false;
+                        isAiming = false;
+                        Debug.Log("Aiming is false");
                     }
+                    */
                 }
+                
             }
             if(Input.GetKeyDown(KeyCode.Mouse0)){
                 isShooting = true;
@@ -53,6 +55,7 @@ namespace Charactercontroller.scripts{
                 isShooting = false;
             }
             if(currentWeapon){
+                Debug.Log("current weapon");
                 
                 if(currentWeapon.wasPickedUp){
                     
@@ -60,6 +63,7 @@ namespace Charactercontroller.scripts{
                     currentWeapon.transform.position = rightHandPos.position;
                     currentWeapon.transform.rotation = rightHandPos.rotation;
                     isAiming = true;
+                    Debug.Log("Aiming is true");
                     
                 }
                 
@@ -67,15 +71,13 @@ namespace Charactercontroller.scripts{
             
             
         }
-        /*void LateUpdate()
+        void LateUpdate()
         {
-            if (currentWeapon) 
-            {
-                Debug.Log("pick up false");
-                currentWeapon.pickedUp = false;
+            if(isAiming){
+                hasWeapon = true;
             }
         }
-        */
+        
         void FixedUpdate()
         {
             RaycastsHandler();
@@ -91,7 +93,7 @@ namespace Charactercontroller.scripts{
         private void Equip(){
             if(topRayHitInfo.collider != null){
                 currentWeapon = topRayHitInfo.transform.gameObject.GetComponent<Gun>();
-                
+                Debug.Log("equip is running when there is a weapon");
             }
 
             if(!currentWeapon) return;

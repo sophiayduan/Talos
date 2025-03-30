@@ -61,6 +61,7 @@ namespace Charactercontroller{
             bool isFalling = _playerState.CurrentPlayerMovementState == PlayerMovementState.Falling && !isGrounded;
             bool isPlayingAction = actionHashes.Any(hash => _animator.GetBool(hash));
             bool isShooting = _playerActionInputs.AttackPressed;
+            bool isactuallyAiming = _pickUpDown.hasWeapon;
 
             bool isRunBlendValue = isRunning || isJumping || isFalling;
 

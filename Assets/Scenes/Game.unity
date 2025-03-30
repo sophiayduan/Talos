@@ -192,14 +192,9 @@ MonoBehaviour:
     m_Bits: 1024
   rightHandPos: {fileID: 1488864993}
   leftHandPos: {fileID: 1826500172}
-  rightHandIK: {fileID: 0}
-  rightHandTarget: {fileID: 0}
-  leftHandIK: {fileID: 0}
-  leftHandTarget: {fileID: 0}
-  IKRightHandPos: {fileID: 0}
-  IKLeftHandPos: {fileID: 0}
   isAiming: 0
   isShooting: 0
+  hasWeapon: 0
 --- !u!114 &13125288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1955,6 +1950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsParent: {fileID: 295113960}
+  inventoryUI: {fileID: 818857446}
 --- !u!4 &588678953 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 104820510870592369, guid: bb40ca51209a0d74abc1dec5f7c3b1ce, type: 3}
@@ -4104,6 +4100,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2636196319250377023, guid: f86749afa64986e47bc283972a0b1882, type: 3}
   m_PrefabInstance: {fileID: 3737472420176081153}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1148230794 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7827416141640678596, guid: f86749afa64986e47bc283972a0b1882, type: 3}
+  m_PrefabInstance: {fileID: 3737472420176081153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0240c7d85ec8a4db86ae98d3c28da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1189583452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1001474672915247416, guid: bb40ca51209a0d74abc1dec5f7c3b1ce, type: 3}
@@ -4269,6 +4276,7 @@ GameObject:
   - component: {fileID: 1255249929}
   - component: {fileID: 1255249930}
   - component: {fileID: 1255249931}
+  - component: {fileID: 1255249932}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -4356,6 +4364,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   space: 6
   items: []
+--- !u!114 &1255249932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255249925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 649cc3bcbeb9bed49946ee21aa8bd10a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1265561143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 653092436098688328, guid: bb40ca51209a0d74abc1dec5f7c3b1ce, type: 3}
@@ -6589,7 +6609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a68849a1e86add49aaad4e7d2f8c8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 938ea6059460aac44a786a379597e04c, type: 2}
+  item: {fileID: 11400000, guid: 5920334ffc9c38442871d21e4b6f6ab7, type: 2}
   pickedUp: 0
   wasPickedUp: 0
 --- !u!1 &1848697206
@@ -6840,14 +6860,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 295113960}
     m_Modifications:
-    - target: {fileID: 927339163732311295, guid: f86749afa64986e47bc283972a0b1882, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 927339163732311295, guid: f86749afa64986e47bc283972a0b1882, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2636196319250377023, guid: f86749afa64986e47bc283972a0b1882, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6928,14 +6940,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6106568462108703170, guid: f86749afa64986e47bc283972a0b1882, type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6106568462108703170, guid: f86749afa64986e47bc283972a0b1882, type: 3}
-      propertyPath: m_Colors.m_DisabledColor.a
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 5798437454184987990, guid: f86749afa64986e47bc283972a0b1882, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1148230794}
     - target: {fileID: 8104133147116174785, guid: f86749afa64986e47bc283972a0b1882, type: 3}
       propertyPath: m_Name
       value: InventorySlot (1)
@@ -7407,6 +7415,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6192475219138504854, guid: 2c62a428a2188834bab2fd05df56575c, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: f9c49e8826191184e859c3ae4017d95d, type: 2}
     - target: {fileID: 8433110815590946678, guid: 2c62a428a2188834bab2fd05df56575c, type: 3}
       propertyPath: m_Layer
       value: 10
