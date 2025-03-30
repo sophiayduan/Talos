@@ -5,13 +5,11 @@ public class PlayerBullet : MonoBehaviour
 {
     public float speed =10f;
     private Vector3 target;
-    private PlayerShoot playerShoot;
-    public ParticleSystem particles;
-    public ParticleSystem blueparticles;
+    public ParticleSystem groundParticles;
+    public ParticleSystem enemyParticles;
     public float amount = 10;
     private bool hasInstantiated = false;
     private bool hashit = false;
-    private bool triggered = false;
     void Start()
     {
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
@@ -39,11 +37,12 @@ public class PlayerBullet : MonoBehaviour
     {
 
         if(hashit) return;
-        triggered = true;
+        
         if (other.CompareTag("Object"))
         {
             print("it is object");
-            Instantiate(blueparticles,transform.position,Quaternion.identity);
+            ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
+            Destroy(enemy.gameObject,1f);
             hashit = true;
             Destroy(gameObject);
             hasInstantiated = true;
@@ -54,9 +53,10 @@ public class PlayerBullet : MonoBehaviour
         else if (other.CompareTag("Enemy"))
         {            
             print("it is the enemy!");
-            Instantiate(particles,other.transform.position,Quaternion.identity);
+            ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
+            Destroy(enemy.gameObject,1f);
             EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
-                    hasInstantiated = true;
+            hasInstantiated = true;
 
             hashit = true;
 
@@ -73,11 +73,13 @@ public class PlayerBullet : MonoBehaviour
         }
         else if (other.CompareTag("Ground")){
             hashit = true;
-            Instantiate(blueparticles,target,Quaternion.identity);
+            ParticleSystem ground = Instantiate(groundParticles,target,Quaternion.identity);
+            Destroy(ground.gameObject,1f);
+
             hasInstantiated = true;
             Debug.Log("GROUND");
             Destroy(gameObject);
         }
     }
-    
+           
 }

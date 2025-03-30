@@ -249,8 +249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  particles: {fileID: 1078360017053888719, guid: 887608799f4f68b41b63dd500e57d132, type: 3}
-  blueparticles: {fileID: 1078360017053888719, guid: 0dc34afa570e3c646bafcff2ffaba79f, type: 3}
+  groundParticles: {fileID: 198175801688348628, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
+  enemyParticles: {fileID: 198656289721292014, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
   amount: 8
 --- !u!54 &384327698094195768
 Rigidbody:
