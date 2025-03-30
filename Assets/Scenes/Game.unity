@@ -195,6 +195,7 @@ MonoBehaviour:
   isAiming: 0
   isShooting: 0
   hasWeapon: 0
+  currentWeapon: {fileID: 0}
 --- !u!114 &13125288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,7 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.72156864}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2902,6 +2903,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &812520599 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 707956310906701763, guid: 2c62a428a2188834bab2fd05df56575c, type: 3}
+  m_PrefabInstance: {fileID: 3270096855719956133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &814069045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2329273426925652319, guid: bb40ca51209a0d74abc1dec5f7c3b1ce, type: 3}
@@ -4376,6 +4382,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 649cc3bcbeb9bed49946ee21aa8bd10a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightHandPos: {fileID: 1488864993}
+  Slot1: {fileID: 1830069856}
+  Slot2: {fileID: 812520599}
 --- !u!4 &1265561143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 653092436098688328, guid: bb40ca51209a0d74abc1dec5f7c3b1ce, type: 3}
@@ -6611,7 +6620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 5920334ffc9c38442871d21e4b6f6ab7, type: 2}
   pickedUp: 0
-  wasPickedUp: 0
+  inventorySpace: 0
 --- !u!1 &1848697206
 GameObject:
   m_ObjectHideFlags: 0

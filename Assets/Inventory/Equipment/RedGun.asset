@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3049ae88ca0fa4c96c45fb655b35bb, type: 3}
   m_Name: RedGun
   m_EditorClassIdentifier: 
-  name: RedGun
+  name: Red Gun
   icon: {fileID: 21300000, guid: 5c33c6994cdbcf84694799fed8412876, type: 3}
   isDefaultItem: 0
   equipSlot: 0
+  mesh: {fileID: 9142717709798682185, guid: c5a62d572dba15841b096f567a71df88, type: 3}

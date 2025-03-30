@@ -14,6 +14,8 @@ namespace Charactercontroller{
         private PlayerController _playerController;
         private PlayerActionInputs _playerActionInputs;
         private PickUpDown _pickUpDown;
+        
+        private InventorySlot _inventorySlot;
 
         private static int inputXHash = Animator.StringToHash("inputX");
         private static int inputYHash = Animator.StringToHash("inputY");
@@ -44,6 +46,9 @@ namespace Charactercontroller{
             _playerController = GetComponent<PlayerController>();
             _playerActionInputs = GetComponent<PlayerActionInputs>();
             _pickUpDown = GetComponent<PickUpDown>();
+            
+            
+            _inventorySlot = GetComponent<InventorySlot>();
 
             actionHashes = new int[] {isGrabingHash, isFallingHash};
         }
@@ -61,7 +66,7 @@ namespace Charactercontroller{
             bool isFalling = _playerState.CurrentPlayerMovementState == PlayerMovementState.Falling && !isGrounded;
             bool isPlayingAction = actionHashes.Any(hash => _animator.GetBool(hash));
             bool isShooting = _playerActionInputs.AttackPressed;
-            bool isactuallyAiming = _pickUpDown.hasWeapon;
+            
 
             bool isRunBlendValue = isRunning || isJumping || isFalling;
 

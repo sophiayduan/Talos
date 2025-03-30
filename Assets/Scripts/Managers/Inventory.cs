@@ -19,6 +19,7 @@ public class Inventory : MonoBehaviour
     public OnItemChanged onItemChangedCallBack;
     public int space = 6;
     public List<Items> items = new List<Items>();
+    
 
     public bool Add(Items item){
         if(items.Count >= space){

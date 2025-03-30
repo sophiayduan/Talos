@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
     public Items item;
     private PickUpDown pickUpDown;
     public bool pickedUp;
-    public bool wasPickedUp;
+    public bool inventorySpace;
     void Start()
     {
         gunBody = GetComponent<Rigidbody>();
@@ -23,7 +23,7 @@ public class Gun : MonoBehaviour
     {
         if(pickedUp == true){
             Debug.Log("Picked up" + item.name);
-            wasPickedUp = Inventory.instance.Add(item);
+            inventorySpace = Inventory.instance.Add(item);
            
             pickedUp = false;
         }

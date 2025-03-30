@@ -5,6 +5,7 @@ public class InventorySlot : MonoBehaviour
     public Image icon;
     public Button removeButton;
     Items _item;
+    public bool isAiming;
 
     public void AddItem(Items newItem){
         _item = newItem;
@@ -28,6 +29,8 @@ public class InventorySlot : MonoBehaviour
     public void UseItem(){
         if(_item != null){
             _item.Use();
+            Debug.Log("aiming is true");
+            isAiming = true;
         }
     }
 }

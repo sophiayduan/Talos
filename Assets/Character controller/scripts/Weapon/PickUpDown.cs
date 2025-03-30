@@ -16,9 +16,10 @@ namespace Charactercontroller.scripts{
         public bool isAiming = false;
         public bool isShooting = false;
         public bool hasWeapon = false;
-        private Gun currentWeapon;
+        public Gun currentWeapon;
         
         private PlayerInputs _playerInputs;
+        private InventorySlot _inventorySlot;
         private RigBuilder _rigBuilder;
         private void Awake()
         {
@@ -57,25 +58,24 @@ namespace Charactercontroller.scripts{
             if(currentWeapon){
                 Debug.Log("current weapon");
                 
-                if(currentWeapon.wasPickedUp){
-                    
-                    currentWeapon.transform.parent = rightHandPos.transform;
-                    currentWeapon.transform.position = rightHandPos.position;
-                    currentWeapon.transform.rotation = rightHandPos.rotation;
-                    isAiming = true;
-                    Debug.Log("Aiming is true");
-                    
-                }
-                
+                //if(currentWeapon.inventorySpace){
+                    if(currentWeapon.transform.position == rightHandPos.position){
+                        isAiming = true;
+                        Debug.Log("Aiming is true");
+                    }
+                //}    
+                  
             }
-            
-            
+            if(_inventorySlot.isAiming){
+                hasWeapon = true;
+                Debug.Log("hasWeapon is true");
+            }
         }
         void LateUpdate()
         {
-            if(isAiming){
-                hasWeapon = true;
-            }
+            //if(isAiming){
+            //    hasWeapon = true;
+            //}
         }
         
         void FixedUpdate()
@@ -98,6 +98,14 @@ namespace Charactercontroller.scripts{
 
             if(!currentWeapon) return;
 
+        }
+
+        public void PickUpTransform(){
+            currentWeapon.transform.parent = rightHandPos.transform;
+            currentWeapon.transform.position = rightHandPos.position;
+            currentWeapon.transform.rotation = rightHandPos.rotation;
+            //isAiming = true;
+            Debug.Log("Aiming is true");
         }
 
         
