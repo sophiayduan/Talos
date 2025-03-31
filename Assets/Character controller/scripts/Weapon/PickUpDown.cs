@@ -15,8 +15,10 @@ namespace Charactercontroller.scripts{
         private RaycastHit topRayHitInfo;
         public bool isAiming = false;
         public bool isShooting = false;
-        public bool hasWeapon = false;
-        public Gun currentWeapon;
+        
+        private Gun currentWeapon;
+        public GameObject RedGun;
+        public GameObject BlueGun;
         
         private PlayerInputs _playerInputs;
         private InventorySlot _inventorySlot;
@@ -57,19 +59,20 @@ namespace Charactercontroller.scripts{
             }
             if(currentWeapon){
                 Debug.Log("current weapon");
+            }
                 
                 //if(currentWeapon.inventorySpace){
-                    if(currentWeapon.transform.position == rightHandPos.position){
-                        isAiming = true;
-                        Debug.Log("Aiming is true");
-                    }
+            if(RedGun.gameObject.transform.position == rightHandPos.position || BlueGun.gameObject.transform.position == rightHandPos.position){
+                isAiming = true;
+                Debug.Log("Aiming is true");
+            }
+            if(!RedGun.gameObject.activeSelf && !BlueGun.gameObject.activeSelf){
+                isAiming = false;
+            }
                 //}    
                   
-            }
-            if(_inventorySlot.isAiming){
-                hasWeapon = true;
-                Debug.Log("hasWeapon is true");
-            }
+            
+           
         }
         void LateUpdate()
         {

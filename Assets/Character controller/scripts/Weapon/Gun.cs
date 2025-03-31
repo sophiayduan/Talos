@@ -1,4 +1,5 @@
 using Charactercontroller.scripts;
+using InventorySystem;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -22,6 +23,9 @@ public class Gun : MonoBehaviour
     void Update()
     {
         if(pickedUp == true){
+            if(item == Inventory.instance){
+                return;
+            }
             Debug.Log("Picked up" + item.name);
             inventorySpace = Inventory.instance.Add(item);
            

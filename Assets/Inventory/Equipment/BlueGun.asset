@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3049ae88ca0fa4c96c45fb655b35bb, type: 3}
   m_Name: BlueGun
   m_EditorClassIdentifier: 
-  name: BlueGun
+  name: Blue Gun
   icon: {fileID: 21300000, guid: bbafe73c7d338c8419de846434424bd9, type: 3}
   isDefaultItem: 0
   equipSlot: 0

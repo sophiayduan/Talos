@@ -69,6 +69,7 @@ namespace Charactercontroller {
       }
 
       private void Update(){
+        
         UpdateMovementState();
         HandleVerticalMovment();
         HandleLateralMovement();

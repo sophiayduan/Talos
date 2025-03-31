@@ -194,8 +194,8 @@ MonoBehaviour:
   leftHandPos: {fileID: 1826500172}
   isAiming: 0
   isShooting: 0
-  hasWeapon: 0
-  currentWeapon: {fileID: 0}
+  RedGun: {fileID: 1830069856}
+  BlueGun: {fileID: 812520599}
 --- !u!114 &13125288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4383,8 +4383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightHandPos: {fileID: 1488864993}
-  Slot1: {fileID: 1830069856}
-  Slot2: {fileID: 812520599}
+  RedGun: {fileID: 1830069856}
+  BlueGun: {fileID: 812520599}
 --- !u!4 &1265561143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 653092436098688328, guid: bb40ca51209a0d74abc1dec5f7c3b1ce, type: 3}

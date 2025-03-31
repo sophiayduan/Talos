@@ -19,8 +19,8 @@ public class EquipmentManager : MonoBehaviour
     MeshRenderer[] currentMeshes;
 
     //public bool isAiming;
-    public GameObject Slot1;
-    public GameObject Slot2;
+    public GameObject RedGun;
+    public GameObject BlueGun;
     
    
     //public List<Gun> guns = new List<Gun>();
@@ -55,18 +55,56 @@ public class EquipmentManager : MonoBehaviour
         
         //isAiming = true;
         
+        
         if(newItem.name == "Red Gun"){
-            Slot1.SetActive(true);
-            Slot2.SetActive(false);
+            RedGun.SetActive(true);
             
+            RedGun.gameObject.transform.parent = rightHandPos.transform;
+            RedGun.gameObject.transform.position = rightHandPos.position;
+            RedGun.gameObject.transform.rotation = rightHandPos.rotation;
+        }else if(RedGun.gameObject.transform.position != rightHandPos.position){
+            RedGun.SetActive(true);
+        }else{
+            RedGun.SetActive(false);
+        }
 
-            Slot1.gameObject.transform.parent = rightHandPos.transform;
-            Slot1.gameObject.transform.position = rightHandPos.position;
-            Slot1.gameObject.transform.rotation = rightHandPos.rotation;
+        /*
+        else if(oldItem.name == "Red Gun"){
+            RedGun.SetActive(false);
+        }else{
+            return;
+        }
+        */
+
+        if(newItem.name == "Blue Gun"){
+            BlueGun.SetActive(true);
             
+            BlueGun.gameObject.transform.parent = rightHandPos.transform;
+            BlueGun.gameObject.transform.position = rightHandPos.position;
+            BlueGun.gameObject.transform.rotation = rightHandPos.rotation;
+        }else if(BlueGun.gameObject.transform.position != rightHandPos.position){
+            BlueGun.SetActive(true);
+        }else{
+            BlueGun.SetActive(false);
+        }
+        /*
+        
+        if(currentEquipment[0] == BlueGun){
+            BlueGun.SetActive(false);
+        }
+        if(currentEquipment[0] == RedGun){
+            RedGun.SetActive(false);
         }
         
-        
+        */
+//bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        /*
+        else if(oldItem.name == "Blue Gun"){
+            BlueGun.SetActive(false);
+        }else{
+            return;
+        }
+        */
         
         
         //pickUpDown.PickUpTransform();
@@ -79,6 +117,15 @@ public class EquipmentManager : MonoBehaviour
             Equipment oldItem = currentEquipment[slotIndex];
             inventory.Add(oldItem);
 
+            
+            if(oldItem.name == "Red Gun"){
+                RedGun.SetActive(false);
+                BlueGun.SetActive(true);
+            }
+            if(oldItem.name == "Blue Gun"){
+                BlueGun.SetActive(false);
+                RedGun.SetActive(true);
+            }
             currentEquipment[slotIndex] = null;
 
             if(onEquipmentChanged != null){
@@ -92,6 +139,9 @@ public class EquipmentManager : MonoBehaviour
         for(int i = 0; i < currentEquipment.Length; i++){
             Unequip(i);
         }
+        BlueGun.SetActive(false);
+        RedGun.SetActive(false);
+        
     }
 
     void Update()
@@ -100,8 +150,6 @@ public class EquipmentManager : MonoBehaviour
             UnequipAll();
         }
 
-        if(currentEquipment[0] != null){
-            //isAiming = true;
-        }
+        
     }
 }

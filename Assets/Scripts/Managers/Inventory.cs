@@ -26,6 +26,12 @@ public class Inventory : MonoBehaviour
             Debug.Log("Not enough room");
             return false;
         }
+        for(int i = items.Count - 1; i >= 0; i = i - 1){
+            if(item == items[i]){
+                return false;
+            }
+        }
+        
         items.Add(item);
         if(onItemChangedCallBack != null)
             onItemChangedCallBack.Invoke();

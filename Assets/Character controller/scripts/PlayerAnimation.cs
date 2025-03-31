@@ -1,5 +1,5 @@
 using System.Linq;
-using Charactercontroller.Inputs;
+using UnityEngine.EventSystems;
 using Charactercontroller.scripts;
 using UnityEngine;
 
@@ -54,6 +54,8 @@ namespace Charactercontroller{
         }
 
         private void Update(){
+            
+        
             UpdateAnimationState();
         }
 
@@ -85,10 +87,14 @@ namespace Charactercontroller{
             _animator.SetFloat(inputYHash, _currentBlendInput.y);
             _animator.SetFloat(inputMagHash, _currentBlendInput.magnitude);
             _animator.SetFloat(rotationMismatchHash, _playerController.RotationMismatch);
-            _animator.SetBool(isPunchingHash, _playerActionInputs.AttackPressed);
+            
             _animator.SetBool(isGrabingHash, _playerActionInputs.GrabPressed);
             _animator.SetBool(isAimingHash, _pickUpDown.isAiming);
             _animator.SetBool(isShootingHash, _pickUpDown.isShooting);
+            if(EventSystem.current.IsPointerOverGameObject()){
+                return;
+            }
+            _animator.SetBool(isPunchingHash, _playerActionInputs.AttackPressed);
         }
     }
 
