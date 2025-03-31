@@ -1,10 +1,8 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
-public class Test : MonoBehaviour
+public class PlayerShoot : MonoBehaviour
 {
     public GameObject playerBullet;
     public float cooldown, maxDistance, bulletsPerShot, timeBetweenShots, currentBulletAmount, maxBulletAmount;
