@@ -251,7 +251,7 @@ MonoBehaviour:
   speed: 20
   groundParticles: {fileID: 198220379293217532, guid: d8f0099df63275647a8bcf646df1ca00, type: 3}
   enemyParticles: {fileID: 198175801688348628, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
-  amount: 8
+  amount: 10
 --- !u!54 &384327698094195768
 Rigidbody:
   m_ObjectHideFlags: 0

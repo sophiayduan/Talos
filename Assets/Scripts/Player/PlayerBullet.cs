@@ -12,6 +12,7 @@ public class PlayerBullet : MonoBehaviour
     private bool hashit = false;
     void Start()
     {
+        
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
         target = playerShoot.aimPos.position; 
         if (target == Vector3.zero)
@@ -44,7 +45,7 @@ public class PlayerBullet : MonoBehaviour
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
             Destroy(enemy.gameObject,1f);
             hashit = true;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             hasInstantiated = true;
 
 
@@ -63,7 +64,7 @@ public class PlayerBullet : MonoBehaviour
             if(enemyHealth != null)
             {
                 enemyHealth.takeDamage(amount);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
                 Debug.Log("enemyHealth took damage");
             }
             else 
@@ -78,7 +79,7 @@ public class PlayerBullet : MonoBehaviour
 
             hasInstantiated = true;
             Debug.Log("GROUND");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
            

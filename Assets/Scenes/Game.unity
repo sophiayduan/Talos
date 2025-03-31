@@ -4261,7 +4261,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2061619397
 Transform:
   m_ObjectHideFlags: 0
@@ -4293,7 +4293,7 @@ MonoBehaviour:
   playerBullet: {fileID: 3321875004569940165, guid: 8de6595f84998c847acfcca352a74c2b, type: 3}
   cooldown: 0.3
   maxDistance: 25
-  bulletsPerShot: 5
+  bulletsPerShot: 1
   timeBetweenShots: 0.1
   currentBulletAmount: 0
   maxBulletAmount: 70
@@ -6640,7 +6640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2704865281358261406, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3148244760159886957, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_Name

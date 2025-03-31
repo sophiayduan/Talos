@@ -5,7 +5,7 @@ using System.Collections;
 public class PlayerShoot : MonoBehaviour
 {
     public GameObject playerBullet;
-    public float cooldown, maxDistance, bulletsPerShot, timeBetweenShots, currentBulletAmount, maxBulletAmount;
+    public float cooldown, maxDistance, bulletsPerShot = 5, timeBetweenShots, currentBulletAmount, maxBulletAmount;
     public float lastAttack;
     public GameObject firepoint;
     public Transform aimPos;
@@ -40,12 +40,12 @@ public class PlayerShoot : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.C))
         {
-            StartCoroutine(ShootRoutine());
+            if(Time.time >= lastAttack + cooldown)StartCoroutine(ShootRoutine());
 
         }
     }
     private void Shooting(){
-        if (Time.time >= lastAttack + cooldown)
+        if (Time.time >= lastAttack)
         {
             Debug.Log("shooting");
             if (currentBulletAmount <= 0) 
@@ -70,7 +70,7 @@ public class PlayerShoot : MonoBehaviour
         float count = 0f;
         while(count < bulletsPerShot)
         {
-            Debug.Log("in coroutine");
+            Debug.Log("a shot");
             count += 1;
             Shooting();
             yield return new WaitForSeconds(timeBetweenShots);

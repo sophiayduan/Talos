@@ -50,7 +50,7 @@ public class EnemyHealth : MonoBehaviour
 
         if(enemyHealth <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             Debug.Log("enemy died");
         }
  

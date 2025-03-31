@@ -248,10 +248,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac6e91633951c94a9ca065bca877bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 23
+  speed: 18
   groundParticles: {fileID: 198175801688348628, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
   enemyParticles: {fileID: 198656289721292014, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
-  amount: 5
+  amount: 8
 --- !u!54 &384327698094195768
 Rigidbody:
   m_ObjectHideFlags: 0
