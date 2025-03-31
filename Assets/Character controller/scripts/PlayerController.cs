@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
@@ -64,11 +63,9 @@ namespace Charactercontroller {
       }
 
       private void Update(){
-        
         UpdateMovementState();
         HandleVerticalMovment();
         HandleLateralMovement();
-        
       }
       
       private void UpdateMovementState(){
