@@ -169,7 +169,7 @@ namespace Charactercontroller {
 
         _playerTargetRotation.x += transform.eulerAngles.x + lookSenseH * _playerLocomotionInput.LookInput.x;
         
-        float rotationTolerence = 90f;
+        float rotationTolerence = 0f;
         bool isIdling = _playerState.CurrentPlayerMovementState == PlayerMovementState.Idling;
         IsRotatingToTarget = _rotatingToTargetTimer > 0;
         //rotate when not idling

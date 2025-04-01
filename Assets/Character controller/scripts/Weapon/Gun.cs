@@ -1,5 +1,5 @@
 using Charactercontroller.scripts;
-using InventorySystem;
+
 using JetBrains.Annotations;
 using UnityEngine;
 

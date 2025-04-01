@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
+
 
 namespace Charactercontroller.scripts{
     public class PickUpDown : MonoBehaviour
@@ -22,11 +22,11 @@ namespace Charactercontroller.scripts{
         
         private PlayerInputs _playerInputs;
         private InventorySlot _inventorySlot;
-        private RigBuilder _rigBuilder;
+        
         private void Awake()
         {
-            _rigBuilder = GetComponent<RigBuilder>();
-            var rigs = GetComponentInChildren<Rig>();
+            
+            
 
             _playerInputs = GetComponent<PlayerInputs>();
         }
@@ -35,19 +35,9 @@ namespace Charactercontroller.scripts{
             if(Input.GetKeyDown(KeyCode.E)){
                 Equip();
                 if(currentWeapon){
-                    //if(!isAiming){
-                        currentWeapon.pickedUp = true;
-                    //}
                     
-
-                    /*
-                    if(currentWeapon.wasPickedUp && isAiming){
-                        Destroy(currentWeapon.gameObject);
-                        hasWeapon = false;
-                        isAiming = false;
-                        Debug.Log("Aiming is false");
-                    }
-                    */
+                        currentWeapon.pickedUp = true;
+                    
                 }
                 
             }
@@ -69,16 +59,14 @@ namespace Charactercontroller.scripts{
             if(!RedGun.gameObject.activeSelf && !BlueGun.gameObject.activeSelf){
                 isAiming = false;
             }
-                //}    
+                //}
                   
             
            
         }
         void LateUpdate()
         {
-            //if(isAiming){
-            //    hasWeapon = true;
-            //}
+            
         }
         
         void FixedUpdate()
