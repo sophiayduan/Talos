@@ -10,11 +10,11 @@ public class PlayerHealth : MonoBehaviour
     private float lerpSpeed = 0.05f;
     public GameObject playerModel;
     private Lifetime lifetime;
-    public GameObject  respawnpoint;
+    // public GameObject respawnpoint;
     public float lastHeal ;
     public float healAmount = 5f;
     public float cooldown = 5f;
-
+    public SetSpawn setSpawn;
     void Start()
     { 
         currentHealth = maxHealth;
@@ -68,9 +68,20 @@ public class PlayerHealth : MonoBehaviour
             }    
         }
     }
-    void Respawn(){
+    void Respawn(){ 
+        Vector3 respawnPoint = SetSpawn.newSpawn;
         currentHealth = maxHealth;
-        transform.position = respawnpoint.transform.position;
+        if(setSpawn != null){
+            Debug.Log($"where: {respawnPoint}");
+            gameObject.transform.position = respawnPoint;
+
+            Debug.Log("uh i hope");
+        }
+        else if (setSpawn == null){
+            // transform.position = respawnpoint.transform.position;
+            Debug.Log("ts null");
+        }
+        Debug.Log($"new transform.postion = {transform.position}");
     }
 }
     
