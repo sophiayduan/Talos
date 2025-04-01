@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 namespace Charactercontroller {
     [DefaultExecutionOrder(-1)]
@@ -13,6 +16,9 @@ namespace Charactercontroller {
       [SerializeField] private Camera _playerCamera; 
       public float RotationMismatch {get; private set;} = 0f;
       public bool IsRotatingToTarget {get; private set;} = false;   
+
+      
+      
       
       [Header("Base Movement")]
       public float walkAcceleration = 0.15f;
@@ -63,9 +69,11 @@ namespace Charactercontroller {
       }
 
       private void Update(){
+        
         UpdateMovementState();
         HandleVerticalMovment();
         HandleLateralMovement();
+        
       }
       
       private void UpdateMovementState(){

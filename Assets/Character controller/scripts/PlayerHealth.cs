@@ -1,3 +1,6 @@
+using System.Data;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
@@ -9,16 +12,19 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
     public GameObject playerModel;
-    private Lifetime lifetime;
-    public GameObject  respawnpoint;
-    public float lastHeal ;
-    public float healAmount = 5f;
-    public float cooldown = 5f;
+    public GameObject map;
+    // public GameObject diedscreen;
+
 
     void Start()
     { 
         currentHealth = maxHealth;
-        lifetime = FindFirstObjectByType<Lifetime>();
+        // diedscreen.SetActive(false);
+        // if (diedscreen == null){
+        //     Debug.LogError("fuck");
+        // }
+
+
     }
     void Update()
     {   
@@ -40,37 +46,28 @@ public class PlayerHealth : MonoBehaviour
         {
             easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed );
         }
-
-        
-        if (currentHealth < 100f)
-        {
-            if (Time.time >= lastHeal+ cooldown && easeHealthSlider.value == healthSlider.value){
-                Debug.Log("healing");
-                currentHealth += healAmount;
-                lastHeal = Time.time;
-            }
-        }
     }
     public void takeDamage(float amount)
     {
         currentHealth -= amount;
         Debug.Log($"Current health: {currentHealth}");
+
         if(currentHealth <= 0)
         {
-            if(lifetime != null && lifetime.running())
-            {
-                Respawn();
-            }
-            else 
-            {
-                print("respawn");
-                GameManager.instance.GameOver();
-            }    
+            died();
+            Debug.Log("you died");
         }
+ 
     }
-    void Respawn(){
-        currentHealth = maxHealth;
-        transform.position = respawnpoint.transform.position;
+    private void died()
+    {
+        GameManager.instance.GameOver();
+        playerModel.SetActive(false);
+        map.SetActive(false);
+        Time.timeScale = 0f;
+
     }
+
+
 }
     
