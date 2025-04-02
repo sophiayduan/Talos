@@ -23,12 +23,12 @@ public class EnemyHealth : MonoBehaviour
     }
     void Update()
     {   
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            takeDamage(10); 
-            healthSlider.value = enemyHealth;
-            // Instantiate(enemyParticles,transform.position,Quaternion.identity);
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     takeDamage(10); 
+        //     healthSlider.value = enemyHealth;
+        //     // Instantiate(enemyParticles,transform.position,Quaternion.identity);
+        // }
 
         if (healthSlider.value != enemyHealth)
         {

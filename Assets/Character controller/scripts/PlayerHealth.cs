@@ -22,12 +22,12 @@ public class PlayerHealth : MonoBehaviour
     }
     void Update()
     {   
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            takeDamage(10); 
-            healthSlider.value = currentHealth;
-            // Instantiate(particles,transform.position,Quaternion.identity);
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     takeDamage(10); 
+        //     healthSlider.value = currentHealth;
+        //     // Instantiate(particles,transform.position,Quaternion.identity);
+        // }
 
         if (healthSlider.value != currentHealth)
         {
@@ -57,35 +57,40 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Current health: {currentHealth}");
         if(currentHealth <= 0)
         {
-            if(lifetime != null && lifetime.running())
-            {
-                Respawn();
-            }
-            else 
-            {
-                print("respawn");
-                GameManager.instance.GameOver();
-            }    
+            Respawn();
+            // if(lifetime != null && lifetime.running())
+            // {
+            //     Respawn();
+            // }
+            // else 
+            // {
+            //     print("respawn");
+            //     GameManager.instance.GameOver();
+            // }    
         }
     }
     void Respawn(){ 
         Vector3 respawnPoint;
-        if(SetSpawn.newSpawn != Vector3.zero) respawnPoint = SetSpawn.newSpawn;
-        else {
-            respawnPoint = new Vector3(147, 125, 806);
-        }
-        currentHealth = maxHealth;
-        if(setSpawn != null){
-            Debug.Log($"where: {respawnPoint}");
-            gameObject.transform.position = respawnPoint;
 
-            Debug.Log("uh i hope");
-        }
-        else if (setSpawn == null){
-            gameObject.transform.position = respawnPoint;
-            Debug.Log("ts null");
-        }
-        Debug.Log($"new transform.postion = {transform.position}");
+        respawnPoint = new Vector3(147, 125, 806);
+        gameObject.transform.position = respawnPoint;
+
+        // if(SetSpawn.newSpawn != Vector3.zero) respawnPoint = SetSpawn.newSpawn;
+        // else {
+        //     respawnPoint = new Vector3(147, 125, 806);
+        // }
+        // currentHealth = maxHealth;
+        // if(setSpawn != null){
+        //     Debug.Log($"where: {respawnPoint}");
+        //     gameObject.transform.position = respawnPoint;
+
+        //     Debug.Log("uh i hope");
+        // }
+        // else if (setSpawn == null){
+        //     gameObject.transform.position = respawnPoint;
+        //     Debug.Log("ts null");
+        // }
+        // Debug.Log($"new transform.postion = {transform.position}");
     }
 }
     
