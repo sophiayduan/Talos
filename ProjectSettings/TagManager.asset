@@ -8,6 +8,7 @@ TagManager:
   - Object
   - Ground
   - Barrier
+  - aimPos
   layers:
   - Default
   - TransparentFX

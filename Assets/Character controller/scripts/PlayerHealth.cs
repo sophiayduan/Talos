@@ -1,6 +1,3 @@
-using System.Data;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
@@ -12,19 +9,16 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
     public GameObject playerModel;
-    public GameObject map;
-    // public GameObject diedscreen;
-
-
+    private Lifetime lifetime;
+    // public GameObject respawnpoint;
+    public float lastHeal ;
+    public float healAmount = 5f;
+    public float cooldown = 5f;
+    public SetSpawn setSpawn;
     void Start()
     { 
         currentHealth = maxHealth;
-        // diedscreen.SetActive(false);
-        // if (diedscreen == null){
-        //     Debug.LogError("fuck");
-        // }
-
-
+        lifetime = FindFirstObjectByType<Lifetime>();
     }
     void Update()
     {   
@@ -46,28 +40,52 @@ public class PlayerHealth : MonoBehaviour
         {
             easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed );
         }
+
+        
+        if (currentHealth < 100f)
+        {
+            if (Time.time >= lastHeal+ cooldown && easeHealthSlider.value == healthSlider.value){
+                Debug.Log("healing");
+                currentHealth += healAmount;
+                lastHeal = Time.time;
+            }
+        }
     }
     public void takeDamage(float amount)
     {
         currentHealth -= amount;
         Debug.Log($"Current health: {currentHealth}");
-
         if(currentHealth <= 0)
         {
-            died();
-            Debug.Log("you died");
+            if(lifetime != null && lifetime.running())
+            {
+                Respawn();
+            }
+            else 
+            {
+                print("respawn");
+                GameManager.instance.GameOver();
+            }    
         }
- 
     }
-    private void died()
-    {
-        GameManager.instance.GameOver();
-        playerModel.SetActive(false);
-        map.SetActive(false);
-        Time.timeScale = 0f;
+    void Respawn(){ 
+        Vector3 respawnPoint;
+        if(SetSpawn.newSpawn != Vector3.zero) respawnPoint = SetSpawn.newSpawn;
+        else {
+            respawnPoint = new Vector3(147, 125, 806);
+        }
+        currentHealth = maxHealth;
+        if(setSpawn != null){
+            Debug.Log($"where: {respawnPoint}");
+            gameObject.transform.position = respawnPoint;
 
+            Debug.Log("uh i hope");
+        }
+        else if (setSpawn == null){
+            gameObject.transform.position = respawnPoint;
+            Debug.Log("ts null");
+        }
+        Debug.Log($"new transform.postion = {transform.position}");
     }
-
-
 }
     
