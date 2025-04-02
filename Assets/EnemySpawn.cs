@@ -4,18 +4,19 @@ using System.Collections;
 public class EnemySpawn : MonoBehaviour
 {
     public PlayerHealth player;
-    public GameObject enemy;
-    // public Transform[] small;
-    // public Transform[] medium;
-    // public Transform[] large;
-    // public Terrain terrain1, terrain2, terrain3, terrain4, terrain5, terrain6;
+    // public GameObject enemy;
+ 
     [SerializeField] private Vector3 lastSpawnPoint;
     public int enemyAmount;
 
     public float minSpawnDistance;
-   void Start()
+    private ObjectPooler objectPooler;
+    public PoolType poolType = PoolType.smallEnemy;
+    public float initialSpeed;
+   private void Start()
     {
         lastSpawnPoint = player.transform.position;
+        objectPooler = FindFirstObjectByType<ObjectPooler>();
     }
 
     // Update is called once per frame
@@ -29,7 +30,14 @@ public class EnemySpawn : MonoBehaviour
     }
 
         void SpawnEnemies(){
-            Instantiate(enemy, lastSpawnPoint, Quaternion.identity);
+            // Instantiate(enemy, lastSpawnPoint, Quaternion.identity);
+            // lastSpawnPoint = player.transform.position;
+            GameObject newSpawnedObject = objectPooler.GetFromPool(poolType);
+            newSpawnedObject.transform.position = lastSpawnPoint;
+            newSpawnedObject.transform.rotation = Quaternion.identity;
+            newSpawnedObject.GetComponent<Rigidbody>().linearVelocity = transform.forward * initialSpeed;
+            newSpawnedObject.transform.parent = transform;
+            newSpawnedObject.SetActive(true);
             lastSpawnPoint = player.transform.position;
 
            

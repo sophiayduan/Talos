@@ -13,18 +13,21 @@ public class PlayerShoot : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public TextMeshProUGUI text;
     [SerializeField] private LayerMask layerMask;
+    private ObjectPooler objectPooler;
+    private PoolType poolType = PoolType.playerBullets;
 
     void Start()
     {
         currentBulletAmount = maxBulletAmount;
+        objectPooler = FindFirstObjectByType<ObjectPooler>();
     }
     void Update()
     {               
         Vector2 screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
 
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
-
         text.text = currentBulletAmount + "/" + maxBulletAmount;
+
         if (currentBulletAmount < 1) currentBulletAmount = 0;
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
@@ -56,7 +59,11 @@ public class PlayerShoot : MonoBehaviour
 
             currentBulletAmount -= 1;
 
-            Instantiate(playerBullet, firepoint.transform.position, Quaternion.identity);
+            GameObject bullet = objectPooler.GetFromPool(poolType);
+            bullet.transform.position = firepoint.transform.position;
+            bullet.transform.rotation = Quaternion.identity;
+            bullet.SetActive(true);
+            // Instantiate(playerBullet, firepoint.transform.position, Quaternion.identity);
 
             ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
             Destroy(flash.gameObject, 0.1f);

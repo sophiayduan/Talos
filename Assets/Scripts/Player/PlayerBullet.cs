@@ -10,15 +10,18 @@ public class PlayerBullet : MonoBehaviour
     public float amount = 10;
     private bool hasInstantiated = false;
     private bool hashit = false;
+    private ObjectPooler objectPooler;
+    private PoolType poolType = PoolType.playerBullets;
     void Start()
     {
-        
+        objectPooler = FindFirstObjectByType<ObjectPooler>();
+
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
         target = playerShoot.aimPos.position; 
         if (target == Vector3.zero)
         {
             Debug.LogError("Bullet target is Vector3.zero, destroying bullet.");
-            Destroy(gameObject);
+            ReturnToPool();
         }
     }
     void Update()
@@ -34,6 +37,11 @@ public class PlayerBullet : MonoBehaviour
     
         }    
     }
+    void OnEnable()
+    {
+        hashit = false;
+        hasInstantiated = false;
+    }
     void OnTriggerEnter(Collider other)
     {
 
@@ -45,7 +53,7 @@ public class PlayerBullet : MonoBehaviour
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
             Destroy(enemy.gameObject,1f);
             hashit = true;
-            Destroy(gameObject);
+            ReturnToPool();
             hasInstantiated = true;
 
 
@@ -65,7 +73,7 @@ public class PlayerBullet : MonoBehaviour
             {
                 enemyHealth.takeDamage(amount);
                 // gameObject.SetActive(false);
-                Destroy(gameObject);
+                ReturnToPool();
 
                 Debug.Log("enemyHealth took damage");
             }
@@ -82,9 +90,15 @@ public class PlayerBullet : MonoBehaviour
             hasInstantiated = true;
             Debug.Log("GROUND");
             // gameObject.SetActive(false);
-            Destroy(gameObject);
+            ReturnToPool();
 
         }
+    }
+    private void ReturnToPool(){
+        // hashit = false;
+        // hasInstantiated = false;
+        gameObject.SetActive(false);
+        objectPooler.AddToPool(poolType, gameObject);
     }
            
 }

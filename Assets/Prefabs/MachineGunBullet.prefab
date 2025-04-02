@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3510186136879983718}
   - component: {fileID: 4011303865403302519}
   - component: {fileID: 384327698094195768}
+  - component: {fileID: 4694633731486084458}
   m_Layer: 8
   m_Name: MachineGunBullet
   m_TagString: Untagged
@@ -279,3 +280,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &4694633731486084458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3321875004569940165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867dc8cd3cbf0fe4b96ca85b42f1c476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballType: 1
