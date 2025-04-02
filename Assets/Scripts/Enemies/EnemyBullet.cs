@@ -47,7 +47,8 @@ public class EnemyBullet : MonoBehaviour
         
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         // if(transform.position.x == target.x && transform.position.y == target.y){
-        if (Vector3.Distance(transform.position, target) < 0.1f && hasHit == false){
+        if (Vector3.Distance(transform.position, target) <= 0f && hasHit == false){
+            // transform.position += transform.forward * speed * Time.deltaTime;            
             // DestroyEnemyBullet();
             // Instantiate(playerparticles,transform.position,Quaternion.identity);
 

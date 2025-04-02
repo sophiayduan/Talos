@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 384327698094195768}
   m_Layer: 8
   m_Name: MachineGunBullet
-  m_TagString: Untagged
+  m_TagString: Barrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   speed: 18
   groundParticles: {fileID: 198175801688348628, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
   enemyParticles: {fileID: 198656289721292014, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
-  amount: 8
+  amount: 12
 --- !u!54 &384327698094195768
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -69,12 +69,18 @@ public class PlayerHealth : MonoBehaviour
         }
     }
     void Respawn(){ 
-        Vector3 respawnPoint = SetSpawn.newSpawn;
+        Vector3 respawnPoint;
+        if(SetSpawn.newSpawn != Vector3.zero){
+            respawnPoint = SetSpawn.newSpawn;
+            Debug.Log("nothing");
+        }
+        else {
+            respawnPoint = new Vector3(147, 125, 806);
+        }
         currentHealth = maxHealth;
         if(setSpawn != null){
             Debug.Log($"where: {respawnPoint}");
             gameObject.transform.position = respawnPoint;
-
             Debug.Log("uh i hope");
         }
         else if (setSpawn == null){

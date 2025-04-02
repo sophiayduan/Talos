@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 21828688}
   m_Layer: 6
   m_Name: ROCKET LAUNCHER
-  m_TagString: Respawn
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1829,7 +1829,7 @@ GameObject:
   - component: {fileID: 387179263}
   m_Layer: 6
   m_Name: REVOLVER
-  m_TagString: Respawn
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2029,6 +2029,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397552023}
   m_CullTransparentMesh: 1
+--- !u!1 &405620227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 405620229}
+  - component: {fileID: 405620230}
+  m_Layer: 0
+  m_Name: Spawers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &405620229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405620227}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 359.1491, y: 153.59015, z: 601.05164}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &405620230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405620227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e3ef33df273334cab83fde9330df22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8433384197499012832}
+  enemy: {fileID: 2540029033114023622, guid: c5daf6eff44b7af479ca09e6f141df46, type: 3}
+  lastSpawnPoint: {x: 0, y: 0, z: 0}
+  enemyAmount: 3
+  minSpawnDistance: 20
 --- !u!1 &409828266
 GameObject:
   m_ObjectHideFlags: 0
@@ -9656,7 +9705,7 @@ GameObject:
   - component: {fileID: 2061619398}
   m_Layer: 6
   m_Name: MACHINE GUN
-  m_TagString: Respawn
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9692,7 +9741,7 @@ MonoBehaviour:
   playerBullet: {fileID: 3321875004569940165, guid: 8de6595f84998c847acfcca352a74c2b, type: 3}
   cooldown: 0.3
   maxDistance: 25
-  bulletsPerShot: 1
+  bulletsPerShot: 3
   timeBetweenShots: 0.1
   currentBulletAmount: 0
   maxBulletAmount: 70
@@ -12368,6 +12417,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 237724787250587997, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 237724787250587997, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 346678376630872803, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: setSpawn
       value: 
@@ -12384,6 +12441,10 @@ PrefabInstance:
       propertyPath: easeHealthSlider
       value: 
       objectReference: {fileID: 924082442141419070}
+    - target: {fileID: 665443755473245077, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1399315968710034104, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.50005126
@@ -12396,6 +12457,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.9042349
       objectReference: {fileID: 0}
+    - target: {fileID: 2508162129326488961, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2704865281358261406, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_Name
       value: PISTOL
@@ -12404,13 +12469,45 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2704865281358261406, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2996953605967696367, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005536438131608341, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3148244760159886957, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_Name
       value: PLAYER
       objectReference: {fileID: 0}
+    - target: {fileID: 3148244760159886957, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3395413703950610443, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4243736213507898390, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627094275991502933, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024718483040509039, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024718483040509039, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5790677598294683365, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12452,6 +12549,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6464043732291328642, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7291160810892078459, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7483865085352666160, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -12469,12 +12574,20 @@ PrefabInstance:
       value: -1.9042349
       objectReference: {fileID: 0}
     - target: {fileID: 8201177692828908731, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201177692828908731, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_TagString
-      value: aimPos
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326663610882126216, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 9108385618768809792, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_RenderingLayerMask
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7483865085352666160, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
@@ -16360,7 +16473,7 @@ MonoBehaviour:
   DetectionRange: 10
   Target: {fileID: 4920897367195716077}
   seePlayer: 0
-  Cooldown: 3
+  Cooldown: 0.5
   MinAttackRange: 3
   MaxAttackRange: 5
   LastAttack: 0
@@ -16377,7 +16490,7 @@ MonoBehaviour:
   _animator: {fileID: 8637695247425988886}
   layerMask:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 64
   startPause: 0
   pauseTime: 2
   status: nada
@@ -17311,3 +17424,4 @@ SceneRoots:
   - {fileID: 633570901}
   - {fileID: 2106503574}
   - {fileID: 2093648095}
+  - {fileID: 405620229}
