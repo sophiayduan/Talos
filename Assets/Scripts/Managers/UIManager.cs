@@ -5,6 +5,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject deathPanel;
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject settingsPanel;
+    [SerializeField] GameObject winPanel;
+
 
 
     public bool isPaused = false;
@@ -23,6 +25,13 @@ public class UIManager : MonoBehaviour
             return;
         }
         else deathPanel.SetActive(true);
+    }
+     public void ToggleWinPanel() 
+    {
+        if (winPanel.activeSelf == true){
+            return;
+        }
+        else winPanel.SetActive(true);
     }
     public void TogglePausePanel() 
     {

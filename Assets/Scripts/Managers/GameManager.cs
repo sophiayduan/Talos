@@ -25,6 +25,19 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+    public void GameOverWin(){
+        UIManager _ui = GetComponent<UIManager>();
+        Time.timeScale = 0f;
+        if (_ui != null) {
+            _ui.ToggleWinPanel();
+        } 
+        GameObject[] respawns = GameObject.FindGameObjectsWithTag("Respawn");
+        foreach (GameObject obj in respawns){
+            Destroy(obj);
+        }   
+
+    }
   
  
 }

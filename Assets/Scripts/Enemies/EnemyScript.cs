@@ -203,7 +203,8 @@ public class EnemyScript : MonoBehaviour
         
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        if(distanceToWalkPoint.magnitude <= 0.1f){       
+        if(distanceToWalkPoint.magnitude <= 0.5f){   
+            // walkPointSet = false;    
             Pause();
 
         }
@@ -213,11 +214,12 @@ public class EnemyScript : MonoBehaviour
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(transform.position.x + randomX,transform.position.y, transform.position.z + randomZ);
+        walkPoint = new Vector3(transform.position.x + randomX,transform.position.y + 10f, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up , out Hit, 2.5f, GroundLayer)){
+        // if (Physics.Raycast(walkPoint, -transform.up , out Hit, 2.5f, GroundLayer)){
+        if(Physics.Raycast(walkPoint, Vector3.down, out Hit, 20f, GroundLayer)){
             Debug.DrawRay(walkPoint, Hit.point,Color.blue, 2f);
-            
+            walkPoint = Hit.point;
             walkPointSet = true;
         }
         else walkPointSet = false;

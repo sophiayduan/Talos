@@ -45,7 +45,7 @@ public class PlayerBullet : MonoBehaviour
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
             Destroy(enemy.gameObject,1f);
             hashit = true;
-            gameObject.SetActive(false);
+            Destroy(gameObject);
             hasInstantiated = true;
 
 
@@ -64,7 +64,9 @@ public class PlayerBullet : MonoBehaviour
             if(enemyHealth != null)
             {
                 enemyHealth.takeDamage(amount);
-                gameObject.SetActive(false);
+                // gameObject.SetActive(false);
+                Destroy(gameObject);
+
                 Debug.Log("enemyHealth took damage");
             }
             else 
@@ -79,7 +81,9 @@ public class PlayerBullet : MonoBehaviour
 
             hasInstantiated = true;
             Debug.Log("GROUND");
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
+            Destroy(gameObject);
+
         }
     }
            
