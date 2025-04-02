@@ -27,7 +27,7 @@ public class Gun : MonoBehaviour
                 return;
             }
             Debug.Log("Picked up" + item.name);
-            inventorySpace = Inventory.instance.Add(item);
+            bool inventorySpace = Inventory.instance.Add(item);
            
             pickedUp = false;
         }
