@@ -27,8 +27,8 @@ namespace Charactercontroller{
         private static int isPunchingHash = Animator.StringToHash("isPunching");
         private static int isGrabingHash = Animator.StringToHash("isGrabing");
         private static int isPlayingActionsHash = Animator.StringToHash("isPlayingAction");
-        private static int isAimingHash = Animator.StringToHash("isAiming");
-        private static int isShootingHash = Animator.StringToHash("isShooting");
+        // private static int isAimingHash = Animator.StringToHash("isAiming");
+        // private static int isShootingHash = Animator.StringToHash("isShooting");
         private int[] actionHashes;
         private static int isRotatingToTargetHash = Animator.StringToHash("isRotatingToTarget");
         private static int rotationMismatchHash = Animator.StringToHash("rotationMismatch");
@@ -89,8 +89,8 @@ namespace Charactercontroller{
             _animator.SetFloat(rotationMismatchHash, _playerController.RotationMismatch);
             
             _animator.SetBool(isGrabingHash, _playerActionInputs.GrabPressed);
-            _animator.SetBool(isAimingHash, _pickUpDown.isAiming);
-            _animator.SetBool(isShootingHash, _pickUpDown.isShooting);
+            // _animator.SetBool(isAimingHash, _pickUpDown.isAiming);
+            // _animator.SetBool(isShootingHash, _pickUpDown.isShooting);
             if(EventSystem.current.IsPointerOverGameObject()){
                 return;
             }
