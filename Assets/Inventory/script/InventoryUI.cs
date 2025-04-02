@@ -26,6 +26,7 @@ public class InventoryUI : MonoBehaviour
         for(int i = 0; i < slots.Length; i++){
             if(i < inventory.items.Count){
                 slots[i].AddItem(inventory.items[i]);
+                Debug.Log("adding item in UI");
             } else{
                 slots[i].ClearSlot();
             }

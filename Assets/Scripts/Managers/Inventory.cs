@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
         items.Add(item);
         if(onItemChangedCallBack != null)
             onItemChangedCallBack.Invoke();
-        
+        Debug.Log("returning true for inventory space");
         return true;
 
     }
