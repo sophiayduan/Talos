@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
-    public Image icon;
+    public Image micon;
     public Button removeButton;
     Items _item;
     public EquipmentManager equipmentManager;
@@ -15,16 +15,22 @@ public class InventorySlot : MonoBehaviour
     public void AddItem(Items newItem){
         
         _item = newItem;
-        icon.sprite = _item.icon;
-        icon.enabled = true;
+        Debug.Log("icon"+_item.icon);
+        micon = GetComponent<Image>();
+        if (micon != null) {
+            micon.sprite = _item.icon;
+            micon.enabled = true;
+        }
         removeButton.interactable = true;
     }
 
     public void ClearSlot(){
         _item = null;
-
-        icon.sprite = null;
-        icon.enabled = false;
+        
+        if (micon != null) {
+            micon.sprite = null;
+            micon.enabled = false;
+        }
         removeButton.interactable = false; 
     }
 
