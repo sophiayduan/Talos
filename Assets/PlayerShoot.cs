@@ -41,7 +41,7 @@ public class PlayerShoot : MonoBehaviour
             aimPos.position = Vector3.Lerp(aimPos.position, destination, aimSmoothSpeed * Time.deltaTime);
         }
 
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.Q))
         {
             if(Time.time >= lastAttack + cooldown)StartCoroutine(ShootRoutine());
 
