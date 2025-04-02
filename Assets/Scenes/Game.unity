@@ -12177,6 +12177,14 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 4920897367195716077}
+    - target: {fileID: 6896670834280762236, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
+      propertyPath: SightRange
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896670834280762236, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
+      propertyPath: DetectionRange
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8547529400638037060, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 150
