@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 9968aca8a25ea234bbe4d55ed1a5872e
+  m_OcclusionCullingData: {fileID: 36300000, guid: d61fd4651b998a14d9967375646f30b7, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -813,6 +813,7 @@ GameObject:
   - component: {fileID: 110611552}
   - component: {fileID: 110611551}
   - component: {fileID: 110611550}
+  - component: {fileID: 110611553}
   m_Layer: 3
   m_Name: Terrain_(1000.00, 0.00, 0.00)
   m_TagString: Ground
@@ -862,7 +863,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
@@ -895,6 +896,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1162282159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &110611553
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110611549}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &147998240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1064,7 @@ GameObject:
   - component: {fileID: 156771068}
   - component: {fileID: 156771067}
   - component: {fileID: 156771066}
+  - component: {fileID: 156771069}
   m_Layer: 3
   m_Name: Terrain_(2000.00, 0.00, -1000.00)
   m_TagString: Ground
@@ -1088,7 +1114,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
@@ -1121,6 +1147,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1162282159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &156771069
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156771065}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1001 &182117577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5907,6 +5957,7 @@ GameObject:
   - component: {fileID: 998727217}
   - component: {fileID: 998727216}
   - component: {fileID: 998727215}
+  - component: {fileID: 998727218}
   m_Layer: 3
   m_Name: Terrain_(2000.00, 0.00, 0.00)
   m_TagString: Ground
@@ -5956,7 +6007,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
@@ -5989,6 +6040,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1162282159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &998727218
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998727214}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &998842564
 GameObject:
   m_ObjectHideFlags: 0
@@ -6000,6 +6075,7 @@ GameObject:
   - component: {fileID: 998842567}
   - component: {fileID: 998842566}
   - component: {fileID: 998842565}
+  - component: {fileID: 998842568}
   m_Layer: 3
   m_Name: Terrain_(1000.00, 0.00, -1000.00)
   m_TagString: Ground
@@ -6049,7 +6125,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
@@ -6082,6 +6158,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1162282159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &998842568
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998842564}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &1066154374
 GameObject:
   m_ObjectHideFlags: 0
@@ -6625,6 +6725,7 @@ GameObject:
   - component: {fileID: 1247269945}
   - component: {fileID: 1247269947}
   - component: {fileID: 1247269946}
+  - component: {fileID: 1247269948}
   m_Layer: 3
   m_Name: Terrain
   m_TagString: Ground
@@ -6677,19 +6778,19 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 2fa96168af205c94b9bb1d6a766299d3, type: 2}
-  m_TreeDistance: 455
+  m_TreeDistance: 240
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 38
-  m_DetailObjectDensity: 0.303
+  m_DetailObjectDensity: 0.217
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
@@ -6707,6 +6808,30 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!205 &1247269948
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247269944}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &1252045640
 GameObject:
   m_ObjectHideFlags: 0
@@ -7306,6 +7431,7 @@ GameObject:
   - component: {fileID: 1318088863}
   - component: {fileID: 1318088862}
   - component: {fileID: 1318088861}
+  - component: {fileID: 1318088864}
   m_Layer: 3
   m_Name: Terrain_(0.00, 0.00, -1000.00)
   m_TagString: Ground
@@ -7355,7 +7481,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
@@ -7388,6 +7514,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1162282159}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &1318088864
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318088860}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &1336335006
 GameObject:
   m_ObjectHideFlags: 0
@@ -13718,6 +13868,7 @@ SceneRoots:
   - {fileID: 918438454}
   - {fileID: 1268862364}
   - {fileID: 1902942614}
+  - {fileID: 182117577}
   - {fileID: 1162282159}
   - {fileID: 2028041740}
   - {fileID: 191322006}
@@ -13726,5 +13877,4 @@ SceneRoots:
   - {fileID: 3948490340285194953}
   - {fileID: 633570901}
   - {fileID: 1483929640}
-  - {fileID: 182117577}
   - {fileID: 1934258410}
