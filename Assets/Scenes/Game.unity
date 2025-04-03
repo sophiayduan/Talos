@@ -11906,6 +11906,10 @@ PrefabInstance:
       propertyPath: easeHealthSlider
       value: 
       objectReference: {fileID: 924082442141419070}
+    - target: {fileID: 434185570616635523, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: AvoidObstacles.CollisionFilter.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 594036757149013948, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -11991,6 +11995,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7483865085352666160, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7933515674780175035, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
