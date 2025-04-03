@@ -21,6 +21,9 @@ public class EquipmentManager : MonoBehaviour
     //public bool isAiming;
     public GameObject RedGun;
     public GameObject BlueGun;
+    public GameObject MachineGun;
+    public GameObject Revolver;
+    public GameObject RocketLauncher;
     
    
     //public List<Gun> guns = new List<Gun>();
@@ -87,6 +90,42 @@ public class EquipmentManager : MonoBehaviour
         }else{
             BlueGun.SetActive(false);
         }
+
+        if(newItem.name == "Machine Gun"){
+            MachineGun.SetActive(true);
+            
+            MachineGun.gameObject.transform.parent = rightHandPos.transform;
+            MachineGun.gameObject.transform.position = rightHandPos.position;
+            MachineGun.gameObject.transform.rotation = rightHandPos.rotation;
+        }else if(MachineGun.gameObject.transform.position != rightHandPos.position){
+            MachineGun.SetActive(true);
+        }else{
+            MachineGun.SetActive(false);
+        }
+
+        if(newItem.name == "Revolver"){
+            Revolver.SetActive(true);
+            
+            Revolver.gameObject.transform.parent = rightHandPos.transform;
+            Revolver.gameObject.transform.position = rightHandPos.position;
+            Revolver.gameObject.transform.rotation = rightHandPos.rotation;
+        }else if(Revolver.gameObject.transform.position != rightHandPos.position){
+            Revolver.SetActive(true);
+        }else{
+            Revolver.SetActive(false);
+        }
+
+        if(newItem.name == "Rocket Launcher"){
+            RocketLauncher.SetActive(true);
+            
+            RocketLauncher.gameObject.transform.parent = rightHandPos.transform;
+            RocketLauncher.gameObject.transform.position = rightHandPos.position;
+            RocketLauncher.gameObject.transform.rotation = rightHandPos.rotation;
+        }else if(RocketLauncher.gameObject.transform.position != rightHandPos.position){
+            RocketLauncher.SetActive(true);
+        }else{
+            RocketLauncher.SetActive(false);
+        }
         /*
         
         if(currentEquipment[0] == BlueGun){
@@ -121,10 +160,37 @@ public class EquipmentManager : MonoBehaviour
             if(oldItem.name == "Red Gun"){
                 RedGun.SetActive(false);
                 BlueGun.SetActive(true);
+                MachineGun.SetActive(true);
+                Revolver.SetActive(true);
+                RocketLauncher.SetActive(true);
             }
             if(oldItem.name == "Blue Gun"){
-                BlueGun.SetActive(false);
                 RedGun.SetActive(true);
+                BlueGun.SetActive(false);
+                MachineGun.SetActive(true);
+                Revolver.SetActive(true);
+                RocketLauncher.SetActive(true);
+            }
+            if(oldItem.name == "Machine Gun"){
+                RedGun.SetActive(true);
+                BlueGun.SetActive(true);
+                MachineGun.SetActive(false);
+                Revolver.SetActive(true);
+                RocketLauncher.SetActive(true);
+            }
+            if(oldItem.name == "Revolver"){
+                RedGun.SetActive(true);
+                BlueGun.SetActive(true);
+                MachineGun.SetActive(true);
+                Revolver.SetActive(false);
+                RocketLauncher.SetActive(true);
+            }
+            if(oldItem.name == "Rocket Launcher"){
+                RedGun.SetActive(true);
+                BlueGun.SetActive(true);
+                MachineGun.SetActive(true);
+                Revolver.SetActive(true);
+                RocketLauncher.SetActive(false);
             }
             currentEquipment[slotIndex] = null;
 
@@ -141,6 +207,9 @@ public class EquipmentManager : MonoBehaviour
         }
         BlueGun.SetActive(false);
         RedGun.SetActive(false);
+        MachineGun.SetActive(false);
+        Revolver.SetActive(false);
+        RocketLauncher.SetActive(false);
         
     }
 

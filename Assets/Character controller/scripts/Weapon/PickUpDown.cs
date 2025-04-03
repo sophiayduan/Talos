@@ -19,6 +19,9 @@ namespace Charactercontroller.scripts{
         private Gun currentWeapon;
         public GameObject RedGun;
         public GameObject BlueGun;
+        public GameObject MachineGun;
+        public GameObject Revolver;
+        public GameObject RocketLauncher;
         
         private PlayerInputs _playerInputs;
         private InventorySlot _inventorySlot;
@@ -52,7 +55,9 @@ namespace Charactercontroller.scripts{
             }
                 
                 //if(currentWeapon.inventorySpace){
-            if(RedGun.gameObject.transform.position == rightHandPos.position || BlueGun.gameObject.transform.position == rightHandPos.position){
+            if(RedGun.gameObject.transform.position == rightHandPos.position || 
+                BlueGun.gameObject.transform.position == rightHandPos.position ||
+                MachineGun.gameObject.transform.position == rightHandPos.position){
                 isAiming = true;
                 Debug.Log("Aiming is true");
             }
