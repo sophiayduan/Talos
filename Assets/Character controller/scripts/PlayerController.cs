@@ -1,11 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-using UnityEngine.InputSystem;
-using Unity.Cinemachine;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 
 namespace Charactercontroller {
     [DefaultExecutionOrder(-1)]

@@ -1,7 +1,4 @@
 using Charactercontroller.scripts;
-
-using Unity.VisualScripting;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EquipmentManager : MonoBehaviour
@@ -13,10 +10,9 @@ public class EquipmentManager : MonoBehaviour
         instance = this;
     }
     [SerializeField] private Transform rightHandPos;
-    private PickUpDown pickUpDown;
-    private Gun weapon;
+    
     Equipment[] currentEquipment;
-    MeshRenderer[] currentMeshes;
+    
 
     //public bool isAiming;
     public GameObject RedGun;
@@ -149,7 +145,5 @@ public class EquipmentManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.U)){
             UnequipAll();
         }
-
-        
     }
 }

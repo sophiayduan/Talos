@@ -20,16 +20,6 @@ namespace Charactercontroller.scripts{
         public GameObject RedGun;
         public GameObject BlueGun;
         
-        private PlayerInputs _playerInputs;
-        private InventorySlot _inventorySlot;
-        
-        private void Awake()
-        {
-            
-            
-
-            _playerInputs = GetComponent<PlayerInputs>();
-        }
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.E)){
@@ -64,10 +54,7 @@ namespace Charactercontroller.scripts{
             
            
         }
-        void LateUpdate()
-        {
-            
-        }
+        
         
         void FixedUpdate()
         {
@@ -89,14 +76,6 @@ namespace Charactercontroller.scripts{
 
             if(!currentWeapon) return;
 
-        }
-
-        public void PickUpTransform(){
-            currentWeapon.transform.parent = rightHandPos.transform;
-            currentWeapon.transform.position = rightHandPos.position;
-            currentWeapon.transform.rotation = rightHandPos.rotation;
-            //isAiming = true;
-            Debug.Log("Aiming is true");
         }
 
         

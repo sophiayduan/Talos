@@ -15,7 +15,6 @@ namespace Charactercontroller{
         private PlayerActionInputs _playerActionInputs;
         private PickUpDown _pickUpDown;
         
-        private InventorySlot _inventorySlot;
 
         private static int inputXHash = Animator.StringToHash("inputX");
         private static int inputYHash = Animator.StringToHash("inputY");
@@ -46,9 +45,6 @@ namespace Charactercontroller{
             _playerController = GetComponent<PlayerController>();
             _playerActionInputs = GetComponent<PlayerActionInputs>();
             _pickUpDown = GetComponent<PickUpDown>();
-            
-            
-            _inventorySlot = GetComponent<InventorySlot>();
 
             actionHashes = new int[] {isGrabingHash, isFallingHash};
         }
@@ -87,13 +83,9 @@ namespace Charactercontroller{
             _animator.SetFloat(inputYHash, _currentBlendInput.y);
             _animator.SetFloat(inputMagHash, _currentBlendInput.magnitude);
             _animator.SetFloat(rotationMismatchHash, _playerController.RotationMismatch);
-            
             _animator.SetBool(isGrabingHash, _playerActionInputs.GrabPressed);
             _animator.SetBool(isAimingHash, _pickUpDown.isAiming);
             _animator.SetBool(isShootingHash, _pickUpDown.isShooting);
-            if(EventSystem.current.IsPointerOverGameObject()){
-                return;
-            }
             _animator.SetBool(isPunchingHash, _playerActionInputs.AttackPressed);
         }
     }
