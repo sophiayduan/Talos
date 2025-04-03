@@ -3,32 +3,26 @@ using System.Collections;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public PlayerHealth player;
-    // public GameObject enemy;
- 
+    public PlayerHealth player; 
     [SerializeField] private Vector3 lastSpawnPoint;
     public int enemyAmount;
-
     public float minSpawnDistance;
     private ObjectPooler objectPooler;
     public PoolType poolType = PoolType.smallEnemy;
     public float initialSpeed;
-   private void Start()
+    private void Start()
     {
         lastSpawnPoint = player.transform.position;
         objectPooler = FindFirstObjectByType<ObjectPooler>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float distanceFromPlayer =  Vector3.Distance(lastSpawnPoint, player.transform.position);
         if (distanceFromPlayer >= minSpawnDistance){
                 StartCoroutine(SpawnEnemiesRoutine());
-
         }
     }
-
         void SpawnEnemies(){
             // Instantiate(enemy, lastSpawnPoint, Quaternion.identity);
             // lastSpawnPoint = player.transform.position;
@@ -40,7 +34,6 @@ public class EnemySpawn : MonoBehaviour
             newSpawnedObject.SetActive(true);
             lastSpawnPoint = player.transform.position;
 
-           
         }
     IEnumerator SpawnEnemiesRoutine()
     {

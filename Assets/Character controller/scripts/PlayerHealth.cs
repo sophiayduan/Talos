@@ -6,29 +6,20 @@ public class PlayerHealth : MonoBehaviour
     public Slider easeHealthSlider;
     public float maxHealth = 100f;
     public float currentHealth;
-    [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
-    public GameObject playerModel;
-    private Lifetime lifetime;
+    // private Lifetime lifetime;
     public GameObject respawnpoint;
     public float lastHeal ;
     public float healAmount = 5f;
     public float cooldown = 5f;
-    public SetSpawn setSpawn;
+    // public SetSpawn setSpawn;
     void Start()
     { 
         currentHealth = maxHealth;
-        lifetime = FindFirstObjectByType<Lifetime>();
+        // lifetime = FindFirstObjectByType<Lifetime>();
     }
     void Update()
     {   
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     takeDamage(10); 
-        //     healthSlider.value = currentHealth;
-        //     // Instantiate(particles,transform.position,Quaternion.identity);
-        // }
-
         if (healthSlider.value != currentHealth)
         {
             healthSlider.value = currentHealth;
@@ -41,7 +32,6 @@ public class PlayerHealth : MonoBehaviour
             easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed );
         }
 
-        
         if (currentHealth < 100f)
         {
             if (Time.time >= lastHeal+ cooldown && easeHealthSlider.value == healthSlider.value){

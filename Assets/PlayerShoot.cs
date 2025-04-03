@@ -13,13 +13,13 @@ public class PlayerShoot : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public TextMeshProUGUI text;
     [SerializeField] private LayerMask layerMask;
-    // private ObjectPooler objectPooler;
-    // private PoolType poolType = PoolType.playerBullets;
+    private ObjectPooler objectPooler;
+    private PoolType poolType = PoolType.playerBullets;
 
     void Start()
     {
         currentBulletAmount = maxBulletAmount;
-        // objectPooler = FindFirstObjectByType<ObjectPooler>();
+        objectPooler = FindFirstObjectByType<ObjectPooler>();
     }
     void Update()
     {               
@@ -58,12 +58,11 @@ public class PlayerShoot : MonoBehaviour
             }
 
             currentBulletAmount -= 1;
-
-            // GameObject bullet = objectPooler.GetFromPool(poolType);
-            // bullet.transform.position = firepoint.transform.position;
-            // bullet.transform.rotation = Quaternion.identity;
-            // bullet.SetActive(true);
-            Instantiate(playerBullet, firepoint.transform.position, Quaternion.identity);
+            GameObject bullet = objectPooler.GetFromPool(poolType);
+            bullet.transform.position = firepoint.transform.position;
+            bullet.transform.rotation = Quaternion.identity;
+            bullet.SetActive(true);
+            // Instantiate(playerBullet, firepoint.transform.position, Quaternion.identity);
         
             ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
             Destroy(flash.gameObject, 0.1f);
@@ -83,8 +82,5 @@ public class PlayerShoot : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenShots);
 
         }
-        
     }
-
-
 }

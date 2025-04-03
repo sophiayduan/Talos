@@ -6,11 +6,9 @@ public class EnemyBullet : MonoBehaviour
     private Transform player;
     private Vector3 target;
     public float amount = 10;
-    // public float KOtime;
     private PlayerHealth playerHealth;
     public  ParticleSystem particles;
     private bool hasHit = false;
-
 
     [SerializeField] 
     PerlinShake.Params shakeParams;
@@ -35,7 +33,6 @@ public class EnemyBullet : MonoBehaviour
                 playerHealth = player.GetComponent<PlayerHealth>();
                 Debug.LogError("playerhealth null (enemy bullet)");
             }
-
         }
         else 
         {
@@ -44,19 +41,12 @@ public class EnemyBullet : MonoBehaviour
     }
     void Update()
     {   
-        
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         // if(transform.position.x == target.x && transform.position.y == target.y){
-        if (Vector3.Distance(transform.position, target) < 0.1f && hasHit == false){
-            // DestroyEnemyBullet();
-            // Instantiate(playerparticles,transform.position,Quaternion.identity);
-
-    
-        }
-    }
-
-    void DestroyEnemyBullet(){
-        Destroy(gameObject);
+        // if (Vector3.Distance(transform.position, target) < 0.1f && hasHit == false){
+        //     DestroyEnemyBullet();
+        //     Instantiate(playerparticles,transform.position,Quaternion.identity);
+        // }
     }
     void OnTriggerEnter(Collider other)
     {   
@@ -75,19 +65,15 @@ public class EnemyBullet : MonoBehaviour
                 CameraShaker.Shake(new PerlinShake(shakeParams));
 
                 Debug.Log("playerHealth took damage");
-
             }
             else 
             {
                 Debug.LogError("playerhealth bottom = null");
             }
             Destroy(gameObject);
-
         }
         else  Debug.Log($"OK FINE THIS TAG {other.tag}");
-
     }
-
 }
 
 

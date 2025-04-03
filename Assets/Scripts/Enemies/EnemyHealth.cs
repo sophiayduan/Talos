@@ -13,7 +13,6 @@ public class EnemyHealth : MonoBehaviour
     [Header(" ")]
     public float maxHealth = 50f;
     public float enemyHealth;
-    [SerializeField] private ParticleSystem enemyParticles;
 
 
     void Start()
@@ -21,21 +20,15 @@ public class EnemyHealth : MonoBehaviour
         enemyHealth = maxHealth;
 
     }
+
     void Update()
     {   
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     takeDamage(10); 
-        //     healthSlider.value = enemyHealth;
-        //     // Instantiate(enemyParticles,transform.position,Quaternion.identity);
-        // }
-
         if (healthSlider.value != enemyHealth)
         {
             healthSlider.value = enemyHealth;
         }
-        if (healthSlider == null) print("shit");
-        if (easeHealthSlider == null) print("fuck");
+        // if (healthSlider == null) print("shit");
+        // if (easeHealthSlider == null) print("fuck");
 
         if (easeHealthSlider.value - healthSlider.value < 0.1f) easeHealthSlider.value = healthSlider.value;
 
@@ -55,8 +48,6 @@ public class EnemyHealth : MonoBehaviour
         }
  
     }
-
-
 
 }
     

@@ -1,47 +1,24 @@
-// using System.Numerics;
-
-// using Unity.Mathematics;
-// using System.Numerics;
-// using System.Numerics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-
 public class EnemyScript : MonoBehaviour
 {    
-    public Rigidbody rb;
-    public float Maxspeed;
+    // public float Maxspeed;
     private float Speed;
     public NavMeshAgent agent;
-
     public float SightRange;
     public float DetectionRange;
     public GameObject Target;
     public bool seePlayer;
     private Collider[] hitColliders;
     private RaycastHit Hit;
-
-    //Attacking 
-    public float Cooldown;
-    public float MinAttackRange;
-    public float MaxAttackRange;
-    public float LastAttack;
+    public float Cooldown, MinAttackRange, MaxAttackRange, LastAttack;
     public GameObject EnemyBullet;
     public LayerMask GroundLayer;
     private Vector3 Heading;
     private float Distance;
     public GameObject firepoint;
-
     private Vector3 lastKnownPosition;
-    private bool lostPlayer;
-
-    private float lastSeenTime;
-    public float searchTime = 5f;
-
-    // Patrolling 
-    public Transform walksphere;
     public Vector3 walkPoint;
     public bool walkPointSet;
     public int walkPointRange = 10;
@@ -51,13 +28,13 @@ public class EnemyScript : MonoBehaviour
     public float startPause;
     public float pauseTime = 0;
     public string status = "nada";
-    public Vector3 shootDestination;
     public bool isPaused;
     public Transform LKPsphere;
-    void Start()
-    {
-        Speed = Maxspeed;
-    }
+
+    // void Start()
+    // {
+    //     Speed = Maxspeed;
+    // }
 
     void Update()
     {
@@ -73,9 +50,7 @@ public class EnemyScript : MonoBehaviour
                     Target = HitCollider.gameObject;
                     seePlayer = true;
                     Debug.Log("ooh its the player");
-              
                     break;
-
                 }
                 else{
                     // Debug.Log("start patrol");
@@ -88,7 +63,6 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {   
-            // lastKnownPosition = transform.position + Vector3.forward * 0.5f;
             Vector3 theorigin = transform.position + Vector3.up * 2f;
             if(Physics.Raycast(theorigin, (Target.transform.position - theorigin).normalized, out Hit, SightRange, layerMask)){
                 Debug.DrawRay(theorigin,  (Target.transform.position - theorigin).normalized* SightRange, Color.black, 2f);
@@ -103,7 +77,6 @@ public class EnemyScript : MonoBehaviour
                     status = "Hit.collider.tag = Player";
                     lastKnownPosition = Hit.point; 
                     LKPsphere.position = Hit.point;
-
 
                     if(Distance <= MaxAttackRange && Distance >= MinAttackRange) {Chase();Attack();}
                     else if(Distance < MinAttackRange + 1 && Distance > MinAttackRange){Stop();Attack();}
@@ -206,7 +179,6 @@ public class EnemyScript : MonoBehaviour
         if(distanceToWalkPoint.magnitude <= 0.5f){   
             // walkPointSet = false;    
             Pause();
-
         }
     }
     private void SearchWalkPoint()
@@ -216,7 +188,6 @@ public class EnemyScript : MonoBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX,transform.position.y + 10f, transform.position.z + randomZ);
 
-        // if (Physics.Raycast(walkPoint, -transform.up , out Hit, 2.5f, GroundLayer)){
         if(Physics.Raycast(walkPoint, Vector3.down, out Hit, 20f, GroundLayer)){
             Debug.DrawRay(walkPoint, Hit.point,Color.blue, 2f);
             walkPoint = Hit.point;
