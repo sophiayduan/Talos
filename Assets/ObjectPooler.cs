@@ -4,7 +4,6 @@ using System.Collections.Generic;
     [System.Serializable]
     public enum PoolType {smallEnemy, playerBullets}
     [System.Serializable]
-
     public class ObjectPool {
         public PoolType poolType;
         public GameObject prefabObject;

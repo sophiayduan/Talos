@@ -12176,6 +12176,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ROBOT
       objectReference: {fileID: 0}
+    - target: {fileID: 174417426252132336, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4143894779136599852, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
       propertyPath: cam
       value: 
