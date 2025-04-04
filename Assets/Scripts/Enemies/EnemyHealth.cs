@@ -15,7 +15,8 @@ public class EnemyHealth : MonoBehaviour
     public float enemyHealth;
     [SerializeField] private ParticleSystem enemyParticles;
 
-
+    public delegate void DeactivateHandler();
+    public event DeactivateHandler OnDeactivate;
     void Start()
     { 
         enemyHealth = maxHealth;
@@ -49,11 +50,19 @@ public class EnemyHealth : MonoBehaviour
         enemyHealth -= amount;
 
         if(enemyHealth <= 0)
-        {
+        {   
+            Deactivate();
             Destroy(gameObject);
             Debug.Log("enemy died");
+            
         }
  
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false); // Deactivates the enemy
+        OnDeactivate?.Invoke(); // Triggers the deactivation event
     }
 
 

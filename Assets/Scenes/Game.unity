@@ -8241,9 +8241,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8433384197499012832}
+  enemy: {fileID: 0}
   lastSpawnPoint: {x: 0, y: 0, z: 0}
   enemyAmount: 1
-  minSpawnDistance: 12
+  maxActiveEnemies: 5
+  minSpawnDistance: 6
   poolType: 0
   initialSpeed: 3
 --- !u!4 &1483929640
@@ -12180,10 +12182,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1672691319390002101, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
+      propertyPath: m_Speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4143894779136599852, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 889392183460591917}
+    - target: {fileID: 4143894779136599852, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6573694483606805356, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
