@@ -37,7 +37,7 @@ public class EnemySpawn : MonoBehaviour
         void SpawnEnemies(){
             if (activeEnemyCount >= maxActiveEnemies)
             {
-                Debug.Log("Max enemy limit reached. Not spawning more enemies.");
+                Debug.Log("max active enemies");
                 return;
             }
             // Instantiate(enemy, lastSpawnPoint, Quaternion.identity);
@@ -50,8 +50,9 @@ public class EnemySpawn : MonoBehaviour
             enemy = newSpawnedObject.GetComponent<EnemyHealth>();
             if (enemy != null)
             {
-                enemy.OnDeactivate += HandleEnemyDeactivation;
+                enemy.OnDeactivate += EnemyDeactivation;
             }
+
 
             newSpawnedObject.SetActive(true);
             activeEnemyCount++;
@@ -77,9 +78,11 @@ public class EnemySpawn : MonoBehaviour
         yield return new WaitForSeconds(lifeTime);
         enemy.Deactivate();
     }
-    public void HandleEnemyDeactivation()
+    
+
+    public void EnemyDeactivation()
     {
-        activeEnemyCount = Mathf.Max(activeEnemyCount - 1, 0); // Decrease counter safely
-        Debug.Log("An enemy was deactivated. Active enemy count: " + activeEnemyCount);
+        activeEnemyCount = Mathf.Max(activeEnemyCount - 1, 0); 
+        Debug.Log("deactivated, active enemy # " + activeEnemyCount);
     }
 }

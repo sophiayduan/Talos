@@ -12,6 +12,7 @@ using UnityEngine.AI;
 public class EnemyScript : MonoBehaviour
 {    
     public Rigidbody rb;
+    public PlayerHealth player;
     public float Maxspeed;
     private float Speed;
     public NavMeshAgent agent;
@@ -54,6 +55,7 @@ public class EnemyScript : MonoBehaviour
     public Vector3 shootDestination;
     public bool isPaused;
     public Transform LKPsphere;
+    public EnemySpawn enemySpawn;
     void Start()
     {
         Speed = Maxspeed;
@@ -124,6 +126,13 @@ public class EnemyScript : MonoBehaviour
                 LastPosition();
                 // Patrol(); 
                 // Debug.Log("donde estas");
+            }
+
+            if(Vector3.Distance(transform.position, player.transform.position) > 2f){
+                Debug.Log("player gone too far, byebye enemy");
+                enemySpawn.EnemyDeactivation();
+                //SIA THIS IS WHAT I ADD IDK IF IT WORKS 
+
             }
 
         }
