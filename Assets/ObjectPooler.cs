@@ -42,4 +42,8 @@ public class ObjectPooler : MonoBehaviour
         }
         return result;
     }
+    void Update()
+    {
+        
+    }
 }

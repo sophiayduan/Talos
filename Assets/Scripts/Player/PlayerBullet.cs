@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
@@ -9,30 +10,32 @@ public class PlayerBullet : MonoBehaviour
     public float amount = 10;
     private bool hasInstantiated = false;
     private bool hashit = false;
-    private ObjectPooler objectPooler;
-    private PoolType poolType = PoolType.playerBullets;
+    // private ObjectPooler objectPooler;
+    // private PoolType poolType = PoolType.playerBullets;
     void Start()
     {
-        objectPooler = FindFirstObjectByType<ObjectPooler>();
+        // objectPooler = FindFirstObjectByType<ObjectPooler>();
 
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
         target = playerShoot.aimPos.position; 
         if (target == Vector3.zero)
         {
             Debug.LogError("Bullet target is Vector3.zero, destroying bullet.");
-            ReturnToPool();
+            // ReturnToPool();
         }
     }
     void Update()
     {   if (target == Vector3.zero)
         {
-            ReturnToPool();
             return;
         }
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         if (Vector3.Distance(transform.position, target) < 0.1f && !hashit && !hasInstantiated){
-                ReturnToPool();
-                return;
+           
+                // ReturnToPool();
+                // return;
+            
+
         }    
     }
     void OnEnable()
@@ -42,6 +45,7 @@ public class PlayerBullet : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
+
         if(hashit) return;
         
         if (other.CompareTag("Object"))
@@ -51,10 +55,12 @@ public class PlayerBullet : MonoBehaviour
             Destroy(enemy.gameObject,1f);
             hashit = true;
             Destroy(gameObject);
-            ReturnToPool();
+            // ReturnToPool();
             hasInstantiated = true;
-        }
 
+
+
+        }
         else if (other.CompareTag("Enemy"))
         {            
             print("it is the enemy!");
@@ -68,9 +74,11 @@ public class PlayerBullet : MonoBehaviour
             if(enemyHealth != null)
             {
                 enemyHealth.takeDamage(amount);
-                gameObject.SetActive(false);
-                ReturnToPool();
+                // gameObject.SetActive(false);
+                // ReturnToPool();
                  Destroy(gameObject);
+
+
                 Debug.Log("enemyHealth took damage");
             }
             else 
@@ -85,16 +93,18 @@ public class PlayerBullet : MonoBehaviour
 
             hasInstantiated = true;
             Debug.Log("GROUND");
-            gameObject.SetActive(false);
-            ReturnToPool();
+            // gameObject.SetActive(false);
+            // ReturnToPool();
             Destroy(gameObject);
+
+
         }
     }
-    private void ReturnToPool(){
-        // hashit = false;
-        // hasInstantiated = false;
-        gameObject.SetActive(false);
-        objectPooler.AddToPool(poolType, gameObject);
-    }
+    // private void ReturnToPool(){
+    //     // hashit = false;
+    //     // hasInstantiated = false;
+    //     gameObject.SetActive(false);
+    //     objectPooler.AddToPool(poolType, gameObject);
+    // }
            
 }
