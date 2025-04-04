@@ -7190,8 +7190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8433384197499012832}
+  enemy: {fileID: 0}
   lastSpawnPoint: {x: 0, y: 0, z: 0}
   enemyAmount: 1
+  maxActiveEnemies: 5
   minSpawnDistance: 12
   poolType: 0
   initialSpeed: 0
@@ -7573,6 +7575,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace28259d65bcdb4b917f32824a0c3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 0
+  maxLifetime: 100
+  deathSpeed: 0
+  healthSlider: {fileID: 0}
 --- !u!1 &1570270083
 GameObject:
   m_ObjectHideFlags: 0
@@ -10612,6 +10618,10 @@ PrefabInstance:
       propertyPath: SightRange
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6896670834280762236, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
+      propertyPath: enemySpawn
+      value: 
+      objectReference: {fileID: 1483929639}
     - target: {fileID: 6896670834280762236, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
       propertyPath: DetectionRange
       value: 25

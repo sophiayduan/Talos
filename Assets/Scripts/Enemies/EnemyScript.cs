@@ -36,13 +36,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject firepoint;
 
     private Vector3 lastKnownPosition;
-    private bool lostPlayer;
-
-    private float lastSeenTime;
-    public float searchTime = 5f;
-
-    // Patrolling 
-    public Transform walksphere;
+    
     public Vector3 walkPoint;
     public bool walkPointSet;
     public int walkPointRange = 10;
@@ -82,12 +76,22 @@ public class EnemyScript : MonoBehaviour
                 else{
                     // Debug.Log("start patrol");
                     seePlayer = false;
-                    Patrol();
+                    Debug.Log("player gone too far, byebye enemy");
+                    enemySpawn.EnemyDeactivation();
+
+                    // Patrol();
                     
 
                 }
             }
         }
+        // if(Vector3.Distance(transform.position, player.transform.position) > 2f){
+        //     Debug.Log($"{player.transform.position} + enemy: {transform.position}");
+        //     Debug.Log("player gone too far, byebye enemy");
+        //     enemySpawn.EnemyDeactivation();
+            //SIA THIS IS WHAT I ADD IDK IF IT WORKS 
+
+        // }
         else
         {   
             // lastKnownPosition = transform.position + Vector3.forward * 0.5f;
@@ -128,12 +132,7 @@ public class EnemyScript : MonoBehaviour
                 // Debug.Log("donde estas");
             }
 
-            if(Vector3.Distance(transform.position, player.transform.position) > 2f){
-                Debug.Log("player gone too far, byebye enemy");
-                enemySpawn.EnemyDeactivation();
-                //SIA THIS IS WHAT I ADD IDK IF IT WORKS 
-
-            }
+       
 
         }
     }
