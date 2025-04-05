@@ -39,6 +39,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B)) // Example key press
         {
+            enemy.enemyHealth = 0;
             DeactivateAllEnemies();
         }
     }
