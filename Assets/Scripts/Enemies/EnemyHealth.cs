@@ -51,9 +51,10 @@ public class EnemyHealth : MonoBehaviour
 
         if(enemyHealth <= 0)
         {   
-            Deactivate();
+            
             Destroy(gameObject);
             Debug.Log("enemy died");
+            Deactivate();
             
         }
  
@@ -61,7 +62,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void Deactivate()
     {
-        gameObject.SetActive(false); // Deactivates the enemy
+        Destroy(gameObject); // Deactivates the enemy
         OnDeactivate?.Invoke(); // Triggers the deactivation event
     }
 

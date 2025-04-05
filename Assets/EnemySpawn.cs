@@ -33,9 +33,9 @@ public class EnemySpawn : MonoBehaviour
         if (distanceFromPlayer >= minSpawnDistance){
                 StartCoroutine(SpawnEnemiesRoutine());
         }
-        // if(activeEnemyCount == maxActiveEnemies){
-        //         StartCoroutine(DeactivateAfterTime());
-        // }
+        if(activeEnemyCount == maxActiveEnemies){
+                StartCoroutine(DeactivateAfterTime());
+        }
 
         if (Input.GetKeyDown(KeyCode.B)) // Example key press
         {
@@ -78,7 +78,7 @@ public class EnemySpawn : MonoBehaviour
             Debug.Log("I SPAWNED");
             count += 1;
             SpawnEnemies();
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
 
         }
         
@@ -100,7 +100,7 @@ public class EnemySpawn : MonoBehaviour
     {
         foreach (GameObject enemies in activeEnemies)
         {
-            enemy.Deactivate();
+            Destroy(enemy.gameObject);
             // if (enemies.activeSelf) // Ensure enemy is active
             // {
             //     EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
