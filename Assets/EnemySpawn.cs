@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemySpawn : MonoBehaviour
 {
@@ -17,11 +18,12 @@ public class EnemySpawn : MonoBehaviour
     private ObjectPooler objectPooler;
     public PoolType poolType = PoolType.smallEnemy;
     public float initialSpeed;
+    private List<GameObject> activeEnemies = new List<GameObject>();
    private void Start()
     {
         lastSpawnPoint = player.transform.position;
         objectPooler = FindFirstObjectByType<ObjectPooler>();
-        StartCoroutine(DeactivateAfterTime());
+        
     }
 
     // Update is called once per frame
@@ -30,7 +32,14 @@ public class EnemySpawn : MonoBehaviour
         float distanceFromPlayer =  Vector3.Distance(lastSpawnPoint, player.transform.position);
         if (distanceFromPlayer >= minSpawnDistance){
                 StartCoroutine(SpawnEnemiesRoutine());
+        }
+        // if(activeEnemyCount == maxActiveEnemies){
+        //         StartCoroutine(DeactivateAfterTime());
+        // }
 
+        if (Input.GetKeyDown(KeyCode.B)) // Example key press
+        {
+            DeactivateAllEnemies();
         }
     }
 
@@ -55,6 +64,7 @@ public class EnemySpawn : MonoBehaviour
 
 
             newSpawnedObject.SetActive(true);
+            activeEnemies.Add(newSpawnedObject);
             activeEnemyCount++;
             lastSpawnPoint = player.transform.position;
 
@@ -68,7 +78,7 @@ public class EnemySpawn : MonoBehaviour
             Debug.Log("I SPAWNED");
             count += 1;
             SpawnEnemies();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(5);
 
         }
         
@@ -84,5 +94,29 @@ public class EnemySpawn : MonoBehaviour
     {
         activeEnemyCount = Mathf.Max(activeEnemyCount - 1, 0); 
         Debug.Log("deactivated, active enemy # " + activeEnemyCount);
+    }
+
+    public void DeactivateAllEnemies()
+    {
+        foreach (GameObject enemies in activeEnemies)
+        {
+            enemy.Deactivate();
+            // if (enemies.activeSelf) // Ensure enemy is active
+            // {
+            //     EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
+            //     if (enemyScript != null)
+            //     {
+            //         enemy.Deactivate(); // Call the Deactivate method on the enemy
+            //     }
+            //     else
+            //     {
+            //         enemy.gameObject.SetActive(false); // Fallback if no Enemy script exists
+            //     }
+            // }
+        }
+
+        activeEnemies.Clear(); // Clear the list after deactivating all
+        activeEnemyCount = 0; // Reset active enemy count
+        Debug.Log("All enemies have been deactivated.");
     }
 }

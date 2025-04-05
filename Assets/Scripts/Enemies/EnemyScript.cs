@@ -77,7 +77,7 @@ public class EnemyScript : MonoBehaviour
                     // Debug.Log("start patrol");
                     seePlayer = false;
                     Debug.Log("player gone too far, byebye enemy");
-                    enemySpawn.EnemyDeactivation();
+                    //enemySpawn.EnemyDeactivation();
 
                     // Patrol();
                     

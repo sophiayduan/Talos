@@ -10623,8 +10623,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1483929639}
     - target: {fileID: 6896670834280762236, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
+      propertyPath: patrolRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896670834280762236, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
       propertyPath: DetectionRange
-      value: 25
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 6896670834280762236, guid: a09cedb1abb576b449634c891459cfc1, type: 3}
       propertyPath: layerMask.m_Bits
