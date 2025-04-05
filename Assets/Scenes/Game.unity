@@ -7194,6 +7194,7 @@ MonoBehaviour:
   lastSpawnPoint: {x: 0, y: 0, z: 0}
   enemyAmount: 1
   maxActiveEnemies: 5
+  enamy: {fileID: 1483929640}
   minSpawnDistance: 10.5
   poolType: 0
   initialSpeed: 0

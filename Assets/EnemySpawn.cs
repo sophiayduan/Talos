@@ -14,11 +14,13 @@ public class EnemySpawn : MonoBehaviour
     private int activeEnemyCount = 0;
     private float lifeTime = 10f;
 
+    public Transform enamy;
     public float minSpawnDistance;
     private ObjectPooler objectPooler;
     public PoolType poolType = PoolType.smallEnemy;
     public float initialSpeed;
     private List<GameObject> activeEnemies = new List<GameObject>();
+    EnemyScript[] enemiess;
    private void Start()
     {
         lastSpawnPoint = player.transform.position;
@@ -39,7 +41,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B)) // Example key press
         {
-            enemy.enemyHealth = 0;
+            //enemy.enemyHealth = 0;
             DeactivateAllEnemies();
         }
     }
@@ -50,6 +52,12 @@ public class EnemySpawn : MonoBehaviour
                 Debug.Log("max active enemies");
                 return;
             }
+
+            Vector3 spawnPosition = player.transform.position + new Vector3(
+                Random.Range(-12f, 12f), 
+                0, 
+                Random.Range(-12f, 12f) 
+            );
             // Instantiate(enemy, lastSpawnPoint, Quaternion.identity);
             // lastSpawnPoint = player.transform.position;
             GameObject newSpawnedObject = objectPooler.GetFromPool(poolType);
@@ -76,6 +84,12 @@ public class EnemySpawn : MonoBehaviour
         float count = 0f;
         while(count < enemyAmount)
         {
+            if (activeEnemyCount >= maxActiveEnemies)
+            {
+                Debug.Log("Max active enemies reached, stopping spawn routine.");
+                yield break;
+            }
+            
             Debug.Log("I SPAWNED");
             count += 1;
             SpawnEnemies();
@@ -87,7 +101,7 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator DeactivateAfterTime()
     {
         yield return new WaitForSeconds(lifeTime);
-        enemy.Deactivate();
+        enemy.enemyHealth = 0f;;
     }
     
 
@@ -99,25 +113,34 @@ public class EnemySpawn : MonoBehaviour
 
     public void DeactivateAllEnemies()
     {
-        foreach (GameObject enemies in activeEnemies)
-        {
-            Destroy(enemy.gameObject);
-            // if (enemies.activeSelf) // Ensure enemy is active
-            // {
-            //     EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
-            //     if (enemyScript != null)
-            //     {
-            //         enemy.Deactivate(); // Call the Deactivate method on the enemy
-            //     }
-            //     else
-            //     {
-            //         enemy.gameObject.SetActive(false); // Fallback if no Enemy script exists
-            //     }
-            // }
+        enemiess = enamy.GetComponentsInChildren<EnemyScript>();
+        for(int i = 0; i < enemiess.Length; i++){
+            
+            Destroy(enemiess[i].gameObject);
+            Debug.Log("destroyed");
         }
+        activeEnemyCount = 0;
+            
+        
+    //     foreach (GameObject enemies in activeEnemies)
+    //     {
+            
+    //         if (enemies.activeSelf) // Ensure enemy is active
+    //         {
+    //             EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
+    //             if (enemyScript != null)
+    //             {
+    //                 enemy.Deactivate(); // Call the Deactivate method on the enemy
+    //             }
+    //             else
+    //             {
+    //                 enemy.gameObject.SetActive(false); 
+    //             }
+    //         }
+    //     }
 
-        activeEnemies.Clear(); // Clear the list after deactivating all
-        activeEnemyCount = 0; // Reset active enemy count
-        Debug.Log("All enemies have been deactivated.");
+    //     activeEnemies.Clear(); 
+    //     activeEnemyCount = 0; 
+    //     Debug.Log("All enemies have been deactivated.");
     }
 }

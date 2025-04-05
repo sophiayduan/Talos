@@ -50,6 +50,7 @@ public class EnemyScript : MonoBehaviour
     public bool isPaused;
     public Transform LKPsphere;
     public EnemySpawn enemySpawn;
+    public EnemyHealth enemyHealth;
     void Start()
     {
         Speed = Maxspeed;
@@ -77,7 +78,7 @@ public class EnemyScript : MonoBehaviour
                     // Debug.Log("start patrol");
                     seePlayer = false;
                     Debug.Log("player gone too far, byebye enemy");
-                    //enemySpawn.EnemyDeactivation();
+                    //enemyHealth.Deactivate();
 
                     // Patrol();
                     
@@ -88,8 +89,8 @@ public class EnemyScript : MonoBehaviour
         // if(Vector3.Distance(transform.position, player.transform.position) > 2f){
         //     Debug.Log($"{player.transform.position} + enemy: {transform.position}");
         //     Debug.Log("player gone too far, byebye enemy");
-        //     enemySpawn.EnemyDeactivation();
-            //SIA THIS IS WHAT I ADD IDK IF IT WORKS 
+        //     Destroy(gameObject);
+        //    // SIA THIS IS WHAT I ADD IDK IF IT WORKS 
 
         // }
         else

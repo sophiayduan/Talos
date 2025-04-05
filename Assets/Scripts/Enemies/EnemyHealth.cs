@@ -62,7 +62,8 @@ public class EnemyHealth : MonoBehaviour
 
     public void Deactivate()
     {
-        Destroy(gameObject); // Deactivates the enemy
+        Debug.Log("Deactivate called for: " + gameObject.name);
+        enemyHealth = 0; // Deactivates the enemy
         OnDeactivate?.Invoke(); // Triggers the deactivation event
     }
 
