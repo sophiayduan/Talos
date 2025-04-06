@@ -25,7 +25,6 @@ public class EnemySpawn : MonoBehaviour
     {
         lastSpawnPoint = player.transform.position;
         objectPooler = FindFirstObjectByType<ObjectPooler>();
-        
     }
 
     // Update is called once per frame
@@ -41,7 +40,7 @@ public class EnemySpawn : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B)) // Example key press
         {
-            //enemy.enemyHealth = 0;
+            //enemy.enemyHealth = 0f;
             DeactivateAllEnemies();
         }
     }
@@ -61,7 +60,7 @@ public class EnemySpawn : MonoBehaviour
             // Instantiate(enemy, lastSpawnPoint, Quaternion.identity);
             // lastSpawnPoint = player.transform.position;
             GameObject newSpawnedObject = objectPooler.GetFromPool(poolType);
-            newSpawnedObject.transform.position = lastSpawnPoint;
+            newSpawnedObject.transform.position = spawnPosition;
             newSpawnedObject.transform.rotation = Quaternion.identity;
             newSpawnedObject.GetComponent<Rigidbody>().linearVelocity = transform.forward * initialSpeed;
             newSpawnedObject.transform.parent = transform;
@@ -75,7 +74,7 @@ public class EnemySpawn : MonoBehaviour
             newSpawnedObject.SetActive(true);
             activeEnemies.Add(newSpawnedObject);
             activeEnemyCount++;
-            lastSpawnPoint = player.transform.position;
+            lastSpawnPoint = spawnPosition;
 
            
         }
@@ -101,7 +100,7 @@ public class EnemySpawn : MonoBehaviour
     IEnumerator DeactivateAfterTime()
     {
         yield return new WaitForSeconds(lifeTime);
-        enemy.enemyHealth = 0f;;
+        enemy.enemyHealth = 0f;
     }
     
 
