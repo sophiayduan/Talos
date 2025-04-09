@@ -10,42 +10,32 @@ public class EnemySpawn : MonoBehaviour
  
     [SerializeField] private Vector3 lastSpawnPoint;
     public int enemyAmount;
-    public int maxActiveEnemies = 5; // Maximum number of active enemies
+    public int maxActiveEnemies = 5; 
+    public float cooldown;
     private int activeEnemyCount = 0;
-    private float lifeTime = 10f;
-
-    public Transform enamy;
     public float minSpawnDistance;
     private ObjectPooler objectPooler;
     public PoolType poolType = PoolType.smallEnemy;
     public float initialSpeed;
     private List<GameObject> activeEnemies = new List<GameObject>();
-    EnemyScript[] enemiess;
+    private bool spawning = false;
    private void Start()
     {
         lastSpawnPoint = player.transform.position;
         objectPooler = FindFirstObjectByType<ObjectPooler>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float distanceFromPlayer =  Vector3.Distance(lastSpawnPoint, player.transform.position);
-        if (distanceFromPlayer >= minSpawnDistance){
+        if (distanceFromPlayer >= minSpawnDistance && spawning == false){
                 StartCoroutine(SpawnEnemiesRoutine());
         }
-        if(activeEnemyCount == maxActiveEnemies){
-                StartCoroutine(DeactivateAfterTime());
-        }
 
-        if (Input.GetKeyDown(KeyCode.B)) // Example key press
-        {
-            //enemy.enemyHealth = 0f;
-            DeactivateAllEnemies();
-        }
     }
 
         void SpawnEnemies(){
+            spawning = true;
             if (activeEnemyCount >= maxActiveEnemies)
             {
                 Debug.Log("max active enemies");
@@ -70,11 +60,11 @@ public class EnemySpawn : MonoBehaviour
                 enemy.OnDeactivate += EnemyDeactivation;
             }
 
-
             newSpawnedObject.SetActive(true);
             activeEnemies.Add(newSpawnedObject);
             activeEnemyCount++;
             lastSpawnPoint = spawnPosition;
+            spawning = false;
 
            
         }
@@ -85,42 +75,25 @@ public class EnemySpawn : MonoBehaviour
         {
             if (activeEnemyCount >= maxActiveEnemies)
             {
-                Debug.Log("Max active enemies reached, stopping spawn routine.");
                 yield break;
             }
             
             Debug.Log("I SPAWNED");
             count += 1;
             SpawnEnemies();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
 
         }
         
     }
-    IEnumerator DeactivateAfterTime()
-    {
-        yield return new WaitForSeconds(lifeTime);
-        enemy.enemyHealth = 0f;
-    }
-    
 
+    
     public void EnemyDeactivation()
     {
         activeEnemyCount = Mathf.Max(activeEnemyCount - 1, 0); 
-        Debug.Log("deactivated, active enemy # " + activeEnemyCount);
     }
 
-    public void DeactivateAllEnemies()
-    {
-        enemiess = enamy.GetComponentsInChildren<EnemyScript>();
-        for(int i = 0; i < enemiess.Length; i++){
             
-            Destroy(enemiess[i].gameObject);
-            Debug.Log("destroyed");
-        }
-        activeEnemyCount = 0;
-            
-        
     //     foreach (GameObject enemies in activeEnemies)
     //     {
             
@@ -141,5 +114,5 @@ public class EnemySpawn : MonoBehaviour
     //     activeEnemies.Clear(); 
     //     activeEnemyCount = 0; 
     //     Debug.Log("All enemies have been deactivated.");
-    }
+    
 }

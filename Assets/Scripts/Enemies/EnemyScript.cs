@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyScript : MonoBehaviour
 {    
     public NavMeshAgent agent;
+    public float speed;
 
     public float SightRange,DetectionRange, Cooldown, MinAttackRange, MaxAttackRange, LastAttack, Distance;
     public bool seePlayer;

@@ -1,6 +1,3 @@
-using System.Data;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
@@ -13,7 +10,6 @@ public class EnemyHealth : MonoBehaviour
     [Header(" ")]
     public float maxHealth = 50f;
     public float enemyHealth;
-    [SerializeField] private ParticleSystem enemyParticles;
 
     public delegate void DeactivateHandler();
     public event DeactivateHandler OnDeactivate;

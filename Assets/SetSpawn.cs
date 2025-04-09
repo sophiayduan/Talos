@@ -1,5 +1,3 @@
-
-using UnityEditor;
 using UnityEngine;
 
 public class SetSpawn : MonoBehaviour
@@ -10,7 +8,7 @@ public class SetSpawn : MonoBehaviour
    
     void Update()
     {   
-        if (isInsideTrigger && Input.GetKeyDown(KeyCode.Q)){
+        if (isInsideTrigger && Input.GetKeyDown(KeyCode.E)){
             newSpawn = transform.position;
             Debug.Log("set new spawn i hope");
         }
