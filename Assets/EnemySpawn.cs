@@ -19,7 +19,7 @@ public class EnemySpawn : MonoBehaviour
     public float initialSpeed;
     private List<GameObject> activeEnemies = new List<GameObject>();
     private bool spawning = false;
-   private void Start()
+    private void Start()
     {
         lastSpawnPoint = player.transform.position;
         objectPooler = FindFirstObjectByType<ObjectPooler>();
@@ -27,10 +27,12 @@ public class EnemySpawn : MonoBehaviour
 
     void Update()
     {
-        float distanceFromPlayer =  Vector3.Distance(lastSpawnPoint, player.transform.position);
-        if (distanceFromPlayer >= minSpawnDistance && spawning == false){
-                StartCoroutine(SpawnEnemiesRoutine());
-        }
+        // float distanceFromPlayer =  Vector3.Distance(lastSpawnPoint, player.transform.position);
+        StartCoroutine(SpawnEnemiesRoutine());
+
+        // if (distanceFromPlayer >= minSpawnDistance && spawning == false){
+        //         StartCoroutine(SpawnEnemiesRoutine());
+        // }
 
     }
 

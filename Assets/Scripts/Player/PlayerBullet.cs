@@ -52,7 +52,7 @@ public class PlayerBullet : MonoBehaviour
         {
             print("it is object");
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
-            Destroy(enemy.gameObject,1f);
+            Destroy(enemy.gameObject,0.1f);
             hashit = true;
             Destroy(gameObject);
             // ReturnToPool();
@@ -65,7 +65,7 @@ public class PlayerBullet : MonoBehaviour
         {            
             print("it is the enemy!");
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
-            Destroy(enemy.gameObject,1f);
+            Destroy(enemy.gameObject,0.1f);
             EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
             hasInstantiated = true;
 
@@ -89,7 +89,7 @@ public class PlayerBullet : MonoBehaviour
         else if (other.CompareTag("Ground")){
             hashit = true;
             ParticleSystem ground = Instantiate(groundParticles,target,Quaternion.identity);
-            Destroy(ground.gameObject,1f);
+            Destroy(ground.gameObject,0.1f);
 
             hasInstantiated = true;
             Debug.Log("GROUND");

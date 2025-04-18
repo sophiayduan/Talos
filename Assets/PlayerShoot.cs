@@ -41,12 +41,21 @@ public class PlayerShoot : MonoBehaviour
             aimPos.position = Vector3.Lerp(aimPos.position, destination, aimSmoothSpeed * Time.deltaTime);
         }
 
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetMouseButtonDown(0))
         {
             if(Time.time >= lastAttack + cooldown)StartCoroutine(ShootRoutine());
+            Debug.Log("mousepad down!!!");
 
         }
+
     }
+    // void OnClick()
+    // {
+    //     if(Time.time >= lastAttack + cooldown)StartCoroutine(ShootRoutine());
+    //     Debug.Log("mouse down");
+    // }
+
+    
     private void Shooting(){
         if (Time.time >= lastAttack)
         {

@@ -5,7 +5,7 @@ public class EnemyHealth : MonoBehaviour
     [Header(" ")]     
     public Slider healthSlider;
     public Slider easeHealthSlider;
-    private float lerpSpeed = 0.05f;
+    public float lerpSpeed = 0.05f;
 
     [Header(" ")]
     public float maxHealth = 50f;
