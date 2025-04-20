@@ -8,7 +8,6 @@ public class PlayerBullet : MonoBehaviour
     public ParticleSystem groundParticles;
     public ParticleSystem enemyParticles;
     public float amount = 10;
-    private bool hasInstantiated = false;
     private bool hashit = false;
     private ObjectPooler objectPooler;
     private PoolType poolType = PoolType.playerBullets;
@@ -41,7 +40,6 @@ public class PlayerBullet : MonoBehaviour
     void OnEnable()
     {
         hashit = false;
-        hasInstantiated = false;
     }
     void OnTriggerEnter(Collider other)
     {
@@ -56,7 +54,6 @@ public class PlayerBullet : MonoBehaviour
             hashit = true;
             // Destroy(gameObject);
             ReturnToPool();
-            hasInstantiated = true;
 
 
 
@@ -67,14 +64,13 @@ public class PlayerBullet : MonoBehaviour
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
             Destroy(enemy.gameObject,0.1f);
             EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
-            hasInstantiated = true;
 
             hashit = true;
 
             if(enemyHealth != null)
             {
                 enemyHealth.takeDamage(amount);
-                gameObject.SetActive(false);
+                // gameObject.SetActive(false);
                 ReturnToPool();
                 //  Destroy(gameObject);
 
@@ -92,9 +88,8 @@ public class PlayerBullet : MonoBehaviour
             ParticleSystem ground = Instantiate(groundParticles,target,Quaternion.identity);
             Destroy(ground.gameObject,0.1f);
 
-            hasInstantiated = true;
             Debug.Log("GROUND");
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
             ReturnToPool();
 
 
@@ -102,7 +97,6 @@ public class PlayerBullet : MonoBehaviour
     }
     private void ReturnToPool(){
         // hashit = false;
-        // hasInstantiated = false;
         gameObject.SetActive(false);
         objectPooler.AddToPool(poolType, gameObject);
     }

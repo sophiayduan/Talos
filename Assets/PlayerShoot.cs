@@ -44,7 +44,8 @@ public class PlayerShoot : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             if(Time.time >= lastAttack + cooldown)StartCoroutine(ShootRoutine());
-            Debug.Log("mousepad down!!!");
+            else return;
+
 
         }
 
