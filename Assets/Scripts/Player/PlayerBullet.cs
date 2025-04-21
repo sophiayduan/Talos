@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
@@ -11,7 +10,7 @@ public class PlayerBullet : MonoBehaviour
     private bool hashit = false;
     private ObjectPooler objectPooler;
     private PoolType poolType = PoolType.playerBullets;
-    void Start()
+    void Start() 
     {
         objectPooler = FindFirstObjectByType<ObjectPooler>();
 
@@ -19,7 +18,6 @@ public class PlayerBullet : MonoBehaviour
         target = playerShoot.aimPos.position; 
         if (target == Vector3.zero)
         {
-            Debug.LogError("Bullet target is Vector3.zero, destroying bullet.");
             ReturnToPool();
         }
     }
@@ -29,7 +27,7 @@ public class PlayerBullet : MonoBehaviour
             return;
         }
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        // if (Vector3.Distance(transform.position, target) < 0.1f && !hashit && !hasInstantiated){
+        // if (Vector3.Distance(transform.position, target) < 0.05f && !hashit ){
            
         //         ReturnToPool();
         //         return;
@@ -41,22 +39,25 @@ public class PlayerBullet : MonoBehaviour
     {
         hashit = false;
     }
+    private void ReturnToPool(){
+        // hashit = false;
+        Debug.Log("add this to pool pls");
+        gameObject.SetActive(false);
+        // objectPooler.AddToPool(poolType, gameObject);
+    }
     void OnTriggerEnter(Collider other)
     {
 
         if(hashit) return;
-        
+        hashit = true;
+        Debug.Log("collision!");
+        Debug.Log($"collided:{other.tag}");
+        Debug.Log($"Hit: {other.name}, tag: {other.tag}, layer: {LayerMask.LayerToName(other.gameObject.layer)}");
         if (other.CompareTag("Object"))
         {
             print("it is object");
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
             Destroy(enemy.gameObject,0.1f);
-            hashit = true;
-            // Destroy(gameObject);
-            ReturnToPool();
-
-
-
         }
         else if (other.CompareTag("Enemy"))
         {            
@@ -65,16 +66,10 @@ public class PlayerBullet : MonoBehaviour
             Destroy(enemy.gameObject,0.1f);
             EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
 
-            hashit = true;
 
             if(enemyHealth != null)
             {
                 enemyHealth.takeDamage(amount);
-                // gameObject.SetActive(false);
-                ReturnToPool();
-                //  Destroy(gameObject);
-
-
                 Debug.Log("enemyHealth took damage");
             }
             else 
@@ -83,22 +78,15 @@ public class PlayerBullet : MonoBehaviour
             }
         }
         else if (other.CompareTag("Ground")){
-            // Destroy(gameObject);
-            hashit = true;
             ParticleSystem ground = Instantiate(groundParticles,target,Quaternion.identity);
             Destroy(ground.gameObject,0.1f);
-
             Debug.Log("GROUND");
-            // gameObject.SetActive(false);
-            ReturnToPool();
-
-
+ 
+            Debug.Log("shouda been inactive ");
         }
+
+        ReturnToPool();
     }
-    private void ReturnToPool(){
-        // hashit = false;
-        gameObject.SetActive(false);
-        objectPooler.AddToPool(poolType, gameObject);
-    }
+    
            
 }

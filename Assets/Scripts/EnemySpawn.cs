@@ -49,6 +49,7 @@ public class EnemySpawn : MonoBehaviour
                 0, 
                 Random.Range(-12f, 12f) 
             );
+            Debug.Log("tryna spawn enemy");
             // Instantiate(enemy, lastSpawnPoint, Quaternion.identity);
             // lastSpawnPoint = player.transform.position;
             GameObject newSpawnedObject = objectPooler.GetFromPool(poolType);

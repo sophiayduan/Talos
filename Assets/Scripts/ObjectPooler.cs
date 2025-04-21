@@ -21,12 +21,14 @@ public class ObjectPooler : MonoBehaviour
     }
 
     public void AddToPool(PoolType poolType, GameObject item){
+        Debug.Log("add to pool");
         item.SetActive(false);
         FindByPoolType(poolType).objectQueue.Enqueue(item);
     }
 
     public GameObject GetFromPool(PoolType poolType){
         ObjectPool objectPool = FindByPoolType(poolType);
+        Debug.Log("got from pool");
         if(objectPool.objectQueue.Count > 0){
             return objectPool.objectQueue.Dequeue();
         } else {

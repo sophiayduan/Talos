@@ -151,7 +151,7 @@ public class EnemyScript : MonoBehaviour
             _animator.SetBool(isIdleHash, false);
 
         }
-        else if (Distance < 2.5f){
+        else if (Distance > 0f && Distance < 2.5f){
             _animator.SetBool("isBackrun", true);
             _animator.SetBool(isIdleHash, false);
         }
