@@ -18,8 +18,10 @@ public class PlayerShoot : MonoBehaviour
 
     void Start()
     {
+
         currentBulletAmount = maxBulletAmount;
         objectPooler = FindFirstObjectByType<ObjectPooler>();
+        
     }
     void Update()
     {               

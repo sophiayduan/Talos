@@ -31,13 +31,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3321875004569940165}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.6984326, z: -0, w: 0.7156759}
-  m_LocalPosition: {x: 17.684, y: -1.187, z: -7.944}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.31, y: 1.65, z: -7.944}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -88.603, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4684772534917939953
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.75
+  m_Time: 1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -166,48 +166,66 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.07766791
-        value: 0.08208376
-        inSlope: 0
-        outSlope: 0
+        time: 0
+        value: 0.078209616
+        inSlope: -0.41033608
+        outSlope: -0.41033608
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.59169173
+      - serializedVersion: 3
+        time: 0.19720793
+        value: 0.05961609
+        inSlope: -0.14376187
+        outSlope: -0.14376187
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.4931428
+      - serializedVersion: 3
+        time: 0.43494868
+        value: 0.04065624
+        inSlope: -0.07029256
+        outSlope: -0.07029256
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.24818754
-        value: 0.06878662
-        inSlope: -0.6552269
-        outSlope: -0.6552269
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.15037853
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0.57074547
-        outSlope: 0.57074547
+        time: 0.6419373
+        value: 0.03572938
+        inSlope: -0.073830344
+        outSlope: -0.073830344
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.22201501
+        outWeight: 0.32820362
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.8301887, g: 0.235717, b: 0.121395506, a: 1}
-      key1: {r: 0.8301887, g: 0.235717, b: 0.121395506, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.7735849, g: 0.23911983, b: 0.14449976, a: 1}
+      key1: {r: 0.83137256, g: 0.6146582, b: 0.12156862, a: 1}
+      key2: {r: 0.83137256, g: 0.6146582, b: 0.12156862, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
+      ctime1: 54818
+      ctime2: 54818
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -221,7 +239,7 @@ TrailRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 2
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
@@ -272,7 +290,7 @@ Rigidbody:
     m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 3428
+    m_Bits: 7524
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0

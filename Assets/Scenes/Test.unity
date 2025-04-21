@@ -1075,7 +1075,7 @@ GameObject:
   - component: {fileID: 325540230}
   - component: {fileID: 325540229}
   - component: {fileID: 325540228}
-  m_Layer: 2
+  m_Layer: 12
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1747,7 +1747,7 @@ GameObject:
   - component: {fileID: 448078528}
   - component: {fileID: 448078527}
   - component: {fileID: 448078526}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Helper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2604,7 +2604,7 @@ GameObject:
   - component: {fileID: 633570901}
   - component: {fileID: 633570900}
   - component: {fileID: 633570899}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Bounds
   m_TagString: Barrier
   m_Icon: {fileID: 0}
@@ -7203,7 +7203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2028041740}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: --------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7405,7 +7405,7 @@ GameObject:
   - component: {fileID: 2061619400}
   - component: {fileID: 2061619399}
   - component: {fileID: 2061619398}
-  m_Layer: 2
+  m_Layer: 12
   m_Name: MACHINE GUN
   m_TagString: Respawn
   m_Icon: {fileID: 0}
@@ -7441,7 +7441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBullet: {fileID: 3321875004569940165, guid: 8de6595f84998c847acfcca352a74c2b, type: 3}
-  cooldown: 0
+  cooldown: 0.4
   maxDistance: 25
   bulletsPerShot: 3
   timeBetweenShots: 0.1
@@ -8312,7 +8312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9108385618768809792, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}
       propertyPath: m_RenderingLayerMask
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7483865085352666160, guid: 6a88f10dd44d6f7459d8953f76bc4731, type: 3}

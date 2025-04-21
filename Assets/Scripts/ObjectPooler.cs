@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
-    [System.Serializable]
+[System.Serializable]
     public enum PoolType {smallEnemy, playerBullets}
     [System.Serializable]
     public class ObjectPool {
@@ -15,14 +16,25 @@ public class ObjectPooler : MonoBehaviour
     public ObjectPool[] objectPools;
     void Start()
     {
+       
+
         foreach(ObjectPool objectPool in objectPools){
             objectPool.objectQueue = new Queue<GameObject>();
+            if(objectPool.poolType == PoolType.playerBullets){
+                for (int i = 0; i < 15; i++){
+                GameObject obj = Instantiate(objectPool.prefabObject);
+                obj.SetActive(false);
+                objectPool.objectQueue.Enqueue(obj);
+            }
+            }
+            
+
         }
     }
 
     public void AddToPool(PoolType poolType, GameObject item){
         Debug.Log("add to pool");
-        item.SetActive(false);
+        // item.SetActive(false);
         FindByPoolType(poolType).objectQueue.Enqueue(item);
     }
 
@@ -44,8 +56,5 @@ public class ObjectPooler : MonoBehaviour
         }
         return result;
     }
-    void Update()
-    {
-        
-    }
+
 }
