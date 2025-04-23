@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
@@ -8,65 +8,84 @@ public class PlayerBullet : MonoBehaviour
     public ParticleSystem groundParticles;
     public ParticleSystem enemyParticles;
     public float amount = 10;
-    private bool hasInstantiated = false;
     private bool hashit = false;
-    void Start()
+    private ObjectPooler objectPooler;
+    private Vector3 newTarget;
+    private PoolType poolType = PoolType.playerBullets;
+    void Start() 
     {
-        
+        objectPooler = FindFirstObjectByType<ObjectPooler>();
+
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
+ 
+
         target = playerShoot.aimPos.position; 
+
+    }
+    
+    void Update()
+    {   
         if (target == Vector3.zero)
         {
-            Debug.LogError("Bullet target is Vector3.zero, destroying bullet.");
-            Destroy(gameObject);
-        }
-    }
-    void Update()
-    {   if (target == Vector3.zero)
-        {
-            return;
+            PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
+        target = playerShoot.aimPos.position; 
         }
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, target) < 0.1f && !hashit && !hasInstantiated){
-            // if (target == Camera.main.transform.position + Camera.main.transform.forward * playerShoot.maxDistance){
-            //     Destroy(gameObject);
-            // }
-    
+        
+        if (Vector3.Distance(transform.position, target) < 0.0001f && !hashit ){
+           
+                StartCoroutine(WaitReturnToPool());
+
         }    
+    }
+
+    IEnumerator WaitReturnToPool(){
+        yield return null;
+        ReturnToPool();
+    }
+    void OnEnable()
+    {
+        hashit = false;
+        PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
+        target = playerShoot.aimPos.position; 
+    }
+
+    private void ReturnToPool(){
+        gameObject.SetActive(false);
+        objectPooler.AddToPool(poolType, gameObject);
+        hashit = false;
+        target = newTarget;
+
     }
     void OnTriggerEnter(Collider other)
     {
 
-        if(hashit) return;
-        
+        if(hashit){ ReturnToPool(); return;}
+        Debug.Log($"collided:{other.tag}");
+        Debug.Log($"Hit: {other.name}, tag: {other.tag}, layer: {LayerMask.LayerToName(other.gameObject.layer)}");
         if (other.CompareTag("Object"))
         {
-            print("it is object");
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
-            Destroy(enemy.gameObject,1f);
+            Destroy(enemy.gameObject,0.1f);
             hashit = true;
-            Destroy(gameObject);
-            hasInstantiated = true;
+            print("it is object");
+            transform.position = Vector3.zero;
+            transform.position = Vector3.MoveTowards(transform.position, transform.position, speed * Time.deltaTime);
 
-
-
+            ReturnToPool();
         }
         else if (other.CompareTag("Enemy"))
         {            
+            hashit = true;
             print("it is the enemy!");
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
-            Destroy(enemy.gameObject,1f);
+            Destroy(enemy.gameObject,0.1f);
             EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
-            hasInstantiated = true;
-
-            hashit = true;
+            ReturnToPool();
 
             if(enemyHealth != null)
             {
                 enemyHealth.takeDamage(amount);
-                // gameObject.SetActive(false);
-                Destroy(gameObject);
-
                 Debug.Log("enemyHealth took damage");
             }
             else 
@@ -75,16 +94,18 @@ public class PlayerBullet : MonoBehaviour
             }
         }
         else if (other.CompareTag("Ground")){
-            hashit = true;
+                        hashit = true;
+
             ParticleSystem ground = Instantiate(groundParticles,target,Quaternion.identity);
-            Destroy(ground.gameObject,1f);
-
-            hasInstantiated = true;
+            Destroy(ground.gameObject,0.1f);
             Debug.Log("GROUND");
-            // gameObject.SetActive(false);
-            Destroy(gameObject);
-
+            ReturnToPool();
         }
+       
+
+        
+        // gameObject.SetActive(false);
     }
+    
            
 }

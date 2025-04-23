@@ -1,9 +1,3 @@
-// using System.Numerics;
-
-// using Unity.Mathematics;
-// using System.Numerics;
-// using System.Numerics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,53 +5,26 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {    
-    public Rigidbody rb;
-    public float Maxspeed;
-    private float Speed;
     public NavMeshAgent agent;
+    public float speed;
 
-    public float SightRange;
-    public float DetectionRange;
-    public GameObject Target;
+    public float SightRange,DetectionRange, Cooldown, MinAttackRange, MaxAttackRange, LastAttack, Distance;
     public bool seePlayer;
     private Collider[] hitColliders;
     private RaycastHit Hit;
 
-    //Attacking 
-    public float Cooldown;
-    public float MinAttackRange;
-    public float MaxAttackRange;
-    public float LastAttack;
-    public GameObject EnemyBullet;
+    public GameObject EnemyBullet, firepoint, Target;
     public LayerMask GroundLayer;
-    private Vector3 Heading;
-    private float Distance;
-    public GameObject firepoint;
-
-    private Vector3 lastKnownPosition;
-    private bool lostPlayer;
-
-    private float lastSeenTime;
-    public float searchTime = 5f;
-
-    // Patrolling 
-    public Transform walksphere;
-    public Vector3 walkPoint;
+    private Vector3 Heading, lastKnownPosition, walkPoint;
     public bool walkPointSet;
     public int walkPointRange = 10;
     [SerializeField] private Animator _animator;
     private static int isIdleHash = Animator.StringToHash("isIdle");
     [SerializeField] private LayerMask layerMask;
-    public float startPause;
-    public float pauseTime = 0;
-    public string status = "nada";
-    public Vector3 shootDestination;
+    public float startPause,pauseTime = 0;
     public bool isPaused;
     public Transform LKPsphere;
-    void Start()
-    {
-        Speed = Maxspeed;
-    }
+   
 
     void Update()
     {
@@ -80,15 +47,18 @@ public class EnemyScript : MonoBehaviour
                 else{
                     // Debug.Log("start patrol");
                     seePlayer = false;
-                    Patrol();
+                    Debug.Log("player gone too far, byebye enemy");
+                    //enemyHealth.Deactivate();
+
+                    // Patrol();
                     
 
                 }
             }
         }
+     
         else
         {   
-            // lastKnownPosition = transform.position + Vector3.forward * 0.5f;
             Vector3 theorigin = transform.position + Vector3.up * 2f;
             if(Physics.Raycast(theorigin, (Target.transform.position - theorigin).normalized, out Hit, SightRange, layerMask)){
                 Debug.DrawRay(theorigin,  (Target.transform.position - theorigin).normalized* SightRange, Color.black, 2f);
@@ -100,7 +70,6 @@ public class EnemyScript : MonoBehaviour
                     Heading = Target.transform.position - transform.position;
                     Distance = Heading.magnitude;
                     Debug.Log("okay this is the player");
-                    status = "Hit.collider.tag = Player";
                     lastKnownPosition = Hit.point; 
                     LKPsphere.position = Hit.point;
 
@@ -113,18 +82,18 @@ public class EnemyScript : MonoBehaviour
                 }
                 else
                 {
-                    status = "Hit.collider.tag != Player";
                     LastPosition();
                 }   
                 
 
             }
             else {
-                status = "no raycast";
                 LastPosition();
                 // Patrol(); 
                 // Debug.Log("donde estas");
             }
+
+       
 
         }
     }
@@ -134,9 +103,7 @@ public class EnemyScript : MonoBehaviour
         // Pause();
         agent.SetDestination(LKPsphere.position);
         Debug.DrawRay(transform.position, lastKnownPosition, Color.green);
-        status = "Set Destination LKP";
         if ((transform.position - lastKnownPosition).magnitude < 0.1f ){
-            status = "Reached LKP";
             return;
       
         }
@@ -184,7 +151,7 @@ public class EnemyScript : MonoBehaviour
             _animator.SetBool(isIdleHash, false);
 
         }
-        else if (Distance < 2.5f){
+        else if (Distance > 0f && Distance < 2.5f){
             _animator.SetBool("isBackrun", true);
             _animator.SetBool(isIdleHash, false);
         }
@@ -236,7 +203,6 @@ public class EnemyScript : MonoBehaviour
             if(Time.time < startPause + pauseTime)
             {
                 Debug.Log("correct!!! pause");
-                status = "pausing CORRECT";
 
                 agent.isStopped = true;
                 agent.velocity = Vector3.zero;
@@ -249,12 +215,10 @@ public class EnemyScript : MonoBehaviour
     
             else {
                 Debug.Log("unpause correeect!");
-                status = "unpausing!";
                 agent.isStopped = false; 
                 agent.updateRotation = true;
                 isPaused = false;
                 walkPointSet = false;
-                // return; 
             }
         }
 

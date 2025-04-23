@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEditor.Rendering;
-using UnityEditor;
-using Unity.VisualScripting;
+
 
 public class Status : MonoBehaviour
 {

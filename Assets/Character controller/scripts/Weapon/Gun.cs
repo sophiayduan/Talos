@@ -1,6 +1,4 @@
-using Charactercontroller.scripts;
 
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -9,7 +7,6 @@ public class Gun : MonoBehaviour
 
     private Rigidbody gunBody;
     public Items item;
-    private PickUpDown pickUpDown;
     public bool pickedUp;
     public bool inventorySpace;
     void Start()

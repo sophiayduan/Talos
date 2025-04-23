@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject settingsPanel;
     [SerializeField] GameObject winPanel;
+    [SerializeField] GameObject miniMap;
 
 
 
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour
     }
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.M)) miniMap.SetActive(!miniMap.activeSelf);
         if (isPaused == false)settingsPanel.SetActive(false);
     }
     public void ToggleDeathPanel() 
@@ -43,8 +45,6 @@ public class UIManager : MonoBehaviour
         if (isPaused == true)Time.timeScale = 0f; 
               
         else Time.timeScale = 1f;           
-
-        
     }
 }
         public void ToggleSettingsPanel() 

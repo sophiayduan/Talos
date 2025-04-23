@@ -122,9 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe14f3c88b28f842af4b499bfb9f765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 25
   amount: 10
-  particles: {fileID: 1078360017053888719, guid: 0dc34afa570e3c646bafcff2ffaba79f, type: 3}
+  particles: {fileID: 198175801688348628, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
   shakeParams:
     strength:
       position: {x: 0, y: 0, z: 0}

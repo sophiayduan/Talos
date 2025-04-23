@@ -71,7 +71,8 @@ public class EnemyBullet : MonoBehaviour
             {
                 hasHit = true;
                 playerHealth.takeDamage(amount);
-                Instantiate(particles,transform.position,Quaternion.identity);
+                ParticleSystem enemy = Instantiate(particles,target,Quaternion.identity);
+                Destroy(enemy.gameObject,1f);
                 CameraShaker.Shake(new PerlinShake(shakeParams));
 
                 Debug.Log("playerHealth took damage");

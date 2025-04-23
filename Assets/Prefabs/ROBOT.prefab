@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 2975333332443445962}
   - component: {fileID: 1672691319390002101}
   - component: {fileID: 8801791796476032869}
+  - component: {fileID: 6061610428815900710}
   m_Layer: 7
   m_Name: ROBOT
   m_TagString: Enemy
@@ -259,6 +260,19 @@ MonoBehaviour:
   maxHealth: 100
   enemyHealth: 0
   enemyParticles: {fileID: 1078360017053888719, guid: 0dc34afa570e3c646bafcff2ffaba79f, type: 3}
+--- !u!114 &6061610428815900710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174417426252132336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867dc8cd3cbf0fe4b96ca85b42f1c476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballType: 0
 --- !u!1 &179962139256652371
 GameObject:
   m_ObjectHideFlags: 0

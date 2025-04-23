@@ -1,6 +1,4 @@
 using Charactercontroller.Inputs;
-using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 namespace Charactercontroller

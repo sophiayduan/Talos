@@ -1,6 +1,3 @@
-using System.Data;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
@@ -8,14 +5,14 @@ public class EnemyHealth : MonoBehaviour
     [Header(" ")]     
     public Slider healthSlider;
     public Slider easeHealthSlider;
-    private float lerpSpeed = 0.05f;
+    public float lerpSpeed = 0.05f;
 
     [Header(" ")]
     public float maxHealth = 50f;
     public float enemyHealth;
-    [SerializeField] private ParticleSystem enemyParticles;
 
-
+    public delegate void DeactivateHandler();
+    public event DeactivateHandler OnDeactivate;
     void Start()
     { 
         enemyHealth = maxHealth;
@@ -49,11 +46,21 @@ public class EnemyHealth : MonoBehaviour
         enemyHealth -= amount;
 
         if(enemyHealth <= 0)
-        {
-            gameObject.SetActive(false);
+        {   
+            
+            Destroy(gameObject);
             Debug.Log("enemy died");
+            Deactivate();
+            
         }
  
+    }
+
+    public void Deactivate()
+    {
+        Debug.Log("Deactivate called for: " + gameObject.name);
+        enemyHealth = 0; // Deactivates the enemy
+        OnDeactivate?.Invoke(); // Triggers the deactivation event
     }
 
 
