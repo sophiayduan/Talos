@@ -7624,7 +7624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBullet: {fileID: 3321875004569940165, guid: 8de6595f84998c847acfcca352a74c2b, type: 3}
   cooldown: 0.4
-  maxDistance: 25
+  maxDistance: 35
   bulletsPerShot: 3
   timeBetweenShots: 0.1
   currentBulletAmount: 0
@@ -10072,7 +10072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -59}
+  m_AnchoredPosition: {x: 50, y: -116}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8922455374968144593

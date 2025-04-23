@@ -157,7 +157,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.4
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -184,8 +184,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.4931428
       - serializedVersion: 3
-        time: 0.37775874
-        value: 0.01959911
+        time: 0.4242065
+        value: 0.050269276
         inSlope: -0.19575524
         outSlope: -0.19575524
         tangentMode: 0
@@ -193,8 +193,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.48004377
       - serializedVersion: 3
-        time: 0.64233404
-        value: 0
+        time: 0.72430426
+        value: 0.0368042
         inSlope: -0.073830344
         outSlope: -0.073830344
         tangentMode: 0
@@ -203,7 +203,7 @@ TrailRenderer:
         outWeight: 0.32820362
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 0.030670166
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac6e91633951c94a9ca065bca877bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 50
   groundParticles: {fileID: 198175801688348628, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
   enemyParticles: {fileID: 198656289721292014, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
   amount: 8
