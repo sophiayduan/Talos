@@ -53,16 +53,16 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Current health: {currentHealth}");
         if(currentHealth <= 0)
         {
-            Respawn();
-            // if(lifetime != null && lifetime.running())
-            // {
-            //     Respawn();
-            // }
-            // else 
-            // {
-            //     print("respawn");
-            //     GameManager.instance.GameOver();
-            // }    
+            // Respawn();
+            if(lifetime != null && lifetime.running())
+            {
+                Respawn();
+            }
+            else 
+            {
+                print("respawn");
+                GameManager.instance.GameOver();
+            }    
         }
     }
     void Respawn(){ 
