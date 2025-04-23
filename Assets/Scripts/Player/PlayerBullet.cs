@@ -60,24 +60,28 @@ public class PlayerBullet : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        if(hashit) return;
-        hashit = true;
-        Debug.Log("collision!");
+        if(hashit){ ReturnToPool(); return;}
         Debug.Log($"collided:{other.tag}");
         Debug.Log($"Hit: {other.name}, tag: {other.tag}, layer: {LayerMask.LayerToName(other.gameObject.layer)}");
         if (other.CompareTag("Object"))
         {
-            print("it is object");
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
             Destroy(enemy.gameObject,0.1f);
+            hashit = true;
+            print("it is object");
+            transform.position = Vector3.zero;
+            transform.position = Vector3.MoveTowards(transform.position, transform.position, speed * Time.deltaTime);
+
+            ReturnToPool();
         }
         else if (other.CompareTag("Enemy"))
         {            
+            hashit = true;
             print("it is the enemy!");
             ParticleSystem enemy = Instantiate(enemyParticles,target,Quaternion.identity);
             Destroy(enemy.gameObject,0.1f);
             EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
-
+            ReturnToPool();
 
             if(enemyHealth != null)
             {
@@ -90,12 +94,16 @@ public class PlayerBullet : MonoBehaviour
             }
         }
         else if (other.CompareTag("Ground")){
+                        hashit = true;
+
             ParticleSystem ground = Instantiate(groundParticles,target,Quaternion.identity);
             Destroy(ground.gameObject,0.1f);
             Debug.Log("GROUND");
+            ReturnToPool();
         }
+       
 
-        ReturnToPool();
+        
         // gameObject.SetActive(false);
     }
     

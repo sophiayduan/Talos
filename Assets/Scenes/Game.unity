@@ -1912,7 +1912,7 @@ GameObject:
   - component: {fileID: 448078528}
   - component: {fileID: 448078527}
   - component: {fileID: 448078526}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Helper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6970,7 +6970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1483929640}
   - component: {fileID: 1483929639}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8958,7 +8958,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1934258410}
   - component: {fileID: 1934258411}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EnemyPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11919,6 +11919,10 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 4920897367195716077}
+    - target: {fileID: 206468878292211031, guid: 80d57ab29382a4343aadec0a76528f03, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 440429063773181330, guid: 80d57ab29382a4343aadec0a76528f03, type: 3}
       propertyPath: cam
       value: 

@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - Barrier
   - aimPos
+  - bullet
+  - spawn
   layers:
   - Default
   - TransparentFX

@@ -6,11 +6,8 @@ public class PlayerHealth : MonoBehaviour
     public Slider easeHealthSlider;
     public float maxHealth = 100f;
     public float currentHealth;
-    [SerializeField] private ParticleSystem particles;
     private float lerpSpeed = 0.05f;
-    public GameObject playerModel;
     private Lifetime lifetime;
-    public GameObject respawnpoint;
     public float lastHeal ;
     public float healAmount = 5f;
     public float cooldown = 5f;
@@ -22,12 +19,11 @@ public class PlayerHealth : MonoBehaviour
     }
     void Update()
     {   
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     takeDamage(10); 
-        //     healthSlider.value = currentHealth;
-        //     // Instantiate(particles,transform.position,Quaternion.identity);
-        // }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            takeDamage(40); 
+            healthSlider.value = currentHealth;
+        }
 
         if (healthSlider.value != currentHealth)
         {
@@ -70,17 +66,16 @@ public class PlayerHealth : MonoBehaviour
         }
     }
     void Respawn(){ 
-        // Vector3 respawnPoint;
-
-        // respawnPoint = new Vector3(147, 125, 806);
-        gameObject.transform.position = respawnpoint.transform.position;
+        Vector3 respawnPoint;
+        respawnPoint = new Vector3(0, 0, 0);
         currentHealth = maxHealth;
 
-        // if(SetSpawn.newSpawn != Vector3.zero) respawnPoint = SetSpawn.newSpawn;
-        // else {
-        //     respawnPoint = new Vector3(147, 125, 806);
-        // }
-        // currentHealth = maxHealth;
+        if(SetSpawn.newSpawn != Vector3.zero && SetSpawn.newSpawn != null) respawnPoint = SetSpawn.newSpawn;
+        else respawnPoint = new Vector3(0, 0, 0);
+
+        gameObject.transform.position = respawnPoint;
+        currentHealth = maxHealth;
+
         // if(setSpawn != null){
         //     Debug.Log($"where: {respawnPoint}");
         //     gameObject.transform.position = respawnPoint;
@@ -91,7 +86,7 @@ public class PlayerHealth : MonoBehaviour
         //     gameObject.transform.position = respawnPoint;
         //     Debug.Log("ts null");
         // }
-        // Debug.Log($"new transform.postion = {transform.position}");
+        Debug.Log($"new transform.postion = {transform.position}");
     }
 }
     

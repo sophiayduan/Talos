@@ -12,11 +12,14 @@ public class SetSpawn : MonoBehaviour
             newSpawn = transform.position;
             Debug.Log("set new spawn i hope");
         }
+        else {
+            return;
+        }
         Debug.Log($"new spawn loc : {newSpawn}");
     }
     void OnTriggerEnter(Collider other){
         if(other.CompareTag("aimPos") ){
-            Debug.Log("got the layer trigger");
+            Debug.Log("inside trigger is true!!");
             isInsideTrigger = true;
 
         }
