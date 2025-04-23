@@ -76,16 +76,6 @@ public class PlayerHealth : MonoBehaviour
         gameObject.transform.position = respawnPoint;
         currentHealth = maxHealth;
 
-        // if(setSpawn != null){
-        //     Debug.Log($"where: {respawnPoint}");
-        //     gameObject.transform.position = respawnPoint;
-
-        //     Debug.Log("uh i hope");
-        // }
-        // else if (setSpawn == null){
-        //     gameObject.transform.position = respawnPoint;
-        //     Debug.Log("ts null");
-        // }
         Debug.Log($"new transform.postion = {transform.position}");
     }
 }
