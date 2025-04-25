@@ -12,6 +12,8 @@ public class PlayerBullet : MonoBehaviour
     private ObjectPooler objectPooler;
     private Vector3 newTarget;
     private PoolType poolType = PoolType.playerBullets;
+    public TrailRenderer trailRenderer;
+    public Transform player;
     void Start() 
     {
         objectPooler = FindFirstObjectByType<ObjectPooler>();
@@ -48,6 +50,13 @@ public class PlayerBullet : MonoBehaviour
         hashit = false;
         PlayerShoot playerShoot = FindFirstObjectByType<PlayerShoot>();
         target = playerShoot.aimPos.position; 
+        // float distance = (player.transform.position - gameObject.transform.position).magnitude;
+        // if(distance > 1f){
+        //     trailRenderer.material.SetColor("_TintColor", new Color(128,128,128,128));
+
+        // }
+        
+
     }
 
     private void ReturnToPool(){

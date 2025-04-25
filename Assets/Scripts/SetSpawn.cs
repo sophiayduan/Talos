@@ -8,6 +8,11 @@ public class SetSpawn : MonoBehaviour
     public  static bool spawnSet = false;
     public  bool spawnSets = false;
 
+    void Start()
+    {
+        spawnSet = false;
+        isInsideTrigger = false;
+    }
     void Update()
     {   
         if (isInsideTrigger && Input.GetKeyDown(KeyCode.E)){

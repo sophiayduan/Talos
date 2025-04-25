@@ -161,7 +161,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -175,14 +175,14 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.81742245
       - serializedVersion: 3
-        time: 0.19720793
-        value: 0.05961609
-        inSlope: -0.14376187
-        outSlope: -0.14376187
+        time: 0.17624985
+        value: 0.052813366
+        inSlope: 0.057178296
+        outSlope: 0.057178296
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.4931428
+        outWeight: 0.59326273
       - serializedVersion: 3
         time: 0.4242065
         value: 0.050269276
@@ -194,18 +194,18 @@ TrailRenderer:
         outWeight: 0.48004377
       - serializedVersion: 3
         time: 0.72430426
-        value: 0.0368042
-        inSlope: -0.073830344
-        outSlope: -0.073830344
+        value: 0
+        inSlope: 0.022681046
+        outSlope: 0.022681046
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.22201501
-        outWeight: 0.32820362
+        outWeight: 0.6416253
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: -Infinity
+        outSlope: -Infinity
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
@@ -215,8 +215,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.7735849, g: 0.23911983, b: 0.14449976, a: 1}
-      key1: {r: 0.83137256, g: 0.6146582, b: 0.12156862, a: 1}
+      key0: {r: 0.7264151, g: 0.45719016, b: 0.065103225, a: 1}
+      key1: {r: 0.9622642, g: 0.7071032, b: 0.12255252, a: 1}
       key2: {r: 0.83137256, g: 0.6146582, b: 0.12156862, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -267,10 +267,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac6e91633951c94a9ca065bca877bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 65
   groundParticles: {fileID: 198175801688348628, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
   enemyParticles: {fileID: 198656289721292014, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
   amount: 8
+  trailRenderer: {fileID: 3510186136879983718}
+  player: {fileID: 4797980565575716, guid: 6fcc382533eeddd4cb59b9e20acca545, type: 3}
 --- !u!54 &384327698094195768
 Rigidbody:
   m_ObjectHideFlags: 0
