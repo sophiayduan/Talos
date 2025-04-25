@@ -70,10 +70,10 @@ public class PlayerShoot : MonoBehaviour
             bullet.transform.position = firepoint.transform.position;
             bullet.transform.rotation = Quaternion.identity;
             bullet.SetActive(true);
-            // SetActive(playerBullet, firepoint.transform.position, Quaternion.identity);
         
-            // ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
-            // Destroy(flash.gameObject, 0.1f);
+            ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
+            flash.transform.localPosition = Vector3.zero;
+            Destroy(flash.gameObject, 0.1f);
 
             lastAttack = Time.time;
         }

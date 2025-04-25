@@ -168,12 +168,12 @@ TrailRenderer:
       - serializedVersion: 3
         time: 0
         value: 0.078209616
-        inSlope: -0.41033608
-        outSlope: -0.41033608
+        inSlope: -0.7896255
+        outSlope: -0.7896255
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.59169173
+        outWeight: 0.81742245
       - serializedVersion: 3
         time: 0.19720793
         value: 0.05961609
@@ -203,7 +203,7 @@ TrailRenderer:
         outWeight: 0.32820362
       - serializedVersion: 3
         time: 1
-        value: 0.030670166
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -224,7 +224,7 @@ TrailRenderer:
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 54818
+      ctime1: 57440
       ctime2: 54818
       ctime3: 0
       ctime4: 0

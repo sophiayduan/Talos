@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public float lastHeal ;
     public float healAmount = 5f;
     public float cooldown = 5f;
-    public SetSpawn setSpawn;
+    public GameObject capsule;
     void Start()
     { 
         currentHealth = maxHealth;
@@ -46,6 +46,11 @@ public class PlayerHealth : MonoBehaviour
                 lastHeal = Time.time;
             }
         }
+        if(lifetime == null || !lifetime.running()){
+                GameManager.instance.GameOver();
+
+        }
+
     }
     public void takeDamage(float amount)
     {
@@ -53,27 +58,35 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Current health: {currentHealth}");
         if(currentHealth <= 0)
         {
-            // Respawn();
-            if(lifetime != null && lifetime.running())
-            {
-                Respawn();
-            }
-            else 
-            {
-                print("respawn");
-                GameManager.instance.GameOver();
-            }    
+            Respawn();
+            // if(lifetime != null && lifetime.running())
+            // {
+            //     Respawn();
+            // }
+            // else 
+            // {
+            //     print("respawn");
+            //     GameManager.instance.GameOver();
+            // }    
         }
     }
     void Respawn(){ 
         Vector3 respawnPoint;
-        respawnPoint = new Vector3(0, 0, 0);
-        currentHealth = maxHealth;
+        // respawnPoint = new Vector3(0, 0, 0);
 
-        if(SetSpawn.newSpawn != Vector3.zero && SetSpawn.newSpawn != null) respawnPoint = SetSpawn.newSpawn;
-        else respawnPoint = new Vector3(0, 0, 0);
+        if(SetSpawn.newSpawn != Vector3.zero && SetSpawn.newSpawn != null) 
+        {
+            respawnPoint = SetSpawn.newSpawn; 
+            Debug.Log("NOT NULL WTF");
+        }
 
-        gameObject.transform.position = respawnPoint;
+        else {
+            respawnPoint = capsule.transform.position;
+            Debug.Log("it is null!");
+        }
+
+            gameObject.transform.position = respawnPoint;
+
         currentHealth = maxHealth;
 
         Debug.Log($"new transform.postion = {transform.position}");
