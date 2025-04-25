@@ -72,7 +72,8 @@ public class PlayerShoot : MonoBehaviour
             bullet.SetActive(true);
         
             ParticleSystem flash = Instantiate(muzzleFlash,firepoint.transform.position,Quaternion.identity);
-            flash.transform.localPosition = Vector3.zero;
+            flash.transform.parent = firepoint.transform;
+            // flash.transform.localPosition = Vector3.zero;
             Destroy(flash.gameObject, 0.1f);
 
             lastAttack = Time.time;
