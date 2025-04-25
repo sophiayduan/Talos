@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     public float healAmount = 5f;
     public float cooldown = 5f;
     public GameObject capsule;
+    public Vector3 respawnPoint;
+
     void Start()
     { 
         currentHealth = maxHealth;
@@ -71,10 +73,9 @@ public class PlayerHealth : MonoBehaviour
         }
     }
     void Respawn(){ 
-        Vector3 respawnPoint;
         // respawnPoint = new Vector3(0, 0, 0);
 
-        if(SetSpawn.newSpawn != Vector3.zero && SetSpawn.newSpawn != null) 
+        if(SetSpawn.spawnSet) 
         {
             respawnPoint = SetSpawn.newSpawn; 
             Debug.Log("NOT NULL WTF");
