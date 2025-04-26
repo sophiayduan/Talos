@@ -9,7 +9,6 @@ public class SetSpawn : MonoBehaviour
 
     void Start()
     {
-        isInsideTrigger = false;
         newSpawn = Vector3.zero;
     }
     void Update()

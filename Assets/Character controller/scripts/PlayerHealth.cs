@@ -11,8 +11,6 @@ public class PlayerHealth : MonoBehaviour
     public float lastHeal ;
     public float healAmount = 5f;
     public float cooldown = 5f;
-    public GameObject capsule;
-    public Vector3 respawnPoint;
 
     void Start()
     { 
@@ -52,13 +50,7 @@ public class PlayerHealth : MonoBehaviour
                 GameManager.instance.GameOver();
 
         }
-        if(currentHealth <= 0)
-        {
-            Respawn();
-            // gameObject.transform.position = Vector3.zero;
-            // currentHealth = maxHealth;
-
-        }
+        
  
 
     }
@@ -66,18 +58,17 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= amount;
         Debug.Log($"Current health: {currentHealth}");
+        if(currentHealth <= 0)
+        {
+            Respawn();
+        }
     
     }
     void Respawn(){ 
 
+        gameObject.transform.position = SetSpawn.newSpawn;
+        Debug.Log("NOT NULL WTF");
         
-            gameObject.transform.position = SetSpawn.newSpawn;
-            Debug.Log("NOT NULL WTF");
-        
-        // respawnPoint = capsule.transform.position;
-        // Debug.LogError($"RESPAWN POINT{respawnPoint}");
-
-
         currentHealth = maxHealth;
 
         Debug.Log($"new transform.postion = {transform.position}");
