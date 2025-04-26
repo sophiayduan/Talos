@@ -5,19 +5,17 @@ public class SetSpawn : MonoBehaviour
 
     public static Vector3 newSpawn ;
     public bool isInsideTrigger = false;
-    public  static bool spawnSet = false;
     public  bool spawnSets = false;
 
     void Start()
     {
-        spawnSet = false;
         isInsideTrigger = false;
+        newSpawn = Vector3.zero;
     }
     void Update()
     {   
         if (isInsideTrigger && Input.GetKeyDown(KeyCode.E)){
             newSpawn = transform.position;
-            spawnSet = true;
             spawnSets = true;
 
             Debug.Log("set new spawn i hope");

@@ -52,41 +52,31 @@ public class PlayerHealth : MonoBehaviour
                 GameManager.instance.GameOver();
 
         }
+        if(currentHealth <= 0)
+        {
+            Respawn();
+            // gameObject.transform.position = Vector3.zero;
+            // currentHealth = maxHealth;
+
+        }
+ 
 
     }
     public void takeDamage(float amount)
     {
         currentHealth -= amount;
         Debug.Log($"Current health: {currentHealth}");
-        if(currentHealth <= 0)
-        {
-            Respawn();
-            // if(lifetime != null && lifetime.running())
-            // {
-            //     Respawn();
-            // }
-            // else 
-            // {
-            //     print("respawn");
-            //     GameManager.instance.GameOver();
-            // }    
-        }
+    
     }
     void Respawn(){ 
-        // respawnPoint = new Vector3(0, 0, 0);
 
-        if(SetSpawn.spawnSet) 
-        {
-            respawnPoint = SetSpawn.newSpawn; 
+        
+            gameObject.transform.position = SetSpawn.newSpawn;
             Debug.Log("NOT NULL WTF");
-        }
+        
+        // respawnPoint = capsule.transform.position;
+        // Debug.LogError($"RESPAWN POINT{respawnPoint}");
 
-        else {
-            respawnPoint = capsule.transform.position;
-            Debug.Log("it is null!");
-        }
-
-            gameObject.transform.position = respawnPoint;
 
         currentHealth = maxHealth;
 
