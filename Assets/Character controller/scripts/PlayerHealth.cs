@@ -19,11 +19,6 @@ public class PlayerHealth : MonoBehaviour
     }
     void Update()
     {   
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            takeDamage(40); 
-            healthSlider.value = currentHealth;
-        }
 
         if (healthSlider.value != currentHealth)
         {
@@ -53,7 +48,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Current health: {currentHealth}");
         if(currentHealth <= 0)
         {
-            Respawn();
+            gameObject.transform.position = new Vector3(50, 50, 0);
             // if(lifetime != null && lifetime.running())
             // {
             //     Respawn();
