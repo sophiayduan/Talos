@@ -11,9 +11,6 @@ namespace Charactercontroller {
       [SerializeField] private Camera _playerCamera; 
       public float RotationMismatch {get; private set;} = 0f;
       public bool IsRotatingToTarget {get; private set;} = false;   
-
-      
-      
       
       [Header("Base Movement")]
       public float walkAcceleration = 0.15f;
