@@ -5,4 +5,4 @@ A third person adventure game set on a distant robot filled planet.
 
 Created for Hack Club's [Juice](https://github.com/hackclub/juice)🧃
 
- <img src="https://cdn.hackclub.com/019d041a-e59c-70a2-b935-12549ab33c55/image.png" width="600px" height="auto" />
+<img width="800px" src="https://github.com/user-attachments/assets/3f52813b-43fe-4c5a-95ac-bb3d68c4f245" />
